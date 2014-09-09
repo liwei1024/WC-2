@@ -162,7 +162,7 @@ static inline void Call_区域Call(DWORD_PTR parameter)
 
 static inline void Call_坐标Call(DWORD_PTR parameter)
 {
-	__try {
+	/*__try {*/
 		DWORD object_pointer = read<int>(parameter);
 		DWORD x = read<int>(parameter + 4);
 		DWORD y = read<int>(parameter + 8);
@@ -178,11 +178,11 @@ static inline void Call_坐标Call(DWORD_PTR parameter)
 			mov ecx, esi
 			call eax
 		}
-	}
+		/*}
 	__except (1) {
 		LPCWSTR buffer = L"Call_坐标Call 异常";
 		Call_公告Call((DWORD_PTR)&buffer);
-	}
+	}*/
 }
 
 static inline void Call_过图Call(DWORD_PTR parameter)
