@@ -1,5 +1,10 @@
 #pragma once
 
+struct Pos
+{
+	int x, y, z = 0;
+};
+
 struct COORDINATE
 {
 	int x, y, z = 0;
@@ -12,6 +17,7 @@ struct MAP_OBJECT_STRUCT
 	DWORD type;
 	DWORD camp;
 	DWORD health_point;
+	DWORD code;
 	int x;
 	int y;
 	int z;
@@ -39,3 +45,11 @@ struct TASK_STRUCT
 	int 完成次数 = 0;
 };
 
+struct RolePos
+{
+	int max_city_id;
+	int min_city_id;
+	int x;
+	int y;
+	int z;
+};

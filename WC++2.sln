@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Loader", "Loader\Loader.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "memory_dll", "memory_dll\memory_dll.vcxproj", "{DB61FE3A-C7AC-400C-90DB-BC6494EC80B4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcxproj", "{5E2376B4-545D-41F7-9F6E-986E83A47868}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{DB61FE3A-C7AC-400C-90DB-BC6494EC80B4}.Release|x64.Build.0 = Release|x64
 		{DB61FE3A-C7AC-400C-90DB-BC6494EC80B4}.Release|x86.ActiveCfg = Release|Win32
 		{DB61FE3A-C7AC-400C-90DB-BC6494EC80B4}.Release|x86.Build.0 = Release|Win32
+		{5E2376B4-545D-41F7-9F6E-986E83A47868}.Debug|x64.ActiveCfg = Debug|x64
+		{5E2376B4-545D-41F7-9F6E-986E83A47868}.Debug|x64.Build.0 = Debug|x64
+		{5E2376B4-545D-41F7-9F6E-986E83A47868}.Debug|x86.ActiveCfg = Debug|Win32
+		{5E2376B4-545D-41F7-9F6E-986E83A47868}.Debug|x86.Build.0 = Debug|Win32
+		{5E2376B4-545D-41F7-9F6E-986E83A47868}.Release|x64.ActiveCfg = Release|x64
+		{5E2376B4-545D-41F7-9F6E-986E83A47868}.Release|x64.Build.0 = Release|x64
+		{5E2376B4-545D-41F7-9F6E-986E83A47868}.Release|x86.ActiveCfg = Release|Win32
+		{5E2376B4-545D-41F7-9F6E-986E83A47868}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

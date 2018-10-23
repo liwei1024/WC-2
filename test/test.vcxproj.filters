@@ -15,22 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="memory_loader.c">
-      <Filter>资源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="dllmain.c">
-      <Filter>资源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="loader.c">
-      <Filter>资源文件</Filter>
-    </ClCompile>
+    <ClInclude Include="pch.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
+    <ClCompile Include="pch.cpp">
       <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="memory_loader.h">
+    </ClCompile>
+    <ClCompile Include="test.cpp">
       <Filter>源文件</Filter>
-    </ClInclude>
+    </ClCompile>
   </ItemGroup>
 </Project>

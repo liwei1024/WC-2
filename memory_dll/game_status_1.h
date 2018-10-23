@@ -7,9 +7,10 @@ public:
 
 	void manage();
 
+
 	
 private:
-	void enter_the_dungeon(int dungeon_id);
+	void enter_the_dungeon();
 	void teleport_to(int city);
 };
 

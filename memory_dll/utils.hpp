@@ -118,6 +118,18 @@ static void main_thread_exec_call(LPVOID pfun, std::vector<int> params = { 0 })
 	{
 		call_params[i] = params[i];
 	}
-	PostMessage(g_hWnd, MY_MESSAGE_ID,(WPARAM)pfun,(LPARAM)call_params);
+	SendMessage(g_hWnd, MY_MESSAGE_ID,(WPARAM)pfun,(LPARAM)call_params);
+	delete[]call_params;
 }
 
+static void output_bebug_wstring(const wchar_t *lpcszFormat, ...)
+{
+	va_list argList;
+	wchar_t buffer[0x1024];
+	wchar_t temp_buffer[0x1024];
+	va_start(argList, lpcszFormat);
+	vswprintf_s(buffer, lpcszFormat, argList);
+	swprintf_s(temp_buffer, L"WC %s", buffer);
+	OutputDebugString(temp_buffer);
+	va_end(argList);
+}

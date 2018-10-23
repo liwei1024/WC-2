@@ -1,18 +1,18 @@
 #pragma once
 
-void TraverseAllTaskInfo(DWORD &start_address,size_t &task_count)
+static void TraverseAllTaskInfo(DWORD &start_address,size_t &task_count)
 {
 	start_address = read_offset<DWORD>(__任务基址, { 104 });
 	start_address = (read_offset<size_t>(__任务基址, { 108 }) - start_address) / 4;
 }
 
-void TraverseReceivedTaskInfo(DWORD &start_address, DWORD &task_count)
+static void TraverseReceivedTaskInfo(DWORD &start_address, DWORD &task_count)
 {
 	start_address = read_offset<DWORD>(__任务基址, { 8 });
 	start_address = (read_offset<DWORD>(__任务基址, { 12 }) - start_address) / 12;
 }
 
-TASK_STRUCT TraverseTaskObject(DWORD ObjectPointer)
+static TASK_STRUCT TraverseTaskObject(DWORD ObjectPointer)
 {
 	TASK_STRUCT task;
 	if (ObjectPointer != 0)
@@ -38,17 +38,17 @@ TASK_STRUCT TraverseTaskObject(DWORD ObjectPointer)
 }
 
 
-bool task_is_jump_over()
+static bool task_is_jump_over()
 {
 
 }
 
-bool task_is_received()
+static bool task_is_received()
 {
 
 }
 
-void auto_master_task()
+static void auto_master_task()
 {
 	DWORD task_start_address;
 	size_t task_count;
