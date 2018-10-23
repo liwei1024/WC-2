@@ -3,6 +3,7 @@ extern HWND g_hWnd;
 extern bool g_auto_switch;//自动开关
 extern int g_skills_code;//技能代码
 extern int g_auto_mode;//自动模式 0 搬砖 1剧情
+extern int 刷图功能;// 0 按键 1技能call 2吞噬魔
 extern int g_keep_fatigue_value; //保留疲劳
 extern int g_刷图次数;
 extern int g_金币收益;
