@@ -1,4 +1,7 @@
 #pragma once
+
+
+
 static int createRandom(int min, int max)
 {
 	int Ëæ»úÊý = 0;
@@ -110,11 +113,11 @@ static VOID doKeyPress(INT keyCode, INT s = 0)
 
 static void main_thread_exec_call(LPVOID pfun, std::vector<DWORD> params = { 0 })
 {
-	DWORD a[100] = { 0 };
+	DWORD *call_params = new DWORD[params.size()];
 	for (size_t i = 0; i < params.size(); i++)
 	{
-		a[i] = params[i];
+		call_params[i] = params[i];
 	}
-	PostMessage(g_hWnd, MY_MESSAGE_ID,(WPARAM)pfun,(LPARAM)a);
+	PostMessage(g_hWnd, MY_MESSAGE_ID,(WPARAM)pfun,(LPARAM)call_params);
 }
 
