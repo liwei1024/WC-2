@@ -15,5 +15,5 @@ static void bulletin(CONST LPWSTR Format, ...)
 	vswprintf_s(Buffer, Format, args);
 	va_end(args);
 
-	main_thread_exec_call(Call_公告Call, { (DWORD)&Buffer });
+	main_thread_exec_call(Call_公告Call, { (int)&Buffer });
 }
