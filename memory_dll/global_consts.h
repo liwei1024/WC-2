@@ -8,7 +8,7 @@
 #define __最大疲劳 0x05739530 
 #define __商店基址 0x05625A90 
 //#define __对话基址 0x5626384 
-//#define __释放CALL 0x2374C90 
+#define __释放CALL 0x02377730 
 
 #define __发包基址 0x0576F964
 #define __缓冲CALL 0x0370BC80

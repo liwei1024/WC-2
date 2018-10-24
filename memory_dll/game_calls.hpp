@@ -31,6 +31,37 @@ static inline void Call_技能Call(DWORD_PTR parameter)
 	}
 }
 
+static inline void Call_释放Call(DWORD_PTR parameter)
+{
+	__try
+	{
+		int a[6] = {};
+		a[0] = read<int>(parameter);//触发指针;
+		a[1] = read<int>(parameter + 4); //代码
+		a[2] = read<int>(parameter + 8); //伤害
+		a[3] = read<int>(parameter + 12);//x
+		a[4] = read<int>(parameter + 16);//y
+		a[5] = read<int>(parameter + 20);//z
+		__asm
+		{
+			push a[5]
+			push a[4]
+			push a[3]
+			push a[2]
+			push a[1]
+			push a[0]
+			mov edi,__释放CALL
+			mov eax,edi
+			call eax
+			add esp,24
+		}
+	}
+	__except (1)
+	{
+		output_bebug_wstring(L"Call_释放Call 异常");
+	}
+}
+
 static inline void Call_公告Call(DWORD_PTR parameter)
 {
 	__try
@@ -60,8 +91,6 @@ static inline void Call_公告Call(DWORD_PTR parameter)
 		output_bebug_wstring(L"Call_公告Call 异常");
 	}
 }
-
-
 
 static inline void Call_接受Call(DWORD_PTR parameter)
 {
@@ -120,7 +149,6 @@ static inline void Call_区域Call(DWORD_PTR parameter)
 	}
 	
 }
-
 
 static inline void Call_坐标Call(DWORD_PTR parameter)
 {
