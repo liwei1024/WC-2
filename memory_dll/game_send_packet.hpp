@@ -1,6 +1,6 @@
 #pragma once
 
-inline void Send_缓冲CALL(int cdov)
+static inline void Send_缓冲CALL(int cdov)
 {
 	__asm {
 		push cdov
@@ -10,7 +10,7 @@ inline void Send_缓冲CALL(int cdov)
 		call eax
 	}
 }
-inline void Send_密包CALL(int wtud, int taya)
+static inline void Send_密包CALL(int wtud, int taya)
 {
 	int cdov = 0;
 	if (taya == 1)cdov = __密包CALL;
@@ -25,7 +25,7 @@ inline void Send_密包CALL(int wtud, int taya)
 		call eax
 	}
 }
-inline void Send_发包CALL(void)
+static inline void Send_发包CALL(void)
 {
 	__asm {
 		mov eax, __发包CALL
@@ -33,13 +33,13 @@ inline void Send_发包CALL(void)
 	}
 }
 
-inline void Send_返回角色(DWORD parameter)
+static inline void Send_返回角色(DWORD parameter)
 {
 	Send_缓冲CALL(0x7);
 	Send_发包CALL();
 }
 
-inline void Send_选择角色(DWORD parameter)
+static inline void Send_选择角色(DWORD parameter)
 {
 	int role_index = read<int>(parameter);
 
@@ -48,7 +48,7 @@ inline void Send_选择角色(DWORD parameter)
 	Send_发包CALL();
 }
 
-inline void Send_城镇瞬移(DWORD parameter)
+static inline void Send_城镇瞬移(DWORD parameter)
 {
 	int max_map_id = read<int>(parameter + 0);
 	int min_map_id = read<int>(parameter + 4);
@@ -82,14 +82,14 @@ inline void Send_城镇瞬移(DWORD parameter)
 	}
 }
 
-inline void Send_进入选图(DWORD parameter)
+static inline void Send_进入选图(DWORD parameter)
 {
 	Send_缓冲CALL(15);
 	Send_密包CALL(0, 3);
 	Send_发包CALL();
 }
 
-inline void Send_选择副本(DWORD parameter)
+static inline void Send_选择副本(DWORD parameter)
 {
 	int 副本编号 = read<int>(parameter);
 	int 副本难度 = read<int>(parameter + 4);
@@ -125,7 +125,7 @@ inline void Send_选择副本(DWORD parameter)
 	Send_发包CALL();
 }
 
-inline void Send_组包拾取(DWORD parameter)
+static inline void Send_组包拾取(DWORD parameter)
 {
 	DWORD loot_address = read<int>(parameter);
 	DWORD x = read<int>(parameter + 4);
@@ -145,7 +145,7 @@ inline void Send_组包拾取(DWORD parameter)
 	Send_发包CALL();
 }
 
-inline void Send_组包翻牌(DWORD parameter)
+static inline void Send_组包翻牌(DWORD parameter)
 {
 	Send_缓冲CALL(69);
 	Send_发包CALL();
@@ -157,7 +157,7 @@ inline void Send_组包翻牌(DWORD parameter)
 	Send_发包CALL();
 }
 
-inline void Send_组包卖物(DWORD parameter)
+static inline void Send_组包卖物(DWORD parameter)
 {
 	DWORD 物品下标 = read<int>(parameter);
 
@@ -176,7 +176,7 @@ inline void Send_组包卖物(DWORD parameter)
 }
 
 
-inline void Send_组包回城(DWORD parameter)
+static inline void Send_组包回城(DWORD parameter)
 {
 	Send_缓冲CALL(123);
 	Send_密包CALL(createRandom(1, 1500), 3);

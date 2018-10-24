@@ -1,5 +1,5 @@
 #pragma once
-inline void Call_技能Call(DWORD parameter)
+static inline void Call_技能Call(DWORD parameter)
 {
 	int a[26] = {};
 	a[0] = read<int>(parameter);//触发指针;
@@ -26,7 +26,7 @@ inline void Call_技能Call(DWORD parameter)
 	}
 }
 
-inline void Call_公告Call(DWORD parameter)
+static inline void Call_公告Call(DWORD parameter)
 {
 	DWORD Buffer = read<DWORD>(parameter);
 	if (Buffer > 0) {
@@ -51,22 +51,22 @@ inline void Call_公告Call(DWORD parameter)
 
 
 
-inline void Call_接受Call(DWORD parameter)
+static inline void Call_接受Call(DWORD parameter)
 {
 
 }
 
-inline void Call_提交Call(DWORD parameter)
+static inline void Call_提交Call(DWORD parameter)
 {
 
 }
 
-inline void Call_完成Call(DWORD parameter)
+static inline void Call_完成Call(DWORD parameter)
 {
 
 }
 
-inline void Call_区域Call(DWORD parameter)
+static inline void Call_区域Call(DWORD parameter)
 {
 	int 区域指针 = read<int>(__区域参数);
 	int Copy_ID = read<int>(parameter);
@@ -90,7 +90,7 @@ inline void Call_区域Call(DWORD parameter)
 }
 
 
-inline void Call_坐标Call(DWORD parameter)
+static inline void Call_坐标Call(DWORD parameter)
 {
 	DWORD object_pointer = read<int>(parameter);
 	DWORD x = read<int>(parameter + 4);
@@ -109,7 +109,7 @@ inline void Call_坐标Call(DWORD parameter)
 	}
 }
 
-inline void Call_过图Call(DWORD parameter)
+static inline void Call_过图Call(DWORD parameter)
 {
 	int 方向 = read<int>(parameter);
 	__asm {
@@ -131,12 +131,12 @@ inline void Call_过图Call(DWORD parameter)
 	}
 }
 
-inline void Call_召唤Call(DWORD parameter)
+static inline void Call_召唤Call(DWORD parameter)
 {
 
 }
 
-inline void Call_变身Call(DWORD parameter)
+static inline void Call_变身Call(DWORD parameter)
 {
 
 }

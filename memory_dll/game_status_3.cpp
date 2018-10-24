@@ -214,18 +214,9 @@ void game_status_3::get_loot()
 	MAP_OBJECT_STRUCT object;
 	for (size_t i = 0; i < map_object_count; i++) {
 		object = get_object_info(map_start_address + i * 4);
-		if (object.code == 258 || object.code == 818 || object.code == 63821)
+		if (object.type == 289 && object.camp == 200)
 		{
-			continue;
-		}
-		if (
-			object.type == 289
-			)
-		{
-			if (object.camp == 200)
-			{
-				Objects.insert(Objects.end(), object);
-			}
+			Objects.insert(Objects.end(), object);
 		}
 	}
 	if (Objects.size() > 0)
@@ -238,4 +229,30 @@ void game_status_3::get_loot()
 		}
 	}
 
+}
+
+bool game_status_3:: «∑Ò”–π÷ŒÔ()
+{
+	DWORD map_start_address = get_map_start_address();
+	DWORD map_object_count = get_map_object_count(map_start_address);
+	MAP_OBJECT_STRUCT object;
+	for (size_t i = 0; i < map_object_count; i++) {
+		object = get_object_info(map_start_address + i * 4);
+		if (object.code == 258 || object.code == 818 || object.code == 63821)
+		{
+			continue;
+		}
+		if (object.camp > 0)
+		{
+			if (object.type == 529 ||object.type == 273 || object.type == 545)
+			{
+			
+				if (object.health_point > 0 || object.code == 8104 || object.code == 817)
+				{
+					return true;
+				}
+			}
+		}
+	}
+	return false;
 }
