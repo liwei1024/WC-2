@@ -110,7 +110,7 @@ static inline void Send_选择副本(DWORD_PTR parameter)
 		Send_密包CALL(0, 1);
 		Send_密包CALL(0, 1);
 	}
-	else if (副本模式 == 0) { // 深渊
+	else if (副本模式 == 1) { // 深渊
 		Send_密包CALL(1, 1);
 		Send_密包CALL(0, 1);
 	}

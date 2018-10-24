@@ -2,8 +2,8 @@
 extern HWND g_hWnd;
 extern bool g_auto_switch;//自动开关
 extern int g_skills_code;//技能代码
-extern int g_auto_mode;//自动模式 0 搬砖 1剧情
-extern int 刷图功能;// 0 按键 1技能call 2吞噬魔
+extern int g_auto_mode;//自动模式 0 搬砖 1剧情 2练习
+extern int g_刷图功能;// 0 按键 1技能call 2吞噬魔
 extern int g_keep_fatigue_value; //保留疲劳
 extern int g_过图方式; // 0坐标过图 1 强制过图
 extern int g_移动方式; // 0瞬移 1走路
@@ -17,7 +17,7 @@ extern int g_开始角色;
 extern int g_截止角色;
 extern int g_dungeon_id; 
 extern int g_dungeon_rank;
-
+extern bool 练习模式;
 
 
 

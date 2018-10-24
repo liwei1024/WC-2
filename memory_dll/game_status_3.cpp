@@ -15,13 +15,13 @@ game_status_3::~game_status_3()
 void game_status_3::manage()
 {
 	int game_status = get_game_status();
-	if (is_open_door() == true)
+	if (is_open_door() == true && 是否有怪物() == false)
 	{
-		get_loot();
+		//get_loot();
 		if (is_boss_room() == true && 是否有怪物() == false)
 		{
 			//main_thread_exec_call(Send_组包翻牌);
-			if (get_the_custom_shop() == true)
+			if (get_the_custom_shop() == true || 练习模式 ==true)
 			{
 				main_thread_exec_call(Send_组包回城);
 				while (true) {
@@ -30,7 +30,7 @@ void game_status_3::manage()
 						g_刷图次数++;
 						g_过图时间 = getTime() - g_过图时间;
 						g_首图标记 = true;
-						bulletin(L"[GC] 第 %d 次 本次耗时 %d 秒 ", g_刷图次数, g_过图时间);
+						bulletin(L"[GC] 第 %d 次 本次耗时 %d 秒 ", g_刷图次数, (int)(g_过图时间/1000));
 						break;
 					}
 					Sleep(2000);
@@ -46,7 +46,8 @@ void game_status_3::manage()
 		}
 	}
 	else {
-		attack_monster();
+		//attack_monster();
+		按键_帕拉丁();
 	}
 }
 
@@ -75,34 +76,38 @@ void game_status_3::move_to_next_room(int direction)
 	temp_data = read<DWORD>(__商店基址 - 8);
 	temp_data = read<DWORD>(temp_data + __时间基址);
 	temp_data = read<DWORD>(temp_data + 140);
-	coordinate_struct = temp_data + (direction + direction * 8) * 4 + 5936 + (direction * 4);
+	coordinate_struct = temp_data + (direction + direction * 8) * 4 + 5948 + (direction * 4);
 	x = read<int>(coordinate_struct + 0x0);
 	y = read<int>(coordinate_struct + 0x4);
 	xf = read<int>(coordinate_struct + 0x8);
 	yf = read<int>(coordinate_struct + 0xc);
 	if (direction == 0)
 	{
-		cx = x + xf;
-		cy = y + yf;
+		cx = x + xf + 20;
+		cy = y + yf / 2;
+		doKeyPress(VK_NUMPAD1);
 	}
 	else if (direction == 1) 
 	{
 		cx = x - 20;
 		cy = y + yf / 2;
-	}
-	else if (direction == 2)
-	{
-		cx = x - xf / 2;
-		cy = y + yf + 20;
+		doKeyPress(VK_NUMPAD3);
 	}
 	else if (direction == 2)
 	{
 		cx = x + xf / 2;
+		cy = y + yf + 20;
+	}
+	else if (direction == 3)
+	{
+		cx = x + xf / 2;
 		cy = y - 20;
 	}
+	Sleep(200);
 	main_thread_exec_call(Call_坐标Call, { read<int>(__人物基址),cx,cy,0 });
 	Sleep(200);
 	main_thread_exec_call(Call_坐标Call, { read<int>(__人物基址),(x + xf / 2), y, 0 });
+	Sleep(1000);
 }
 
 // 获取对象信息
@@ -181,55 +186,64 @@ void game_status_3::attack_monster()
 	DWORD map_object_count = get_map_object_count(map_start_address);
 	std::vector<MAP_OBJECT_STRUCT> Objects;
 	MAP_OBJECT_STRUCT object;
+	DWORD object_address;
 	for (size_t i = 0; i < map_object_count; i++) {
-		object = get_object_info(map_start_address + i * 4);
+		object_address = read<int>(map_start_address + i * 4);
+		if (object_address <= 0)continue;
+		object = get_object_info(object_address);
 		if (object.code == 258 || object.code == 818 || object.code == 63821)
 		{
 			continue;
 		}
-		if (
-			object.type == 529 ||
-			object.type == 273 ||
-			object.type == 545
-			)
+		if (object.type == 529 || object.type == 273 || object.type == 545)
 		{
 			if (object.camp > 0)
 			{
 				if (object.health_point > 0 || object.code == 8104 || object.code == 817)
 				{
-					Objects.insert(Objects.end(), object);
+					//Objects.insert(Objects.end(), object);
+					//bulletin(L"Call_技能Call x%,%y,%z", object.x, object.y , object.z);
+					//bulletin(L"Call_技能Call");
+					main_thread_exec_call(Call_技能Call, { 0,70023,113, object.x + createRandom(-10, 10), object.y + createRandom(-10, 10), object.z });
+					Sleep(500);
+					break;
 				}
 			}
 		}
+		
 	}
-	if (Objects.size() > 0)
-	{
-		sort_by_distance(Objects);
-		for (size_t i = 0; i < Objects.size(); i++)
-		{
-			//AttackFunction(Objects[i]);
-			if (g_auto_mode == 搬砖)
-			{
-				main_thread_exec_call(Call_技能Call, { 0,70032,113,Objects[i].x + createRandom(-10,10),Objects[i].y + createRandom(-10,10),Objects[i].z });
-			}
-			else {
+	return;
+	//if (Objects.size() > 0)
+	//{
+	//	sort_by_distance(Objects);
+	//	for (size_t i = 0; i < Objects.size(); i++)
+	//	{
+	//		//AttackFunction(Objects[i]);
+	//		if (g_auto_mode == 搬砖)
+	//		{
+	//			main_thread_exec_call(Call_技能Call, { 0,70023,113,Objects[i].x + createRandom(-10,10),Objects[i].y + createRandom(-10,10),Objects[i].z });
+	//		}
+	//		else if(g_auto_mode == 剧情) {
 
-			}
-			Sleep(500);
-			break;
-		}
-	}
+	//		}
+	//		Sleep(500);
+	//		break;
+	//	}
+	//}
 }
 
 void game_status_3::follow()
 {
 	DWORD map_start_address = get_map_start_address();
 	DWORD map_object_count = get_map_object_count(map_start_address);
-	std::vector<MAP_OBJECT_STRUCT> Objects;
+	//std::vector<MAP_OBJECT_STRUCT> Objects;
 	MAP_OBJECT_STRUCT object;
 	RolePos role_pos = get_role_pos();
+	DWORD object_address;
 	for (size_t i = 0; i < map_object_count; i++) {
-		object = get_object_info(map_start_address + i * 4);
+		object_address = read<int>(map_start_address + i * 4);
+		if (object_address <= 0)continue;
+		object = get_object_info(object_address);
 		if (object.code == 258 || object.code == 818 || object.code == 63821)
 		{
 			continue;
@@ -244,12 +258,26 @@ void game_status_3::follow()
 			{
 				if (object.health_point > 0 || object.code == 8104 || object.code == 817)
 				{
-					Objects.insert(Objects.end(), object);
+					//Objects.insert(Objects.end(), object);
+					if (abs(role_pos.x - object.x) > 150 || abs(role_pos.y - object.y) > 30)
+					{
+						if (role_pos.x > object.x)
+						{
+							移动到角色指定位置(object.x + createRandom(-10, 10) + 100, object.y + createRandom(-10, 10));
+							doKeyPress(VK_NUMPAD1);
+						}
+						else {
+							移动到角色指定位置(object.x + createRandom(-10, 10) - 100, object.y + createRandom(-10, 10));
+							doKeyPress(VK_NUMPAD3);
+						}
+						Sleep(200);
+						break;
+					}
 				}
 			}
 		}
 	}
-	if (Objects.size() > 0)
+	/*if (Objects.size() > 0)
 	{
 		sort_by_distance(Objects);
 		for (size_t i = 0; i < Objects.size(); i++)
@@ -271,7 +299,7 @@ void game_status_3::follow()
 			
 			
 		}
-	}
+	}*/
 }
 
 // 获取通关商店
@@ -280,14 +308,14 @@ bool game_status_3::get_the_custom_shop()
 	DWORD map_start_address = get_map_start_address();
 	DWORD map_object_count = get_map_object_count(map_start_address);
 	MAP_OBJECT_STRUCT object;
+	DWORD object_address;
 	for (size_t i = 0; i < map_object_count; i++) {
-		object = get_object_info(map_start_address + i * 4);
-		if (object.type == 33 && object.camp == 200)
+		object_address = read<int>(map_start_address + i * 4);
+		if (object_address <= 0)continue;
+		object = get_object_info(object_address);
+		if (object.code == 48026)
 		{
-			if (read<int>(object.address + 1020) == 48026)
-			{
-				return true;
-			}
+			return true;
 		}
 	}
 	return false;
@@ -299,8 +327,11 @@ void game_status_3::get_loot()
 	DWORD map_object_count = get_map_object_count(map_start_address);
 	std::vector<MAP_OBJECT_STRUCT> Objects;
 	MAP_OBJECT_STRUCT object;
+	DWORD object_address;
 	for (size_t i = 0; i < map_object_count; i++) {
-		object = get_object_info(map_start_address + i * 4);
+		object_address = read<int>(map_start_address + i * 4);
+		if (object_address <= 0)continue;
+		object = get_object_info(object_address);
 		if (object.type == 289 && object.camp == 200)
 		{
 			Objects.insert(Objects.end(), object);
@@ -322,24 +353,28 @@ bool game_status_3::是否有怪物()
 {
 	DWORD map_start_address = get_map_start_address();
 	DWORD map_object_count = get_map_object_count(map_start_address);
+	std::vector<MAP_OBJECT_STRUCT> Objects;
 	MAP_OBJECT_STRUCT object;
+	DWORD object_address;
 	for (size_t i = 0; i < map_object_count; i++) {
-		object = get_object_info(map_start_address + i * 4);
+		object_address = read<int>(map_start_address + i * 4);
+		if (object_address <= 0)continue;
+		object = get_object_info(object_address);
 		if (object.code == 258 || object.code == 818 || object.code == 63821)
 		{
 			continue;
 		}
-		if (object.camp > 0)
+		if (object.type == 529 || object.type == 273 || object.type == 545)
 		{
-			if (object.type == 529 ||object.type == 273 || object.type == 545)
+			if (object.camp > 0)
 			{
-			
 				if (object.health_point > 0 || object.code == 8104 || object.code == 817)
 				{
 					return true;
 				}
 			}
 		}
+
 	}
 	return false;
 }
@@ -375,7 +410,7 @@ void game_status_3::按键_帕拉丁()
 		else if (current_room.x == 1 && current_room.y == 0) {
 			移动到角色指定位置(345, 216);
 			doKeyPress(VK_A);
-			Sleep(2000);
+			Sleep(3000);
 		}
 		else if (current_room.x == 2 && current_room.y == 0) {
 			移动到角色指定位置(582, 241);
@@ -384,6 +419,7 @@ void game_status_3::按键_帕拉丁()
 		}
 		else if (current_room.x == 2 && current_room.y == 1) {
 			移动到角色指定位置(521, 200);
+			doKeyPress(VK_NUMPAD1);
 			doKeyPress(VK_R);
 			Sleep(1500);
 		}
@@ -396,7 +432,7 @@ void game_status_3::按键_帕拉丁()
 			Sleep(500);
 			this->follow();
 			doKeyPress(VK_Q);
-			Sleep(1500);
+			Sleep(2500);
 		}
 		else if (current_room.x == 3 && current_room.y == 2) {
 			移动到角色指定位置(343, 273);
@@ -404,7 +440,6 @@ void game_status_3::按键_帕拉丁()
 			Sleep(1500);
 		}
 		else if (current_room.x == 3 && current_room.y == 1) {
-			移动到角色指定位置(343, 273);
 			doKeyPress(VK_NUMPAD3);
 			doKeyPress(VK_W);
 			Sleep(3000);
@@ -443,7 +478,7 @@ void game_status_3::按键_帕拉丁()
 		{
 			return;
 		}
-		while (is_open_door() == true)
+		while (is_open_door() == false)
 		{
 			this->follow();
 			doKeyPress(VK_X, 1500);

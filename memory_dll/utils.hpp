@@ -17,13 +17,11 @@ static int createRandom(int min, int max)
 }
 
 // 获取时间戳
-static INT getTime()
+static DWORD getTime()
 {
-	DWORD t_start, t_end;
+	DWORD t_start;
 	t_start = GetTickCount();//从操作系统启动所经过（elapsed）的毫秒数，它的返回值是DWORD。
-	Sleep(3000);
-	t_end = GetTickCount();
-	return  t_end - t_start;
+	return  t_start;
 }
 
 static POINT getMouseCoord()
@@ -107,7 +105,7 @@ static VOID keyUp(INT keyCode)
 static VOID doKeyPress(INT keyCode, INT s = 0)
 {
 	keyDown(keyCode);
-	Sleep(s + createRandom(200, 300));
+	Sleep(s + createRandom(1, 10));
 	keyUp(keyCode);
 }
 

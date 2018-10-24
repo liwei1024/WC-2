@@ -22,14 +22,14 @@ static inline void LoadFromMemory()
 	HMEMORYMODULE module;
 	pEntryPoint EntryPoint;
 
-	_getcwd(szFilePath, MAX_PATH);
-	strcat_s(szFilePath, MAX_PATH, "\\WCPlusPlus.dat");
+	/*_getcwd(szFilePath, MAX_PATH);
+	strcat_s(szFilePath, MAX_PATH, "\\WCPlusPlus.dat");*/
 
 	//OutputDebugStringA(szFilePath);
 	
 
-	//fopen_s(&fp, "C:\\Users\\lw\\source\\repos\\liwei1024\\WC-2\\Release\\WCPlusPlus.dat", "rb");
-	fopen_s(&fp, "C:\\Users\\lw\\source\\repos\\WC++2\\Release\\WCPlusPlus.dat", "rb");
+	fopen_s(&fp, "C:\\Users\\lw\\source\\repos\\liwei1024\\WC-2\\Release\\WCPlusPlus.dat", "rb");
+	//fopen_s(&fp, "C:\\Users\\lw\\source\\repos\\WC++2\\Release\\WCPlusPlus.dat", "rb");
 	//fopen_s(&fp, szFilePath, "rb");
 	if (fp == NULL)
 	{

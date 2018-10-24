@@ -120,8 +120,10 @@ static bool is_boss_room()
 
 	if (current_room_pos.x == boss_room_pos.x && current_room_pos.y == boss_room_pos.y)
 	{
+		//bulletin(L"在Boss 房间");
 		return true;
 	}
+	//bulletin(L"不Boss 房间");
 	return false;
 }
 
@@ -129,9 +131,11 @@ static bool is_open_door()
 {
 	if (decrypt(read_offset<int>(__人物基址, { __地图偏移 }) + __开门偏移) == 0)
 	{
+		//bulletin(L"已开门");
 		return true;
 	}
 	else {
+		//bulletin(L"未开门");
 		return false;
 	}
 }

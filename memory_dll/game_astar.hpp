@@ -99,15 +99,15 @@ static VOID read_map_info(AStarMapInfo &map_info, int type)
 		map_info.end_room.x = decrypt(偏移地址二 + __深渊房间X);
 		map_info.end_room.y = decrypt(偏移地址二 + __深渊房间Y);
 	}
-	//map_info = 地图遍历(模式);
-	/*map_info.width = 4;
-	map_info.height = 3;
-	map_info.name = "ge lan di";
-	map_info.channel = { 1,5,12,0,0,9,14,8,0,3,7,6 };
-	map_info.start_coordinate.x = 0;
-	map_info.start_coordinate.y = 0;
-	map_info.end_coordinate.x = 3;
-	map_info.end_coordinate.y = 1;*/
+	////map_info = 地图遍历(模式);
+	//map_info.width = 4;
+	//map_info.height = 3;
+	////map_info.name = "ge lan di";
+	//map_info.room_channel = { 1,5,12,0,0,9,14,8,0,3,7,6 };
+	//map_info.end_room.x = 0;
+	//map_info.end_room.y = 0;
+	//map_info.end_room.x = 3;
+	//map_info.end_room.y = 1;
 }
 static VOID create_room_array(AStarMapInfo map_info, std::vector<std::vector<AStarRoomInfo>>& room_array)
 {
@@ -232,21 +232,21 @@ static int GetDirection(int type = 1)
 	search_path(map_info, room_array, boss_room);
 	// 4.回溯路径
 	recall_path(map_info, room_array, boss_room, path);
-	/*printf("size %zd\n", path.size());
-	for (SIZE_T i = path.size() - 1; i >= 0; i--)
+	/*bulletin(L"size %zd\n", path.size());
+	for (SIZE_T i = 0; i < path.size(); i++)
 	{
 		if (path[i] == 0)
 		{
-			printf("左\n");
+			bulletin(L"左\n");
 		}
 		else if (path[i] == 1) {
-			printf("右\n");
+			bulletin(L"右\n");
 		}
 		else if (path[i] == 2) {
-			printf("上\n");
+			bulletin(L"上\n");
 		}
 		else if (path[i] == 3) {
-			printf("下\n");
+			bulletin(L"下\n");
 		}
 	}*/
 	return path[path.size() - 1];

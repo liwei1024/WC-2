@@ -7,6 +7,7 @@ public:
 
 	void manage();
 	void output_map_objects_info();
+	
 private:
 	DWORD get_map_address();
 	DWORD get_map_start_address();
