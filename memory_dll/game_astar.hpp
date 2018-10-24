@@ -21,7 +21,7 @@ struct AStarRoomInfo
 	bool right;
 };
 
-unsigned char orientation_vector[16][4] = {
+static unsigned char orientation_vector[16][4] = {
 	// 左 右 上 下 
 	{ 0, 0, 0, 0 },//0	无
 	{ 0, 1, 0, 0 },//1	右
@@ -41,7 +41,7 @@ unsigned char orientation_vector[16][4] = {
 	{ 1, 1, 1, 1 } //15	左	右	上	下
 };
 
-BOOL has_list(std::vector<AStarRoomInfo> list, AStarRoomInfo to_search_room)
+static BOOL has_list(std::vector<AStarRoomInfo> list, AStarRoomInfo to_search_room)
 {
 	for (unsigned i = 0; i < list.size(); i++)
 	{
@@ -52,7 +52,7 @@ BOOL has_list(std::vector<AStarRoomInfo> list, AStarRoomInfo to_search_room)
 	}
 	return false;
 }
-int find_min_weight_key(std::vector<std::vector<AStarRoomInfo>> room_array, std::vector<AStarRoomInfo> open_list)
+static int find_min_weight_key(std::vector<std::vector<AStarRoomInfo>> room_array, std::vector<AStarRoomInfo> open_list)
 {
 	int key = 0;
 	int min_weight;
@@ -67,7 +67,7 @@ int find_min_weight_key(std::vector<std::vector<AStarRoomInfo>> room_array, std:
 	}
 	return key;
 }
-VOID read_map_info(AStarMapInfo &map_info, int type)
+static VOID read_map_info(AStarMapInfo &map_info, int type)
 {
 	int 临时地址一;
 	int 临时地址二;
@@ -109,7 +109,7 @@ VOID read_map_info(AStarMapInfo &map_info, int type)
 	map_info.end_coordinate.x = 3;
 	map_info.end_coordinate.y = 1;*/
 }
-VOID create_room_array(AStarMapInfo map_info, std::vector<std::vector<AStarRoomInfo>>& room_array)
+static VOID create_room_array(AStarMapInfo map_info, std::vector<std::vector<AStarRoomInfo>>& room_array)
 {
 	AStarRoomInfo temp_room_info;
 	// 1.初始化容器大小
@@ -137,7 +137,7 @@ VOID create_room_array(AStarMapInfo map_info, std::vector<std::vector<AStarRoomI
 		}
 	}
 }
-VOID search_path(AStarMapInfo map_info, std::vector<std::vector<AStarRoomInfo>>& room_array, AStarRoomInfo & boss_room)
+static VOID search_path(AStarMapInfo map_info, std::vector<std::vector<AStarRoomInfo>>& room_array, AStarRoomInfo & boss_room)
 {
 	std::vector<AStarRoomInfo> open_list;
 	std::vector<AStarRoomInfo> close_list;
@@ -199,7 +199,7 @@ VOID search_path(AStarMapInfo map_info, std::vector<std::vector<AStarRoomInfo>>&
 		close_list.insert(close_list.end(), current_room);
 	}
 }
-VOID recall_path(AStarMapInfo map_info, std::vector<std::vector<AStarRoomInfo>> room_array, AStarRoomInfo room_info, std::vector<int>& path)
+static VOID recall_path(AStarMapInfo map_info, std::vector<std::vector<AStarRoomInfo>> room_array, AStarRoomInfo room_info, std::vector<int>& path)
 {
 	if (room_info.coordinate.x < room_info.parent_coordinate.x)
 	{
@@ -218,7 +218,7 @@ VOID recall_path(AStarMapInfo map_info, std::vector<std::vector<AStarRoomInfo>> 
 		recall_path(map_info, room_array, room_array[room_info.parent_coordinate.y][room_info.parent_coordinate.x], path);
 	}
 }
-int GetDirection(int type = 1)
+static int GetDirection(int type = 1)
 {
 	AStarMapInfo map_info;
 	std::vector<std::vector<AStarRoomInfo>> room_array;

@@ -1,7 +1,6 @@
-#define WIN32_LEAN_AND_MEAN
-
 #include "pch.h"
 #include "memory_loader.h"
+#include <direct.h>
 
 HMODULE g_hDll = NULL;
 
@@ -12,7 +11,9 @@ typedef VOID(*pEntryPoint)(HMODULE hmLoaderDllHModule, const char* lpLoaderDllPa
 //#define DLL_FILE 
 
 
-void LoadFromMemory()
+char szFilePath[MAX_PATH + 1] = { 0 };
+
+static inline void LoadFromMemory()
 {
 	//VMProtectBegin("LoadFromMemory");
 	FILE *fp;
@@ -21,8 +22,15 @@ void LoadFromMemory()
 	HMEMORYMODULE module;
 	pEntryPoint EntryPoint;
 
+	_getcwd(szFilePath, MAX_PATH);
+	strcat_s(szFilePath, MAX_PATH, "\\WCPlusPlus.dat");
 
-	fopen_s(&fp, "C:\\Users\\lw\\source\\repos\\liwei1024\\WC-2\\Release\\WCPlusPlus.dat", "rb");
+	//OutputDebugStringA(szFilePath);
+	
+
+	//fopen_s(&fp, "C:\\Users\\lw\\source\\repos\\liwei1024\\WC-2\\Release\\WCPlusPlus.dat", "rb");
+	fopen_s(&fp, "C:\\Users\\lw\\source\\repos\\WC++2\\Release\\WCPlusPlus.dat", "rb");
+	//fopen_s(&fp, szFilePath, "rb");
 	if (fp == NULL)
 	{
 		return;

@@ -68,6 +68,7 @@ static void encrypt(INT32 Address, INT32 Value)
 
 static int get_game_status()
 {
+	//output_bebug_wstring(L"__游戏状态 %d", read<int>(__游戏状态));
 	return read<int>(__游戏状态);
 }
 
@@ -77,7 +78,7 @@ static void bulletin(LPCWSTR Format, ...)
 
 	va_list args;
 	va_start(args, Format);
-	vswprintf_s(Buffer, Format, args);
+	vswprintf_s(Buffer,Format, args);
 	va_end(args);
 
 	main_thread_exec_call(Call_公告Call, { (int)&Buffer });
@@ -134,3 +135,4 @@ static bool is_open_door()
 		return false;
 	}
 }
+

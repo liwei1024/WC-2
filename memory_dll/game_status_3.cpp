@@ -14,7 +14,40 @@ game_status_3::~game_status_3()
 
 void game_status_3::manage()
 {
-
+	int game_status = get_game_status();
+	if (is_open_door() == true)
+	{
+		get_loot();
+		if (is_boss_room() == true && 是否有怪物() == false)
+		{
+			//main_thread_exec_call(Send_组包翻牌);
+			if (get_the_custom_shop() == true)
+			{
+				main_thread_exec_call(Send_组包回城);
+				while (true) {
+					if (game_status != get_game_status())
+					{
+						g_刷图次数++;
+						g_过图时间 = getTime() - g_过图时间;
+						g_首图标记 = true;
+						bulletin(L"[GC] 第 %d 次 本次耗时 %d 秒 ", g_刷图次数, g_过图时间);
+						break;
+					}
+					Sleep(2000);
+				}
+			}
+			else {
+				doKeyPress(VK_ESCAPE);
+				Sleep(1000);
+			}
+		}
+		else {
+			move_to_next_room(GetDirection());
+		}
+	}
+	else {
+		attack_monster();
+	}
 }
 
 DWORD game_status_3::get_map_address()
@@ -183,6 +216,60 @@ void game_status_3::attack_monster()
 
 			}
 			Sleep(500);
+			break;
+		}
+	}
+}
+
+void game_status_3::follow()
+{
+	DWORD map_start_address = get_map_start_address();
+	DWORD map_object_count = get_map_object_count(map_start_address);
+	std::vector<MAP_OBJECT_STRUCT> Objects;
+	MAP_OBJECT_STRUCT object;
+	RolePos role_pos = get_role_pos();
+	for (size_t i = 0; i < map_object_count; i++) {
+		object = get_object_info(map_start_address + i * 4);
+		if (object.code == 258 || object.code == 818 || object.code == 63821)
+		{
+			continue;
+		}
+		if (
+			object.type == 529 ||
+			object.type == 273 ||
+			object.type == 545
+			)
+		{
+			if (object.camp > 0)
+			{
+				if (object.health_point > 0 || object.code == 8104 || object.code == 817)
+				{
+					Objects.insert(Objects.end(), object);
+				}
+			}
+		}
+	}
+	if (Objects.size() > 0)
+	{
+		sort_by_distance(Objects);
+		for (size_t i = 0; i < Objects.size(); i++)
+		{
+			if (abs(role_pos.x - Objects[i].x) > 150 || abs(role_pos.x - Objects[i].x) > 30)
+			{
+				if (role_pos.x > Objects[i].x)
+				{
+					移动到角色指定位置(Objects[i].x + createRandom(-10, 10) + 100, Objects[i].y + createRandom(-10, 10));
+					doKeyPress(VK_NUMPAD1);
+				}
+				else {
+					移动到角色指定位置(Objects[i].x + createRandom(-10, 10) - 100, Objects[i].y + createRandom(-10, 10));
+					doKeyPress(VK_NUMPAD3);
+				}
+				Sleep(200);
+				break;
+			}
+			
+			
 		}
 	}
 }
@@ -255,4 +342,111 @@ bool game_status_3::是否有怪物()
 		}
 	}
 	return false;
+}
+
+void game_status_3::移动到角色指定位置(int x,int y,int z)
+{
+	if (g_移动方式 == 0) //坐标call
+	{
+		main_thread_exec_call(Call_坐标Call, { read<int>(__人物基址),x,y,z });
+	}
+	else if (g_移动方式 == 1) { //脚本移动
+
+	}
+	Sleep(200);
+}
+
+
+void game_status_3::按键_帕拉丁()
+{
+	Pos current_room = get_current_room_pos();
+	DWORD figure_pointer = read<DWORD>(__人物基址);
+	if (g_dungeon_id == 格蓝迪)
+	{
+		if (current_room.x == 0 && current_room.y == 0 && g_首图标记 == true)
+		{
+			g_过图时间 = getTime();
+			g_首图标记 = false;
+			doKeyPress(VK_F);
+			Sleep(800);
+			doKeyPress(VK_Y);
+			Sleep(2500);
+		}
+		else if (current_room.x == 1 && current_room.y == 0) {
+			移动到角色指定位置(345, 216);
+			doKeyPress(VK_A);
+			Sleep(2000);
+		}
+		else if (current_room.x == 2 && current_room.y == 0) {
+			移动到角色指定位置(582, 241);
+			doKeyPress(VK_A);
+			Sleep(1000);
+		}
+		else if (current_room.x == 2 && current_room.y == 1) {
+			移动到角色指定位置(521, 200);
+			doKeyPress(VK_R);
+			Sleep(1500);
+		}
+		else if (current_room.x == 2 && current_room.y == 2) {
+			移动到角色指定位置(611, 201);
+			doKeyPress(VK_T);
+			Sleep(1000);
+			移动到角色指定位置(550, 335);
+			doKeyPress(VK_A);
+			Sleep(500);
+			this->follow();
+			doKeyPress(VK_Q);
+			Sleep(1500);
+		}
+		else if (current_room.x == 3 && current_room.y == 2) {
+			移动到角色指定位置(343, 273);
+			doKeyPress(VK_A);
+			Sleep(1500);
+		}
+		else if (current_room.x == 3 && current_room.y == 1) {
+			移动到角色指定位置(343, 273);
+			doKeyPress(VK_NUMPAD3);
+			doKeyPress(VK_W);
+			Sleep(3000);
+		}
+		if (is_open_door() == true)
+		{
+			return;
+		}
+		this->follow();
+		doKeyPress(VK_S);
+		if (is_open_door() == true)
+		{
+			return;
+		}
+		this->follow();
+		doKeyPress(VK_E);
+		if (is_open_door() == true)
+		{
+			return;
+		}
+		this->follow();
+		doKeyPress(VK_G);
+		if (is_open_door() == true)
+		{
+			return;
+		}
+		this->follow();
+		doKeyPress(VK_H);
+		if (is_open_door() == true)
+		{
+			return;
+		}
+		this->follow();
+		doKeyPress(VK_S);
+		if (is_open_door() == true)
+		{
+			return;
+		}
+		while (is_open_door() == true)
+		{
+			this->follow();
+			doKeyPress(VK_X, 1500);
+		}
+	}
 }

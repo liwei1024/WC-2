@@ -16,5 +16,6 @@ int g_开始角色 = -1;
 int g_截止角色 = -1;
 int g_dungeon_id = 104;
 int g_dungeon_rank = 3;
-
-
+int g_过图时间;
+int g_过图方式 = 0; // 0坐标过图 1 强制过图
+int g_移动方式 = 0; // 0瞬移 1走路

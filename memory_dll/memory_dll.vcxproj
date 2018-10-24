@@ -74,6 +74,7 @@
     <LinkIncremental>false</LinkIncremental>
     <TargetName>WCPlusPlus</TargetName>
     <TargetExt>.dat</TargetExt>
+    <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -168,6 +169,7 @@
     <ClInclude Include="game_task.hpp" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="utils.hpp" />
+    <ClInclude Include="veh.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />

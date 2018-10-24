@@ -66,6 +66,9 @@
     <ClInclude Include="game_astar.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="veh.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

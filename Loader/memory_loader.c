@@ -82,7 +82,7 @@ OutputLastError(const char *msg)
 }
 #endif
 
-static void CopySections(const unsigned char *data, PIMAGE_NT_HEADERS old_headers, PMEMORYMODULE module)
+static inline void CopySections(const unsigned char *data, PIMAGE_NT_HEADERS old_headers, PMEMORYMODULE module)
 {
 	int i, size;
 	unsigned char *codeBase = module->codeBase;
@@ -133,7 +133,7 @@ static int ProtectionFlags[2][2][2] = {
 	},
 };
 
-static void FinalizeSections(PMEMORYMODULE module)
+static inline void FinalizeSections(PMEMORYMODULE module)
 {
 	int i;
 	PIMAGE_SECTION_HEADER section = IMAGE_FIRST_SECTION(module->headers);
@@ -187,7 +187,7 @@ static void FinalizeSections(PMEMORYMODULE module)
 #endif
 }
 
-static void PerformBaseRelocation(PMEMORYMODULE module, SIZE_T delta)
+static inline void PerformBaseRelocation(PMEMORYMODULE module, SIZE_T delta)
 {
 	DWORD i;
 	unsigned char *codeBase = module->codeBase;
@@ -241,7 +241,7 @@ static void PerformBaseRelocation(PMEMORYMODULE module, SIZE_T delta)
 	}
 }
 
-static int BuildImportTable(PMEMORYMODULE module)
+static inline int BuildImportTable(PMEMORYMODULE module)
 {
 	int result = 1;
 	unsigned char *codeBase = module->codeBase;

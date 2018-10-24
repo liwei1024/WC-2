@@ -113,7 +113,7 @@ static VOID doKeyPress(INT keyCode, INT s = 0)
 
 static void main_thread_exec_call(LPVOID pfun, std::vector<int> params = { 0 })
 {
-	DWORD *call_params = new DWORD[params.size()];
+	DWORD_PTR *call_params = new DWORD_PTR[params.size()];
 	for (size_t i = 0; i < params.size(); i++)
 	{
 		call_params[i] = params[i];

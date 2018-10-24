@@ -16,8 +16,8 @@
 DWORD dwRetaddress[3];                          //存放返回地址
 
 // 内部函数 获取真实函数地址
-TCHAR szTemp[MAX_PATH] = { 0 };
-FARPROC WINAPI GetAddress(PCSTR pszProcName)
+static TCHAR szTemp[MAX_PATH] = { 0 };
+static inline FARPROC WINAPI GetAddress(PCSTR pszProcName)
 {
 	//VMProtectBegin("GetAddress");
 	FARPROC fpAddress;

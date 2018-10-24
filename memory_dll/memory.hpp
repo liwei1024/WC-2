@@ -1,7 +1,7 @@
 #pragma once
 
 
-template <typename T> static inline T read(DWORD base_address)
+template <typename T> static inline T read(DWORD_PTR base_address)
 {
 	T value = { 0 };
 	if (base_address > 0x0000000000000000 && base_address < 0x00007fffffffffff)
@@ -47,7 +47,7 @@ template <typename T> static inline bool write(DWORD base_address,T value)
 	return result;
 }
 
-template <typename T> static inline T read_offset(DWORD base_address, std::vector<int> offset)
+template <typename T> static inline T read_offset(DWORD_PTR base_address, std::vector<int> offset)
 {
 	DWORD ofset_address = read<DWORD>(base_address);
 	T value;
@@ -68,7 +68,7 @@ template <typename T> static inline T read_offset(DWORD base_address, std::vecto
 	return value;
 }
 
-template <typename T> static inline bool write_offset(DWORD base_address, std::vector<int> offset, T value)
+template <typename T> static inline bool write_offset(DWORD_PTR base_address, std::vector<int> offset, T value)
 {
 	DWORD ofset_address = read<DWORD>(base_address);
 	bool result = false;
@@ -88,18 +88,18 @@ template <typename T> static inline bool write_offset(DWORD base_address, std::v
 	return result;
 }
 
-static inline bool read_bytes(DWORD base_address,size_t length, std::vector<BYTE> &bytes)
+static inline bool read_bytes(DWORD_PTR base_address,size_t length, std::vector<BYTE> &bytes)
 {
 	
 }
 
-static inline bool write_bytes(DWORD base_address, std::vector<BYTE> bytes)
+static inline bool write_bytes(DWORD_PTR base_address, std::vector<BYTE> bytes)
 {
 	return true;
 }
 
 
-static inline std::wstring  read_wstring(DWORD base_address,size_t length)
+static inline std::wstring  read_wstring(DWORD_PTR base_address,size_t length)
 {
 	wchar_t *buffer = new wchar_t[length];
 	if (IsBadReadPtr((LPVOID)base_address, length) == 0) {
@@ -110,7 +110,7 @@ static inline std::wstring  read_wstring(DWORD base_address,size_t length)
 	return str;
 }
 
-static inline std::string read_string(DWORD base_address, size_t length)
+static inline std::string read_string(DWORD_PTR base_address, size_t length)
 {
 	char *buffer = new char[length];
 	if (IsBadReadPtr((LPVOID)base_address, length) == 0) {
