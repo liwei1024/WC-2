@@ -43,7 +43,9 @@
 #define __角色坐标 0x056264cc
 #define __遍历取值 0x05625380
 //#define __区域地址 0x5625550
-#define __角色基址 0x05625380
+#define __任务完成ECX 0x0
+#define __分解CALL 0x0
+
 
 #define __喇叭公告 0x29c0f80
 
@@ -135,3 +137,11 @@
 #define VK_X  88
 #define VK_Y  89
 #define VK_Z  90
+
+
+#define Code_成长之泉水 490007518
+#define Code_肉块 10158893
+#define Code_鸡腿 10158901
+
+
+

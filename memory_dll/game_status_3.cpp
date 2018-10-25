@@ -21,10 +21,11 @@ void game_status_3::manage()
 		if (is_boss_room() == true && 是否有怪物() == false)
 		{
 			//main_thread_exec_call(Send_组包翻牌);
-			if (get_the_custom_shop() == true || 练习模式 ==true)
+			if (get_the_custom_shop() == true || g_auto_mode == 2)
 			{
 				main_thread_exec_call(Send_组包回城);
 				while (true) {
+					Sleep(2000);
 					if (game_status != get_game_status())
 					{
 						g_刷图次数++;
@@ -33,7 +34,6 @@ void game_status_3::manage()
 						bulletin(L"[GC] 第 %d 次 本次耗时 %d 秒 ", g_刷图次数, (int)(g_过图时间/1000));
 						break;
 					}
-					Sleep(2000);
 				}
 			}
 			else {
@@ -61,7 +61,6 @@ DWORD game_status_3::get_map_start_address()
 {
 	return read<int>(get_map_address() + __首地址);
 }
-
 
 int game_status_3::get_map_object_count(DWORD map_start_address)
 {
@@ -151,13 +150,13 @@ void game_status_3::output_map_objects_info()
 		if (object_address <= 0)continue;
 		_ObjectInfo = get_object_info(object_address);
 		output_bebug_wstring(L"=====================================");
-		output_bebug_wstring(L"地址 0x%x", _ObjectInfo.address);
-		output_bebug_wstring(L"代码 %d", _ObjectInfo.code);
-		output_bebug_wstring(L"类型 %d", _ObjectInfo.type);
-		output_bebug_wstring(L"阵营 %d", _ObjectInfo.camp);
-		output_bebug_wstring(L"血量 %d", _ObjectInfo.health_point);
-		output_bebug_wstring(L"位置 %d,%d,%d", _ObjectInfo.x, _ObjectInfo.y, _ObjectInfo.z);
-		output_bebug_wstring(L"名称 %s", _ObjectInfo.name.c_str());
+		output_bebug_wstring(L"address 0x%x", _ObjectInfo.address);
+		output_bebug_wstring(L"code %d", _ObjectInfo.code);
+		output_bebug_wstring(L"type %d", _ObjectInfo.type);
+		output_bebug_wstring(L"camp %d", _ObjectInfo.camp);
+		output_bebug_wstring(L"health_point %d", _ObjectInfo.health_point);
+		output_bebug_wstring(L"pos %d,%d,%d", _ObjectInfo.x, _ObjectInfo.y, _ObjectInfo.z);
+		output_bebug_wstring(L"name %s", _ObjectInfo.name.c_str());
 	}
 }
 // 按角色最近距离排序
@@ -302,7 +301,7 @@ void game_status_3::follow()
 	}*/
 }
 
-// 获取通关商店
+// 获取通关商店 营火
 bool game_status_3::get_the_custom_shop()
 {
 	DWORD map_start_address = get_map_start_address();
@@ -323,6 +322,7 @@ bool game_status_3::get_the_custom_shop()
 
 void game_status_3::get_loot()
 {
+
 	DWORD map_start_address = get_map_start_address();
 	DWORD map_object_count = get_map_object_count(map_start_address);
 	std::vector<MAP_OBJECT_STRUCT> Objects;
@@ -332,6 +332,8 @@ void game_status_3::get_loot()
 		object_address = read<int>(map_start_address + i * 4);
 		if (object_address <= 0)continue;
 		object = get_object_info(object_address);
+		if (object.code == Code_鸡腿 || object.code == Code_肉块 || object.code == Code_成长之泉水)
+			continue;
 		if (object.type == 289 && object.camp == 200)
 		{
 			Objects.insert(Objects.end(), object);
@@ -342,11 +344,40 @@ void game_status_3::get_loot()
 		sort_by_distance(Objects);
 		for (size_t i = 0; i < Objects.size(); i++)
 		{
-			main_thread_exec_call(Send_组包拾取, { decrypt(Objects[i].address + 160),Objects[i].x + createRandom(-10,10),Objects[i].y + createRandom(-10,10) });
-			Sleep(200);
+			if (read<int>(object.address + 0x210) == 0)//可拾取状态
+			{
+				main_thread_exec_call(Send_组包拾取, { decrypt(Objects[i].address + 172),Objects[i].x + createRandom(-10,10),Objects[i].y + createRandom(-10,10) });
+				Sleep(200);
+			}
 		}
 	}
+}
 
+void game_status_3::全屏聚物()
+{
+	DWORD map_start_address = get_map_start_address();
+	DWORD map_object_count = get_map_object_count(map_start_address);
+	std::vector<MAP_OBJECT_STRUCT> Objects;
+	MAP_OBJECT_STRUCT object;
+	DWORD object_address;
+	for (size_t i = 0; i < map_object_count; i++) {
+		object_address = read<int>(map_start_address + i * 4);
+		if (object_address <= 0)continue;
+		object = get_object_info(object_address);
+		if (object.code == Code_鸡腿 || object.code == Code_肉块 || object.code == Code_成长之泉水)
+			continue;
+		if (object.type == 289 && object.camp == 200)
+		{
+			if (read<int>(object.address + 0x210) == 0)//可拾取状态
+			{
+				write<float>(read<int>(object.address + __坐标偏移) + 16,
+					read<float>(read<int>(read<int>(__人物基址) + __人物坐标偏移) + 0));//取对象坐标(一级偏移, 0)
+
+				write<float>(read<int>(object.address + __坐标偏移) + 20,
+					read<float>(read<int>(read<int>(__人物基址) + __人物坐标偏移) + 4));//取对象坐标(一级偏移, 1)
+			}
+		}
+	}
 }
 
 bool game_status_3::是否有怪物()
@@ -390,7 +421,6 @@ void game_status_3::移动到角色指定位置(int x,int y,int z)
 	}
 	Sleep(200);
 }
-
 
 void game_status_3::按键_帕拉丁()
 {
@@ -480,6 +510,11 @@ void game_status_3::按键_帕拉丁()
 		}
 		while (is_open_door() == false)
 		{
+			if (read<int>(__对话基址) == 1)
+			{
+				doKeyPress(VK_RETURN);
+				continue;
+			}
 			this->follow();
 			doKeyPress(VK_X, 1500);
 		}

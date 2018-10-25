@@ -47,9 +47,9 @@ struct TASK_STRUCT
 
 struct RolePos
 {
-	int max_city_id;
-	int min_city_id;
-	int x;
-	int y;
-	int z;
+	int max_city_id = 38;
+	int min_city_id = 2;
+	int x = 0;
+	int y = 0;
+	int z = 0;
 };

@@ -131,3 +131,9 @@ static void output_bebug_wstring(const wchar_t *lpcszFormat, ...)
 	OutputDebugString(temp_buffer);
 	va_end(argList);
 }
+
+static HWND get_game_hwnd()
+{
+	std::wstring wstr(L"地下城与勇士");
+	return FindWindow(wstr.c_str(), wstr.c_str());
+}

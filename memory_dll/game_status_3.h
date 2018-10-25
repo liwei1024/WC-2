@@ -7,7 +7,8 @@ public:
 
 	void manage();
 	void output_map_objects_info();
-	
+	void get_loot();
+	void 全屏聚物();
 private:
 	DWORD get_map_address();
 	DWORD get_map_start_address();
@@ -17,7 +18,7 @@ private:
 	void attack_monster();
 	void follow();
 	bool get_the_custom_shop();
-	void get_loot();
+	
 	bool 是否有怪物();
 	void 移动到角色指定位置(int x, int y,int z = 0);
 	void 按键_帕拉丁();

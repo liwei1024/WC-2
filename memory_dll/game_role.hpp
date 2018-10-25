@@ -15,3 +15,7 @@ static RolePos get_role_pos()
 	role_pos.min_city_id = current_room_pos.y;
 	return role_pos;
 }
+
+static int get_role_level() {
+	return read<int>(__½ÇÉ«µÈ¼¶);
+}

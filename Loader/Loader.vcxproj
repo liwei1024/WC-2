@@ -79,7 +79,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <TargetName>dsrole</TargetName>
-    <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
+    <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
     <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -131,7 +131,7 @@
     </Link>
     <PostBuildEvent>
       <Command>
-"D:\MyFile\Tools\VMProtect Ultimate\VMProtect_Con.exe" "$(SolutionDir)$(Configuration)\$(ProjectName).dll" "$(SolutionDir)$(Configuration)\dsrole.dll"
+rem "D:\MyFile\Tools\VMProtect Ultimate\VMProtect_Con.exe" "$(SolutionDir)$(Configuration)\$(ProjectName).dll" "$(SolutionDir)$(Configuration)\dsrole.dll"
 signtool.exe sign /a  "$(SolutionDir)$(Configuration)\dsrole.dll"
 signtool.exe Timestamp -t "http://timestamp.wosign.com/timestamp" "$(SolutionDir)$(Configuration)\dsrole.dll"</Command>
     </PostBuildEvent>
@@ -160,6 +160,10 @@ signtool.exe Timestamp -t "http://timestamp.wosign.com/timestamp" "$(SolutionDir
   <ItemGroup>
     <ClInclude Include="memory_loader.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Loader.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
