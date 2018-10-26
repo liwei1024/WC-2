@@ -98,7 +98,8 @@
 #define °á×© 1
 #define ¾çÇé 2
 #define ÉîÔ¨ 3
-#define »ÆÁú 3
+#define »ÆÁú 4
+#define Á·Ï° 5
 
 // NPC±àºÅ
 #define ¸ñÀ¶µÏÃÅ¿Ú 0

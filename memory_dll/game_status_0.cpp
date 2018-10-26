@@ -19,7 +19,7 @@ void game_status_0::manage()
 		g_auto_switch = false;
 	}
 	else {
-		select_role(0);
+		select_role(g_Ñ¡½Ç·½Ê½);
 	}
 	
 }
@@ -58,6 +58,9 @@ void game_status_0::select_role(int type)
 		}
 	}
 	else if (type == 1) {
+
+	}
+	else if (type == 2) {
 		
 		while (get_game_status() == 0)
 		{

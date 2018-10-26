@@ -17,8 +17,9 @@ extern int g_开始角色;
 extern int g_截止角色;
 extern int g_dungeon_id; 
 extern int g_dungeon_rank;
-extern bool 练习模式;
-
+extern bool g_练习模式;
+extern int g_选角方式;
+extern int g_城镇瞬移方式;
 
 
 

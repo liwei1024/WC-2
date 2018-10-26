@@ -4,7 +4,7 @@
 HWND g_hWnd = NULL;
 bool g_auto_switch = false;//自动开关
 int g_skills_code = 70023;//技能代码
-int g_auto_mode = 2;//自动模式 0 搬砖 1剧情 2练习
+int g_auto_mode = 练习;//自动模式 0 搬砖 1剧情 5练习
 int g_刷图功能;// 0 按键 1技能call 2吞噬魔
 int g_keep_fatigue_value = 0; //保留疲劳
 int g_刷图次数 = 0;
@@ -20,3 +20,5 @@ int g_过图时间;
 int g_过图方式 = 0; // 0坐标过图 1 强制过图
 int g_移动方式 = 0; // 0瞬移 1走路
 //bool g_副本类型 = 0; //0普通 1深渊 2练习
+int g_选角方式 = 0;//0-组包 1-call 2-按键
+int g_城镇瞬移方式 = 0; //0-组包 1-call

@@ -21,7 +21,7 @@ void game_status_1::manage()
 	}
 	else {
 		
-		if (g_auto_mode == 搬砖 || g_auto_mode == 2)
+		if (g_auto_mode == 搬砖 || g_auto_mode == 练习)
 		{
 			enter_the_dungeon(g_dungeon_id,g_dungeon_rank,g_auto_mode);
 		}
@@ -55,14 +55,14 @@ void game_status_1::move_to_copy_door(int copy_id, int type)
 	{
 	case 104:
 		if (get_role_level() >= 84) {
-			if (role_pos.max_city_id != 14 && role_pos.min_city_id != 2) {
+			if (role_pos.max_city_id != 14 || role_pos.min_city_id != 2) {
 				role_pos.max_city_id = 14;
 				role_pos.min_city_id = 2;
 				role_pos.x = 705;
 				role_pos.y = 288;
-				if (type == 2 || type == 0)
+				if (type == 搬砖 || type == 练习)
 				{
-					teleport_to(role_pos, type);
+					teleport_to(role_pos);
 				}
 				else {
 					//脚本移动
@@ -81,15 +81,15 @@ void game_status_1::move_to_copy_door(int copy_id, int type)
 	}
 }
 
-void game_status_1::teleport_to(RolePos pos,int type)
+void game_status_1::teleport_to(RolePos pos)
 {
 	RolePos role_pos;
-	if (type == 0 || type == 2)
+	if (g_城镇瞬移方式 == 0)
 	{
 		//组包
 		main_thread_exec_call(Send_城镇瞬移, { pos.max_city_id, pos.min_city_id, pos.x, pos.y,0 });
 	}
-	else if (type == 1) {
+	else if (g_城镇瞬移方式 == 1) {
 		//call
 	}
 	while (true)

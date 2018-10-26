@@ -21,7 +21,7 @@ void game_status_3::manage()
 		if (is_boss_room() == true && 是否有怪物() == false)
 		{
 			//main_thread_exec_call(Send_组包翻牌);
-			if (get_the_custom_shop() == true || g_auto_mode == 2)
+			if (get_the_custom_shop() == true || g_auto_mode == 练习)
 			{
 				main_thread_exec_call(Send_组包回城);
 				while (true) {
