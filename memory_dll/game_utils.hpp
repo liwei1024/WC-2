@@ -140,4 +140,72 @@ static bool is_open_door()
 	}
 }
 
+static ULONG 取技能Atk目录(ULONG Obj路径文本)
+{
+	ULONG  副本信息基址 = __副本信息;
+	ULONG  加载_CALL = __加载CALL;
+	ULONG  分割_CALL = __分割CALL;
+	ULONG  Atk路径_基址 = __路径基址;
+	ULONG  Atk路径_Call = __加载CALL;
+	ULONG  Atk目录 = 0;
+	__asm
+	{
+		mov ecx, 副本信息基址
+		mov ecx, [ecx]
+		push 1
+		push Obj路径文本
+		call 加载_CALL
+		test eax, eax
+		je Label1
+		mov edi, eax
+		lea esi, [edi + 0xC8]
+		lea eax, [edi + 0x108]
+		push esi
+		push eax
+		lea edx, 副本信息基址
+		push edx
+		mov[edx], 0
+		call 分割_CALL
+		add esp, 0xC
+		mov eax, [eax]
+		mov ecx, Atk路径_基址
+		mov ecx, [ecx]
+		push 1
+		push eax
+		call Atk路径_Call
+		Label1 :
+		mov Atk目录, eax
+	}
+	return Atk目录;
+}
 
+static ULONG 取文本路径(ULONG ID)
+{
+	ULONG ebp_4 = __目录基址;
+	ULONG ebp_8 = __路径CALL;
+
+	_asm push ID
+	_asm mov ecx, ebp_4
+	_asm call ebp_8
+	_asm mov ebp_4, eax
+
+	return ebp_4;
+}
+
+static void 置入技能伤害(ULONG 技能代码, ULONG 技能伤害)
+{
+	ULONG Atk;
+	ULONG Obj路径;
+	if (技能代码 != 11520 && 技能代码 != 39002 && 技能代码 != 54141 && 技能代码 != 70119 && 技能代码 != 11305 && 技能代码 != 14098 && 技能代码 != 11431 && 技能代码 != 11506 && 技能代码 != 70032 && 技能代码 != 54106 && 技能代码 != 61057 && 技能代码 != 56609 && 技能代码 != 100010 && 技能代码 != 0)
+	{
+		Obj路径 = 取文本路径(技能代码);
+		if (Obj路径 > 0)
+		{
+			Atk = 取技能Atk目录(Obj路径);
+			if (Atk > 0)
+			{
+				encrypt(Atk + 32, 技能伤害);
+			}
+		}
+	}
+}

@@ -31,7 +31,7 @@ void game_status_3::manage()
 						g_刷图次数++;
 						g_过图时间 = getTime() - g_过图时间;
 						g_首图标记 = true;
-						bulletin(L"auto %d time %d s ", g_刷图次数, (int)(g_过图时间/1000));
+						bulletin(_T("auto %d time %d s "), g_刷图次数, (int)(g_过图时间/1000));
 						break;
 					}
 				}
@@ -139,9 +139,9 @@ MAP_OBJECT_STRUCT get_object_info(DWORD object_pointer)
 void game_status_3::output_map_objects_info()
 {
 	DWORD map_start_address = get_map_start_address();
-	output_bebug_wstring(L"map_start_address %x\n", map_start_address);
+	output_bebug_wstring(_T("map_start_address %x\n"), map_start_address);
 	DWORD map_object_count = get_map_object_count(map_start_address);
-	output_bebug_wstring(L"map_object_count %d\n", map_object_count);
+	output_bebug_wstring(_T("map_object_count %d\n"), map_object_count);
 	MAP_OBJECT_STRUCT _ObjectInfo;
 	DWORD object_address;
 	for (size_t i = 0; i < map_object_count; i++)
@@ -149,14 +149,14 @@ void game_status_3::output_map_objects_info()
 		object_address = read<int>(map_start_address + i * 4);
 		if (object_address <= 0)continue;
 		_ObjectInfo = get_object_info(object_address);
-		output_bebug_wstring(L"=====================================");
-		output_bebug_wstring(L"address 0x%x", _ObjectInfo.address);
-		output_bebug_wstring(L"code %d", _ObjectInfo.code);
-		output_bebug_wstring(L"type %d", _ObjectInfo.type);
-		output_bebug_wstring(L"camp %d", _ObjectInfo.camp);
-		output_bebug_wstring(L"health_point %d", _ObjectInfo.health_point);
-		output_bebug_wstring(L"pos %d,%d,%d", _ObjectInfo.x, _ObjectInfo.y, _ObjectInfo.z);
-		output_bebug_wstring(L"name %s", _ObjectInfo.name.c_str());
+		output_bebug_wstring(_T("====================================="));
+		output_bebug_wstring(_T("address 0x%x"), _ObjectInfo.address);
+		output_bebug_wstring(_T("code %d"), _ObjectInfo.code);
+		output_bebug_wstring(_T("type %d"), _ObjectInfo.type);
+		output_bebug_wstring(_T("camp %d"), _ObjectInfo.camp);
+		output_bebug_wstring(_T("health_point %d"), _ObjectInfo.health_point);
+		output_bebug_wstring(_T("pos %d,%d,%d"), _ObjectInfo.x, _ObjectInfo.y, _ObjectInfo.z);
+		output_bebug_wstring(_T("name %s"), _ObjectInfo.name.c_str());
 	}
 }
 // 按角色最近距离排序

@@ -28,7 +28,7 @@ static POINT getMouseCoord()
 {
 	POINT Coord;
 	if (GetCursorPos(&Coord)) {
-		printf("getMouseCoord Erro!\n");
+		//printf("getMouseCoord Erro!\n");
 	}
 	return Coord;
 }
@@ -38,7 +38,7 @@ static BOOL setMouseCoord(INT x, INT y)
 	BOOL result;
 	result = SetCursorPos(x, y);
 	if (result == FALSE) {
-		printf("setMouseCoord Erro!\n");
+		//printf("setMouseCoord Erro!\n");
 	}
 	return result;
 }
@@ -146,6 +146,7 @@ static void output_bebug_string(const char *lpcszFormat, ...)
 
 static HWND get_game_hwnd()
 {
-	std::wstring wstr(L"地下城与勇士");
+	std::wstring wstr(_T("地下城与勇士"));
 	return FindWindow(wstr.c_str(), wstr.c_str());
 }
+

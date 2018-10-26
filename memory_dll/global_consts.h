@@ -46,6 +46,15 @@
 #define __任务完成ECX 0x0
 #define __分解CALL 0x0
 
+#define  __攻击阵营  55938496
+#define  __技能坐标  40079936
+#define  __目录基址  107784148
+#define  __路径基址  90331632
+#define  __副本信息  90331612
+#define  __路径CALL  59503072
+#define  __加载CALL  57738400
+#define  __分割CALL  58318400
+
 
 #define __喇叭公告 0x29c0f80
 
