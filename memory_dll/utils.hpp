@@ -128,7 +128,19 @@ static void output_bebug_wstring(const wchar_t *lpcszFormat, ...)
 	va_start(argList, lpcszFormat);
 	vswprintf_s(buffer, lpcszFormat, argList);
 	swprintf_s(temp_buffer, L"WC %s", buffer);
-	OutputDebugString(temp_buffer);
+	OutputDebugStringW(temp_buffer);
+	va_end(argList);
+}
+
+static void output_bebug_string(const char *lpcszFormat, ...)
+{
+	va_list argList;
+	char buffer[0x1024];
+	char temp_buffer[0x1024];
+	va_start(argList, lpcszFormat);
+	vsprintf_s(buffer, lpcszFormat, argList);
+	sprintf_s(temp_buffer, "WC %s", buffer);
+	OutputDebugStringA(temp_buffer);
 	va_end(argList);
 }
 

@@ -82,7 +82,7 @@ static inline void Call_接受Call(DWORD_PTR parameter)
 		}
 	}
 	__except (1) {
-		output_bebug_wstring(L"Call_接受Call 异常 参数地址 %x", parameter);
+		//output_bebug_wstring(L"Call_接受Call 异常 参数地址 %x", parameter);
 	}
 }
 
@@ -102,7 +102,7 @@ static inline void Call_提交Call(DWORD_PTR parameter)
 		}
 	}
 	__except (1) {
-		output_bebug_wstring(L"Call_提交Call 异常 参数地址 %x", parameter);
+		//output_bebug_wstring(L"Call_提交Call 异常 参数地址 %x", parameter);
 	}
 }
 
@@ -121,7 +121,7 @@ static inline void Call_完成Call(DWORD_PTR parameter)
 		}
 	}
 	__except (1) {
-		output_bebug_wstring(L"Call_完成Call 异常 参数地址 %x", parameter);
+		//output_bebug_wstring(L"Call_完成Call 异常 参数地址 %x", parameter);
 	}
 }
 
@@ -192,8 +192,8 @@ static inline void Call_过图Call(DWORD_PTR parameter)
 		}
 	}
 	__except (1) {
-		LPCWSTR buffer = L"Call_召唤Call 异常";
-		Call_公告Call((DWORD_PTR)&buffer);
+		/*LPCWSTR buffer = L"Call_召唤Call 异常";
+		Call_公告Call((DWORD_PTR)&buffer);*/
 	}
 	
 }
@@ -204,7 +204,7 @@ static inline void Call_召唤Call(DWORD_PTR parameter)
 
 	}
 	__except (1) {
-		output_bebug_wstring(L"Call_召唤Call 异常 参数地址 %x", parameter);
+		//output_bebug_wstring(L"Call_召唤Call 异常 参数地址 %x", parameter);
 	}
 }
 
@@ -214,7 +214,7 @@ static inline void Call_变身Call(DWORD_PTR parameter)
 
 	}
 	__except (1) {
-		output_bebug_wstring(L"Call_变身Call 异常 参数地址 %x", parameter);
+		//output_bebug_wstring(L"Call_变身Call 异常 参数地址 %x", parameter);
 	}
 }
 
