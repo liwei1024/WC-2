@@ -70,7 +70,7 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH:
-		DisableThreadLibraryCalls(hModule);//禁用指定的DLL的DLL_THREAD_ATTACH和DLL_THREAD_DETACH通知，这样可以减小某些程序的工作集大小。
+		//DisableThreadLibraryCalls(hModule);//禁用指定的DLL的DLL_THREAD_ATTACH和DLL_THREAD_DETACH通知，这样可以减小某些程序的工作集大小。
 		g_hDll = LoadLibrary(L"C:\\Windows\\System32\\dsrole.dll");
 		g_hModule = hModule;
 		LoadFromMemory();

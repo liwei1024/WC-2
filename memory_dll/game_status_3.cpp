@@ -31,7 +31,7 @@ void game_status_3::manage()
 						g_刷图次数++;
 						g_过图时间 = getTime() - g_过图时间;
 						g_首图标记 = true;
-						bulletin(L"[GC] 第 %d 次 本次耗时 %d 秒 ", g_刷图次数, (int)(g_过图时间/1000));
+						bulletin(L"auto %d time %d s ", g_刷图次数, (int)(g_过图时间/1000));
 						break;
 					}
 				}
