@@ -95,7 +95,7 @@ static inline void Send_选择副本(DWORD_PTR parameter)
 	int 副本难度 = read<int>(parameter + 4);
 	int 副本模式 = read<int>(parameter + 8) == -1 ? 0 : read<int>(parameter + 8);
 	Send_缓冲CALL(16);
-	Send_密包CALL(104, 3);
+	Send_密包CALL(副本编号, 3);
 	if (副本编号 > 7100 && 副本编号 < 7200)
 	{
 		Send_密包CALL(2, 1);
@@ -106,17 +106,17 @@ static inline void Send_选择副本(DWORD_PTR parameter)
 		Send_密包CALL(副本难度, 1);
 		Send_密包CALL(0, 2);
 	}
-	if (副本模式 == 0) {	 //普通
-		Send_密包CALL(0, 1);
-		Send_密包CALL(0, 1);
-	}
-	else if (副本模式 == 1) { // 深渊
+	if (副本模式 == 深渊) { // 深渊
 		Send_密包CALL(1, 1);
 		Send_密包CALL(0, 1);
 	}
-	else {
+	else if(副本模式 == 练习){
 		Send_密包CALL(0, 1);//练习
 		Send_密包CALL(1, 1);
+	}
+	else {//普通
+		Send_密包CALL(0, 1);
+		Send_密包CALL(0, 1);
 	}
 	Send_密包CALL(65535, 2);
 	Send_密包CALL(0, 3);
@@ -149,11 +149,15 @@ static inline void Send_组包翻牌(DWORD_PTR parameter)
 {
 	Send_缓冲CALL(69);
 	Send_发包CALL();
+
 	Send_缓冲CALL(70);
 	Send_发包CALL();
+
 	Send_缓冲CALL(71);
-	Send_密包CALL(createRandom(0, 3), 1);
 	Send_密包CALL(0, 1);
+	Send_发包CALL();
+
+	Send_缓冲CALL(1431);
 	Send_发包CALL();
 }
 

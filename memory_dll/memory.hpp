@@ -10,9 +10,14 @@ template <typename T> static inline T read(DWORD_PTR base_address)
 			if (IsBadReadPtr((LPVOID)base_address, sizeof(value)) == 0) {
 				value = *(T *)base_address;
 			}
-			else {
-				value = T();
-			}
+			//else {
+			//	/*output_bebug_wstring(L"地址不可读");
+			//	value = T();*/
+			//	DWORD lpflOldProtect;
+			//	VirtualProtect(LPVOID(base_address), sizeof(T), PAGE_EXECUTE_READWRITE, &lpflOldProtect);
+			//	value = *(T *)base_address;
+			//	VirtualProtect(LPVOID(base_address), sizeof(T), lpflOldProtect, 0);
+			//}
 		}
 		__except (EXCEPTION_EXECUTE_HANDLER) {
 			output_bebug_wstring(L"Read null pointer Address %x", base_address);
@@ -34,6 +39,14 @@ template <typename T> static inline bool write(DWORD base_address,T value)
 			if (IsBadWritePtr((LPVOID)base_address, sizeof(value)) == 0) {
 				*(T *)base_address = value;
 			}
+			//else {
+			//	DWORD lpflOldProtect;
+			//	VirtualProtect(LPVOID(base_address), sizeof(T), PAGE_EXECUTE_READWRITE, &lpflOldProtect);
+			//	*(T *)base_address = value;
+			//	VirtualProtect(LPVOID(base_address), sizeof(T), lpflOldProtect, 0);
+			//	//output_bebug_wstring(L"地址不可写");
+			//}
+			
 		}
 		__except (EXCEPTION_EXECUTE_HANDLER) {
 			output_bebug_wstring(L"Write null pointer Address %x", base_address);
@@ -63,7 +76,6 @@ template <typename T> static inline T read_offset(DWORD_PTR base_address, std::v
 				value = read<T>(ofset_address + offset[i]);
 			}
 		}
-		
 	}
 	return value;
 }
@@ -72,6 +84,7 @@ template <typename T> static inline bool write_offset(DWORD_PTR base_address, st
 {
 	DWORD ofset_address = read<DWORD>(base_address);
 	bool result = false;
+	
 	for (size_t i = 0; i < offset.size(); i++)
 	{
 		if (ofset_address)
@@ -85,17 +98,32 @@ template <typename T> static inline bool write_offset(DWORD_PTR base_address, st
 			}
 		}
 	}
+	
 	return result;
 }
 
-static inline bool read_bytes(DWORD_PTR base_address,size_t length, std::vector<BYTE> &bytes)
+static inline std::vector<BYTE> read_bytes(DWORD_PTR base_address,size_t length)
 {
-	
+	std::vector<BYTE> bytes;
+	DWORD lpflOldProtect;
+	VirtualProtect(LPVOID(base_address), length, PAGE_EXECUTE_READWRITE, &lpflOldProtect);
+	for (size_t i = 0; i < bytes.size(); i++)
+	{
+		bytes[i] = read<BYTE>(base_address + i);
+	}
+	VirtualProtect(LPVOID(base_address), length, lpflOldProtect, 0);
+	return bytes;
 }
 
-static inline bool write_bytes(DWORD_PTR base_address, std::vector<BYTE> bytes)
+static inline void write_bytes(DWORD_PTR base_address, std::vector<BYTE> bytes)
 {
-	return true;
+	DWORD lpflOldProtect;
+	VirtualProtect((LPVOID)base_address, bytes.size(), PAGE_EXECUTE_READWRITE, &lpflOldProtect);
+	for (size_t i = 0; i < bytes.size(); i++)
+	{
+		write<BYTE>(base_address+i, bytes[i]);
+	}
+	VirtualProtect((LPVOID)base_address, bytes.size(), lpflOldProtect, 0);
 }
 
 

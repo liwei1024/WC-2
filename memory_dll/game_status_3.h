@@ -8,6 +8,7 @@ public:
 	void manage();
 	void output_map_objects_info();
 	void get_loot();
+	bool 按键捡物();
 	void 全屏聚物();
 private:
 	DWORD get_map_address();
@@ -22,5 +23,6 @@ private:
 	bool 是否有怪物();
 	void 移动到角色指定位置(int x, int y,int z = 0);
 	void 按键_帕拉丁();
+	void 再次挑战();
 };
 

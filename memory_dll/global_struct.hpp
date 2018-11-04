@@ -53,3 +53,22 @@ struct RolePos
 	int y = 0;
 	int z = 0;
 };
+
+typedef struct _WINDOW_INFO
+{
+	int top = 0;
+	int bottom = 0;
+	int left = 0;
+	int right = 0;
+	int width = 0;
+	int height = 0;
+} WINDOW_INFO, *PWINDOW_INFO;
+
+struct GOODS_INFO
+{
+	int address;
+	int count = 1;
+	int level;
+	std::wstring name;
+	int index;
+};

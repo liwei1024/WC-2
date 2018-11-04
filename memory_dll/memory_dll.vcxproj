@@ -75,6 +75,8 @@
     <TargetName>dsrole</TargetName>
     <TargetExt>.dat</TargetExt>
     <GenerateManifest>false</GenerateManifest>
+    <IntDir>$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -169,6 +171,7 @@
     <ClInclude Include="global_consts.h" />
     <ClInclude Include="global_struct.hpp" />
     <ClInclude Include="global_var.h" />
+    <ClInclude Include="Knapsac.h" />
     <ClInclude Include="memory.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="game_task.hpp" />
@@ -183,6 +186,7 @@
     <ClCompile Include="game_status_2.cpp" />
     <ClCompile Include="game_status_3.cpp" />
     <ClCompile Include="global_var.cpp" />
+    <ClCompile Include="Knapsac.cpp" />
     <ClCompile Include="memory_dll.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

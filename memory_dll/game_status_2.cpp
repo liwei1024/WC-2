@@ -19,7 +19,7 @@ void game_status_2::manage()
 		Sleep(1000);
 	}
 	else {
-		main_thread_exec_call(Send_选择副本, { g_dungeon_id, g_dungeon_rank, g_auto_mode });
+		//main_thread_exec_call(Send_选择副本, { g_dungeon_id, g_dungeon_rank, g_auto_mode });
 		while (true)
 		{
 			Sleep(3000);

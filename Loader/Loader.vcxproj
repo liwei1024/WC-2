@@ -81,6 +81,8 @@
     <TargetName>dsrole</TargetName>
     <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
     <GenerateManifest>false</GenerateManifest>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>

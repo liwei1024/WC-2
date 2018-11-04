@@ -23,21 +23,20 @@ static inline void Call_技能Call(DWORD_PTR parameter)
 
 static inline void Call_释放Call(DWORD_PTR parameter)
 {
-	int a[6] = {};
-	a[0] = read<int>(parameter);//触发指针;
-	a[1] = read<int>(parameter + 4); //代码
-	a[2] = read<int>(parameter + 8); //伤害
-	a[3] = read<int>(parameter + 12);//x
-	a[4] = read<int>(parameter + 16);//y
-	a[5] = read<int>(parameter + 20);//z
+	int 触发指针 = read<int>(parameter);//触发指针;
+	int 代码 = read<int>(parameter + 4); //代码
+	int 伤害= read<int>(parameter + 8); //伤害
+	int x = read<int>(parameter + 12);//x
+	int y = read<int>(parameter + 16);//y
+	int z = read<int>(parameter + 20);//z
 	__asm
 	{
-		push a[5]
-		push a[4]
-		push a[3]
-		push a[2]
-		push a[1]
-		push a[0]
+		push z
+		push y
+		push x
+		push 伤害
+		push 代码
+		push 触发指针
 		mov edi, __释放CALL
 		mov eax, edi
 		call eax
