@@ -43,24 +43,20 @@ static BOOL setMouseCoord(INT x, INT y)
 	return result;
 }
 
-static VOID mouseClick(INT s)
+static VOID mouseClick(INT s = 100)
 {
-	mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+	//mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+	MouseEvent(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 	Sleep(s + createRandom(0, 10));
-	mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+	//mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+	MouseEvent(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 	Sleep(50 + createRandom(0, 10));
 }
 
-static VOID mouseDoubleClick(INT s)
+static VOID mouseDoubleClick(INT s = 100)
 {
-	mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
-	Sleep(s + createRandom(0, 10));
-	mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-	Sleep(50 + createRandom(0, 10));
-	mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
-	Sleep(s + createRandom(0, 10));
-	mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-	Sleep(50 + createRandom(0, 10));
+	mouseClick(s);
+	mouseClick(s);
 }
 
 static bool getKeyStatus(INT keyCode)
@@ -88,18 +84,22 @@ static INT getSCan(INT keyCode)
 
 static VOID keyDown(INT keyCode)
 {
-	if (getKeyStatus(keyCode) == FALSE) {
-		keybd_event(keyCode, getSCan(keyCode), 0, 0);
-		Sleep(100);
-	}
+	//if (getKeyStatus(keyCode) == FALSE) {
+	//	////keybd_event(keyCode, getSCan(keyCode), 0, 0);
+	//	
+	//}
+	KeybdEvent(keyCode, 0, 0, 0);
+	Sleep(100);
 }
 
 static VOID keyUp(INT keyCode)
 {
-	if (getKeyStatus(keyCode) == TRUE) {
-		keybd_event(keyCode, getSCan(keyCode), KEYEVENTF_KEYUP, 0);
-		Sleep(100);
-	}
+	//if (getKeyStatus(keyCode) == TRUE) {
+	//	////keybd_event(keyCode, getSCan(keyCode), KEYEVENTF_KEYUP, 0);
+	//	Sleep(100);
+	//}
+	KeybdEvent(keyCode, 0, KEYEVENTF_KEYUP, 0);
+	Sleep(100);
 }
 
 static VOID doKeyPress(INT keyCode, INT s = 0)
@@ -150,3 +150,16 @@ static HWND get_game_hwnd()
 	return FindWindow(wstr.c_str(), wstr.c_str());
 }
 
+static WINDOW_INFO  get_window_info(HWND hWnd)
+{
+	RECT rect;
+	WINDOW_INFO window_info;
+	GetWindowRect(hWnd, &rect);
+	window_info.bottom = rect.bottom;
+	window_info.left = rect.left;
+	window_info.right = rect.right;
+	window_info.top = rect.top;
+	window_info.width = window_info.right - window_info.left;
+	window_info.height = window_info.bottom - window_info.top;
+	return window_info;
+}

@@ -14,9 +14,9 @@ game_status_1::~game_status_1()
 void game_status_1::manage()
 {
 	
-	if (get_current_role_fatigue_value() <= g_keep_fatigue_value && g_auto_mode != 2)
+	if (get_current_role_fatigue_value() <= g_keep_fatigue_value && g_auto_mode != 练习)
 	{
-		main_thread_exec_call(Send_返回角色);
+		return_role(g_返回角色方式);
 		Sleep(2000);
 	}
 	else {
@@ -35,8 +35,9 @@ void game_status_1::enter_the_dungeon(int 副本ID,int 副本难度,int 副本类型)
 {
 	move_to_copy_door(副本ID, 副本类型);
 	Sleep(500);
-	main_thread_exec_call(Send_进入选图);
-	Sleep(500);
+	//main_thread_exec_call(Send_进入选图);
+	按键进入选图(104);
+	//Sleep(500);
 	main_thread_exec_call(Send_选择副本, { 副本ID, 副本难度, 副本类型 });
 
 	while (true)
@@ -51,9 +52,8 @@ void game_status_1::enter_the_dungeon(int 副本ID,int 副本难度,int 副本类型)
 void game_status_1::move_to_copy_door(int copy_id, int type)
 {
 	RolePos role_pos = get_role_pos();
-	switch (copy_id)
+	if (copy_id == 104 || copy_id == 103)
 	{
-	case 104:
 		if (get_role_level() >= 84) {
 			if (role_pos.max_city_id != 14 || role_pos.min_city_id != 2) {
 				role_pos.max_city_id = 14;
@@ -75,9 +75,6 @@ void game_status_1::move_to_copy_door(int copy_id, int type)
 			return_role(0);
 			return;
 		}
-		break;
-	default:
-		break;
 	}
 }
 
@@ -107,7 +104,6 @@ void game_status_1::teleport_to(RolePos pos)
 }
 
 
-
 void game_status_1::return_role(int type)
 {
 	switch (type)
@@ -119,8 +115,32 @@ void game_status_1::return_role(int type)
 			Sleep(1000);
 		}
 		break;
+	case 1:
+		doKeyPress(VK_END);
+		Sleep(1000);
+		setMouseCoord(game_window_info.left + 518, game_window_info.top + 449);
+		mouseClick();
 	default:
 		break;
 	}
 	
+}
+
+void game_status_1::按键进入选图(int copy_id)
+{
+	if (copy_id == 104)
+	{
+		keyDown(VK_NUMPAD3);
+		while (true) 
+		{
+			if (get_game_status() == 2)
+			{
+				keyDown(VK_NUMPAD3);
+				break;
+			}
+			Sleep(500);
+		}
+		
+
+	}
 }

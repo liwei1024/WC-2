@@ -20,7 +20,8 @@ extern int g_dungeon_rank;
 extern bool g_练习模式;
 extern int g_选角方式;
 extern int g_城镇瞬移方式;
-
-
+extern bool g_翻牌模式;
+extern WINDOW_INFO game_window_info;
+extern bool g_返回角色方式;
 
 

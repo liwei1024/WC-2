@@ -3,60 +3,60 @@
 #define TIMER_MIN 100
 #define MY_MESSAGE_ID 10024 //自定义消息ID
 
-#define __人物基址 0x05739288 
-#define __当前疲劳 0x05739528 
-#define __最大疲劳 0x05739530 
-#define __商店基址 0x05625A90 
-#define __对话基址 0x056261b4
-#define __释放CALL 0x02377730 
+#define __人物基址 0x5741540
+#define __当前疲劳 0x57417E0
+#define __最大疲劳 0x57417E8
+#define __商店基址 0x562DD48
+#define __对话基址 0x5770594
+#define __释放CALL 0x237B720
 
-#define __发包基址 0x0576F964
-#define __缓冲CALL 0x0370BC80
-#define __密包CALL 0x0370BD90
-#define __发包CALL 0x0370D4C0
-#define __接受CALL 0x01EC0970
-#define __完成CALL 0x01EC0870
-#define __提交CALL 0x01EC08F0
-#define __任务基址 0x05625AC8
-#define __房间编号 0x05625A88
+#define __发包基址 0x5777C8C
+#define __缓冲CALL 0x3710920
+#define __密包CALL 0x3710A30
+#define __发包CALL 0x3712160
+#define __接受CALL 0x1EC83B0
+#define __完成CALL 0x1EC82B0
+#define __提交CALL 0x1EC8330
+#define __任务基址 0x562DD80
+#define __房间编号 0x562DD40
 
-#define __过图CALL 0x028D66A0
-//#define __跳过CALL 0x1C59380
-#define __游戏状态 0x551C22C
-#define __角色等级 0x0560835C 
+#define __过图CALL 0x1A34B80
+#define __跳过CALL 0x1C5B390
+#define __游戏状态 0x55242EC
+#define __角色等级 0x05610614 
 
-#define __召唤参数 0x0564C7B0
+#define __召唤参数 0x5654A68
 
-//#define __大区域ID 0x056062F8 
-//#define __小区域ID 0x055EF7A4 
 
-#define __解密基址 0x0577AA98 
-#define __背包基址 0x05625A94 
-#define __区域CALL 0x03662F60 
-#define __区域参数 0x0576DBD4
+
+#define __解密基址 0x5782DC0
+#define __背包基址 0x562DD4C
+#define __区域CALL 0x3668050
+#define __区域参数 0x5775EFC
 //#define __城镇移动CALL 0x23DE600
 #define __时间基址 0x20A028 
-#define __技能CALL 0x024D57D0
+#define __技能CALL 0x24DAE30
 
 //#define __地图名称 0x0564D370
-#define __怪物CALL 0x027C5D20
-#define __角色坐标 0x056264cc
-#define __遍历取值 0x05625380
+#define __怪物CALL 0x25A0460
+#define __角色坐标 0x0562E784
+#define __遍历取值 0x0562D638
 //#define __区域地址 0x5625550
 #define __任务完成ECX 0x0
 #define __分解CALL 0x0
+#define __鼠标状态 0x057D0B30
 
-#define  __攻击阵营  55938496
-#define  __技能坐标  40079936
-#define  __目录基址  107784148
-#define  __路径基址  90331632
-#define  __副本信息  90331612
-#define  __路径CALL  59503072
-#define  __加载CALL  57738400
-#define  __分割CALL  58318400
+//#define  __攻击阵营  55938496
+//#define  __技能坐标  40079936
+//#define  __目录基址  107784148
+//#define  __路径基址  90331632
+//#define  __副本信息  90331612
+//#define  __路径CALL  59503072
+//#define  __加载CALL  57738400
+//#define  __分割CALL  58318400
 
 
-#define __喇叭公告 0x29c0f80
+#define __喇叭公告 0x29C5C20
 
 #define __地图偏移 0xC8
 #define __首地址 0xC0
@@ -65,14 +65,14 @@
 #define __A星_当前房间X 0xcc
 #define __A星_当前房间Y 0xd0
 
-#define __阵营偏移 0x824
+#define __阵营偏移 0x828
 #define __类型偏移 0xA4
 #define __血量偏移 0x3AE4
 #define __坐标偏移 0xb8
 #define __人物坐标偏移 0x1D0
 
-#define __名称偏移 0x400
-#define __代码偏移 0x3FC
+#define __名称偏移 0x404
+#define __代码偏移 0x400
 //#define __地图名称偏移 0x1A0
 //#define __地图编号偏移 0x19c
 #define __门型偏移 0xc8
@@ -92,6 +92,8 @@
 #define __角色数量偏移2 0x3c0
 #define __当前角色数量 0xa70
 #define __最大角色数量 0xa78
+#define __坐标结构偏移1 0x8c
+#define __坐标结构偏移2 0x1744
 
 
 

@@ -13,5 +13,6 @@ private:
 	void move_to_copy_door(int copy_id, int type = 0);
 	void teleport_to(RolePos pos);
 	void return_role(int type = 0);
+	void 按键进入选图(int copy_id);
 };
 

@@ -4,7 +4,6 @@
 
 game_status_0::game_status_0()
 {
-	g_role_index = get_role_index();
 }
 
 
@@ -48,6 +47,7 @@ int game_status_0::get_role_max_count()
 void game_status_0::select_role(int type)
 {
 	int select_role_index = g_role_index + 1;
+	bulletin(L"select_role_index %d", select_role_index);
 	if (type == 0)
 	{
 		write_offset(__遍历取值, { __角色下标偏移 }, select_role_index);
@@ -68,7 +68,9 @@ void game_status_0::select_role(int type)
 			{
 				doKeyPress(VK_LEFT);
 			}
-			doKeyPress(VK_RETURN);
+			//doKeyPress(VK_RETURN);
+			setMouseCoord(game_window_info.left + 534, game_window_info.top + 550);
+			mouseClick();
 			Sleep(3000);
 		}
 	}
