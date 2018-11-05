@@ -46,24 +46,30 @@ static inline void Call_释放Call(DWORD_PTR parameter)
 
 static inline void Call_公告Call(DWORD_PTR parameter)
 {
-	DWORD Buffer = read<DWORD>(parameter);
-	if (Buffer > 0) {
-		__asm
-		{
-			mov ecx, __商店基址
-			mov ecx, [ecx]
-			mov ecx, [ecx + 0x50]
-			push 0
-			push 0
-			push 0
-			push 0
-			push 0
-			push 37
-			push 0xff0078ff
-			push Buffer
-			mov eax, __喇叭公告
-			call eax
+	__try
+	{
+		DWORD Buffer = read<DWORD>(parameter);
+		if (Buffer > 0) {
+			__asm
+			{
+				mov ecx, __商店基址
+				mov ecx, [ecx]
+				mov ecx, [ecx + 0x50]
+				push 0
+				push 0
+				push 0
+				push 0
+				push 0
+				push 37
+				push 0xff0078ff
+				push Buffer
+				mov eax, __喇叭公告
+				call eax
+			}
 		}
+	}
+	__except (1) {
+		output_bebug_wstring(L"Call_公告Call");
 	}
 }
 
@@ -126,26 +132,32 @@ static inline void Call_完成Call(DWORD_PTR parameter)
 
 static inline void Call_区域Call(DWORD_PTR parameter)
 {
-	int 区域指针 = read<int>(__区域参数);
-	int Copy_ID = read<int>(parameter);
-	int goods_id = read<int>(parameter + 4);
-	int 区域call = __区域CALL;
-	__asm {
-		mov edx, Copy_ID
-		mov ecx, 区域指针
-		mov eax, 0xf78
-		push edx
-		push eax
-		call 区域call
+	__try
+	{
+		int 区域指针 = read<int>(__区域参数);
+		int Copy_ID = read<int>(parameter);
+		int goods_id = read<int>(parameter + 4);
+		int 区域call = __区域CALL;
+		__asm {
+			mov edx, Copy_ID
+			mov ecx, 区域指针
+			mov eax, 0xf78
+			push edx
+			push eax
+			call 区域call
+		}
+		DWORD 区域信息[4] = { 0 };
+		区域信息[0] = read<int>(区域指针 + __区域偏移);
+		区域信息[1] = read<int>(区域指针 + __区域偏移 + 4);
+		区域信息[2] = read<int>(区域指针 + __区域偏移 + 8) + createRandom(-2, 2);
+		区域信息[3] = read<int>(区域指针 + __区域偏移 + 12) + createRandom(-2, 2);
+		区域信息[4] = goods_id;
+		Send_城镇瞬移((DWORD)&区域信息);
 	}
-	DWORD 区域信息[4] = { 0 };
-	区域信息[0] = read<int>(区域指针 + __区域偏移);
-	区域信息[1] = read<int>(区域指针 + __区域偏移 + 4);
-	区域信息[2] = read<int>(区域指针 + __区域偏移 + 8) + createRandom(-2, 2);
-	区域信息[3] = read<int>(区域指针 + __区域偏移 + 12) + createRandom(-2, 2);
-	区域信息[4] = goods_id;
-	Send_城镇瞬移((DWORD)&区域信息);
-	
+	__except (1) {
+		LPCWSTR buffer = L"Call_区域Call 异常";
+		Call_公告Call((DWORD_PTR)&buffer);
+	}
 }
 
 static inline void Call_坐标Call(DWORD_PTR parameter)
