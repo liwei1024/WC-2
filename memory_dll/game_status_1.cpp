@@ -14,8 +14,12 @@ game_status_1::~game_status_1()
 void game_status_1::manage()
 {
 	
-	if (get_current_role_fatigue_value() <= g_keep_fatigue_value && get_role_level() < 85 && g_auto_mode != 练习)
+	if (get_current_role_fatigue_value() <= g_keep_fatigue_value && g_auto_mode != 练习)
 	{
+		return_role(g_返回角色方式);
+		Sleep(2000);
+	}
+	if (get_role_level() < 85) {
 		return_role(g_返回角色方式);
 		Sleep(2000);
 	}
