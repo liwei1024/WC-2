@@ -23,6 +23,7 @@ static int get_role_level() {
 
 static void 按键移动角色(RolePos end_role_pos)
 {
+	bulletin(L"Start");
 	// 游戏状态
 	int game_status = get_game_status();
 	// 时间变量
@@ -39,9 +40,9 @@ static void 按键移动角色(RolePos end_role_pos)
 		cur_pos = get_role_pos();
 		t2 = getTime();
 		if (
-			cur_pos.max_city_id != end_role_pos.min_city_id ||
+			cur_pos.max_city_id != end_role_pos.max_city_id ||
 			cur_pos.min_city_id != end_role_pos.min_city_id ||
-			(abs(cur_pos.x - end_role_pos.x) < 50 && abs(cur_pos.y - end_role_pos.y) < 10)
+			(abs(cur_pos.x - end_role_pos.x) < 50 && abs(cur_pos.y - end_role_pos.y) < 50)
 		)
 		{
 			KeyUp();//放开所有已按下按键
@@ -51,19 +52,23 @@ static void 按键移动角色(RolePos end_role_pos)
 		if (abs(cur_pos.x - end_role_pos.x) > 50 && end_role_pos.x > cur_pos.x && right == false)
 		{
 			keyDown(VK_NUMPAD3);
+			bulletin(L"右 Down");
 			right = true;
 		}
 		if(abs(cur_pos.x - end_role_pos.x) > 50 && end_role_pos.x < cur_pos.x && left == false) {
 			keyDown(VK_NUMPAD1);
+			bulletin(L"左 Down");
 			left = true;
 		}
-		if (abs(cur_pos.y - end_role_pos.y) > 10 &&  end_role_pos.y > cur_pos.y && top == false)
+		if (abs(cur_pos.y - end_role_pos.y) > 50 &&  end_role_pos.y > cur_pos.y && top == false)
 		{
 			keyDown(VK_NUMPAD5);
+			bulletin(L"上 Down");
 			top = true;
 		}
-		if(abs(cur_pos.y - end_role_pos.y) > 10 && end_role_pos.y < cur_pos.y && bottom == false) {
+		if(abs(cur_pos.y - end_role_pos.y) > 50 && end_role_pos.y < cur_pos.y && bottom == false) {
 			keyDown(VK_NUMPAD2);
+			bulletin(L"下 Down");
 			bottom = true;
 		}
 
@@ -71,30 +76,34 @@ static void 按键移动角色(RolePos end_role_pos)
 		{
 			if (right == true) {
 				keyUp(VK_NUMPAD3);
+				bulletin(L"右 Up");
 				right = false;
 			}
 				
 				
 			if (left == true)
 			{
-				keyUp(VK_NUMPAD3);
+				keyUp(VK_NUMPAD1);
+				bulletin(L"左 Up");
 				left = false;
 			}
 		}
-		if (abs(end_role_pos.y - cur_pos.y) < 10)
+		if (abs(end_role_pos.y - cur_pos.y) < 50)
 		{
 			if (top == true)
 			{
 				keyUp(VK_NUMPAD5);
+				bulletin(L"上 Up");
 				top = false;
 			}
 			if (bottom == true) {
 				keyUp(VK_NUMPAD2);
+				bulletin(L"下 Up");
 				bottom = false;
 			}
 		}
 
-		if (t2-t1 > 3)
+		if (t2 - t1 >= 3)
 		{
 			t1 = getTime();
 			if (

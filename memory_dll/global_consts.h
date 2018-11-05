@@ -45,8 +45,8 @@
 #define __任务完成ECX 0x0
 #define __分解CALL 0x0
 #define __鼠标状态 0x057D0B30
-#define __副本ID 0
-#define __副本难度 0
+#define __副本ID 0x05506770
+#define __副本难度 0x0562D638
 
 //#define  __攻击阵营  55938496
 //#define  __技能坐标  40079936
@@ -60,6 +60,7 @@
 
 #define __喇叭公告 0x29C5C20
 
+#define __副本难度偏移 0x20c
 #define __地图偏移 0xC8
 #define __首地址 0xC0
 #define __尾地址 0xC4

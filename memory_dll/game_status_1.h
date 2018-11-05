@@ -17,5 +17,6 @@ private:
 	void 按键进入选图(int copy_id);
 	CITY_INFO get_city_info(int city_name);
 	bool 按键进格蓝迪();
+	void 组包到格蓝迪门口();
 };
 

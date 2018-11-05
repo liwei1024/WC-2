@@ -198,6 +198,7 @@ static void °´¼üÂôÎï()
 				}
 				goods_pos = get_goods_pos_by_index(_GoodsInfo.index);
 				setMouseCoord(goods_pos.x, goods_pos.y);
+				Sleep(100);
 				mouseDoubleClick(200);
 			}
 		}

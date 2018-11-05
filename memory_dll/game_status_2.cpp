@@ -32,7 +32,7 @@ void game_status_2::按键选择副本(int 副本ID,int 副本难度)
 	while (flag && get_game_status() == 2)
 	{
 		当前副本ID = read<int>(__副本ID);
-		当前副本难度 = read<int>(__副本难度);
+		当前副本难度 = read<int>(read<int>(__副本难度)+__副本难度偏移);
 		Sleep(500);
 		if (副本ID == 当前副本ID && 当前副本难度 == 副本难度)
 		{

@@ -16,7 +16,7 @@ game_status_0::~game_status_0()
 */
 void game_status_0::manage()
 {
-	if (g_role_index == get_role_count()) {
+	if (g_截止角色 == get_role_count()) {
 		bulletin(L"所有角色刷图完毕，自动关闭");
 		g_auto_switch = false;
 	}
@@ -50,7 +50,7 @@ int game_status_0::get_role_max_count()
 void game_status_0::select_role(int type)
 {
 	int select_role_index = g_role_index + 1;
-	bulletin(L"select_role_index %d", select_role_index);
+	//bulletin(L"select_role_index %d", select_role_index);
 	if (type == 0)
 	{
 		write_offset(__遍历取值, { __角色下标偏移 }, select_role_index);
@@ -69,7 +69,7 @@ void game_status_0::select_role(int type)
 		{
 			if (select_role_index != get_role_index())
 			{
-				doKeyPress(VK_LEFT);
+				doKeyPress(VK_RIGHT);
 			}
 			//doKeyPress(VK_RETURN);
 			setMouseCoord(game_window_info.left + 534, game_window_info.top + 550);

@@ -70,7 +70,12 @@ void game_status_3::manage()
 							Sleep(1000);
 							break;
 						}
-						doKeyPress(VK_F10);
+						if (get_current_role_fatigue_value() <= 0) {
+							doKeyPress(VK_F12);
+						}
+						else {
+							doKeyPress(VK_F10);
+						}
 						Sleep(1000);
 					}
 					break;
