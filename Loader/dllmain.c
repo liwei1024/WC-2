@@ -22,8 +22,8 @@ static inline void LoadFromMemory()
 	HMEMORYMODULE module;
 	pEntryPoint EntryPoint;
 
-	/*_getcwd(szFilePath, MAX_PATH);
-	strcat_s(szFilePath, MAX_PATH, "\\WCPlusPlus.dat");*/
+	_getcwd(szFilePath, MAX_PATH);
+	strcat_s(szFilePath, MAX_PATH, "\\WCPlusPlus.dat");
 
 	//OutputDebugStringA(szFilePath);
 	
