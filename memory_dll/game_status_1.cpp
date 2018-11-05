@@ -20,14 +20,18 @@ void game_status_1::manage()
 		Sleep(2000);
 	}
 	else {
-		
-		if (g_auto_mode == 搬砖 || g_auto_mode == 练习)
+		// 1.到副本门口
+		//组包到副本门口(g_dungeon_id);
+		// 2.进入副本
+		//按键进入选图(g_dungeon_id);
+		/*if (g_auto_mode == 搬砖 || g_auto_mode == 练习)
 		{
 			enter_the_dungeon(g_dungeon_id,g_dungeon_rank,g_auto_mode);
 		}
 		else if (g_auto_mode == 剧情) {
 			auto_master_task();
-		}
+		}*/
+		按键进格蓝迪();
 	}
 }
 
@@ -103,7 +107,6 @@ void game_status_1::teleport_to(RolePos pos)
 	}
 }
 
-
 void game_status_1::return_role(int type)
 {
 	switch (type)
@@ -126,6 +129,17 @@ void game_status_1::return_role(int type)
 	
 }
 
+void game_status_1::组包到副本门口(int copy_id)
+{
+	RolePos role_pos = get_role_pos();
+	if (copy_id == 104)
+	{
+		if (role_pos.max_city_id != 14 || role_pos.min_city_id != 2) {
+			main_thread_exec_call(Call_区域Call, { copy_id ,GetGoodsIndexByGoodsName(L"瞬间移动药剂")});
+		}
+	}
+}
+
 void game_status_1::按键进入选图(int copy_id)
 {
 	if (copy_id == 104)
@@ -135,12 +149,51 @@ void game_status_1::按键进入选图(int copy_id)
 		{
 			if (get_game_status() == 2)
 			{
-				keyDown(VK_NUMPAD3);
+				keyUp(VK_NUMPAD3);
 				break;
 			}
 			Sleep(500);
 		}
-		
-
 	}
+}
+
+
+CITY_INFO game_status_1::get_city_info(int city_name)
+{
+	CITY_INFO city_info;
+	if (city_name == 格蓝迪门口)
+	{
+		city_info.max_city_id = 14;
+		city_info.min_city_id = 2;
+		city_info.x = 705;
+		city_info.y = 288;
+	}
+}
+
+
+bool game_status_1::按键进格蓝迪()
+{
+	RolePos cur_role_pos = get_role_pos();
+	if (cur_role_pos.max_city_id == 38 && cur_role_pos.min_city_id == 1)
+	{
+		main_thread_exec_call(Call_城镇移动, { 450 ,400});
+		doKeyPress(VK_NUMPAD2,300);
+	}
+	if (cur_role_pos.max_city_id == 14 && cur_role_pos.max_city_id == 0)
+	{
+		main_thread_exec_call(Call_城镇移动, { 830 ,200 });
+		doKeyPress(VK_NUMPAD2, 300);
+	}
+	if (cur_role_pos.max_city_id == 14 && cur_role_pos.max_city_id == 1)
+	{
+		main_thread_exec_call(Call_城镇移动, { 2248 ,279 });
+		doKeyPress(VK_NUMPAD2, 300);
+	}
+	if (cur_role_pos.max_city_id == 14 && cur_role_pos.max_city_id == 2)
+	{
+		main_thread_exec_call(Call_城镇移动, { 705 ,288 });
+		doKeyPress(VK_NUMPAD3, 300);
+		return true;
+	}
+	return false;
 }

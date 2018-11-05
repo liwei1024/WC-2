@@ -72,6 +72,9 @@
     <ClInclude Include="Knapsac.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="game_knapsac.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

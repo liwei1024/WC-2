@@ -16,7 +16,6 @@ static int decrypt(int address)
 	esi = esi ^ i;
 	return esi;
 }
-
 //º”√‹
 static void encrypt(INT32 Address, INT32 Value)
 {

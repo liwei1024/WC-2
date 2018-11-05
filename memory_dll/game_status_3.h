@@ -7,7 +7,7 @@ public:
 
 	void manage();
 	void output_map_objects_info();
-	void get_loot();
+	void 组包拾取();
 	bool 按键捡物();
 	void 全屏聚物();
 private:
@@ -19,6 +19,7 @@ private:
 	void attack_monster();
 	void follow();
 	bool get_the_custom_shop();
+
 	
 	bool 是否有怪物();
 	void 移动到角色指定位置(int x, int y,int z = 0);

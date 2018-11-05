@@ -36,10 +36,15 @@ void game_status_3::manage()
 						g_过图时间 = getTime() - g_过图时间;
 						g_首图标记 = true;
 						bulletin(_T("练习第 %d 次 耗时 %d s "), g_刷图次数, (int)(g_过图时间 / 1000));
-						Sleep(2000);
+						Sleep(1000);
 						break;
 					}
-					doKeyPress(VK_F10);
+					if(get_current_role_fatigue_value() <= 0){
+						doKeyPress(VK_F12);
+					}
+					else {
+						doKeyPress(VK_F10);
+					}
 					Sleep(1000);
 				}
 				break;
@@ -52,7 +57,7 @@ void game_status_3::manage()
 						doKeyPress(VK_ESCAPE);
 						continue;
 					}
-					Knapsac().按键卖物();
+					按键卖物();
 					doKeyPress(VK_ESCAPE);
 					while (true)
 					{
@@ -294,15 +299,25 @@ void game_status_3::follow()
 			{
 				if (object.health_point > 0 || object.code == 8104 || object.code == 817)
 				{
+					if (role_pos.x > object.x)
+					{
+						doKeyPress(VK_NUMPAD1);
+						
+					}
+					if (role_pos.x < object.x)
+					{
+						doKeyPress(VK_NUMPAD3);
+					}
+					Sleep(200);
 					if (abs(role_pos.x - object.x) > 200 || abs(role_pos.y - object.y) > 50)
 					{
 						if (role_pos.x > object.x)
 						{
-							移动到角色指定位置(object.x + createRandom(-10, 10) + 100, object.y + createRandom(-10, 10));
+							移动到角色指定位置(object.x + createRandom(-10, 10) + 150, object.y + createRandom(-10, 10));
 							doKeyPress(VK_NUMPAD1);
 						}
 						else {
-							移动到角色指定位置(object.x + createRandom(-10, 10) - 100, object.y + createRandom(-10, 10));
+							移动到角色指定位置(object.x + createRandom(-10, 10) - 150, object.y + createRandom(-10, 10));
 							doKeyPress(VK_NUMPAD3);
 						}
 						Sleep(200);
@@ -333,7 +348,7 @@ bool game_status_3::get_the_custom_shop()
 	return false;
 }
 
-void game_status_3::get_loot()
+void game_status_3::组包拾取()
 {
 
 	DWORD map_start_address = get_map_start_address();
@@ -363,6 +378,7 @@ bool game_status_3::按键捡物()
 	std::vector<MAP_OBJECT_STRUCT> Objects;
 	MAP_OBJECT_STRUCT object;
 	DWORD object_address;
+	RolePos role_pos = get_role_pos();
 	for (size_t i = 0; i < map_object_count; i++) {
 		object_address = read<int>(map_start_address + i * 4);
 		if (object_address <= 0)continue;
@@ -371,10 +387,12 @@ bool game_status_3::按键捡物()
 			continue;
 		if (object.type == 289 && object.camp == 200)
 		{
-			main_thread_exec_call(Call_坐标Call, { read<int>(__人物基址),object.x + createRandom(-10,10),object.y + createRandom(-3,3),0 });
-			Sleep(200);
+			if (abs(role_pos.x- object.x) > 10 || abs(role_pos.y - object.y) > 3)
+			{
+				main_thread_exec_call(Call_坐标Call, { read<int>(__人物基址),object.x + createRandom(-10,10),object.y + createRandom(-3,3),0 });
+				Sleep(200);
+			}
 			doKeyPress(VK_X);
-			Sleep(200);
 			return true;
 		}
 	}
@@ -447,7 +465,7 @@ void game_status_3::移动到角色指定位置(int x,int y,int z)
 	else if (g_移动方式 == 1) { //脚本移动
 
 	}
-	Sleep(200);
+	//Sleep(200);
 }
 
 void game_status_3::按键_帕拉丁()
@@ -466,25 +484,31 @@ void game_status_3::按键_帕拉丁()
 		}
 		else if (current_room.x == 1 && current_room.y == 0) {
 			移动到角色指定位置(345, 216);
+			Sleep(300);
 			doKeyPress(VK_A);
-			Sleep(3000);
+			Sleep(2000);
 		}
 		else if (current_room.x == 2 && current_room.y == 0) {
 			移动到角色指定位置(582, 241);
+			Sleep(300);
 			doKeyPress(VK_A);
 			Sleep(1000);
 		}
 		else if (current_room.x == 2 && current_room.y == 1) {
 			移动到角色指定位置(521, 200);
+			Sleep(300);
 			doKeyPress(VK_NUMPAD1);
+			Sleep(100);
 			doKeyPress(VK_R);
 			Sleep(1500);
 		}
 		else if (current_room.x == 2 && current_room.y == 2) {
 			移动到角色指定位置(611, 201);
+			Sleep(300);
 			doKeyPress(VK_T);
 			Sleep(1000);
 			移动到角色指定位置(550, 335);
+			Sleep(300);
 			doKeyPress(VK_A);
 			Sleep(500);
 			this->follow();
@@ -493,11 +517,13 @@ void game_status_3::按键_帕拉丁()
 		}
 		else if (current_room.x == 3 && current_room.y == 2) {
 			移动到角色指定位置(343, 273);
+			Sleep(300);
 			doKeyPress(VK_A);
 			Sleep(1500);
 		}
 		else if (current_room.x == 3 && current_room.y == 1) {
 			doKeyPress(VK_NUMPAD3);
+			Sleep(300);
 			doKeyPress(VK_W);
 			Sleep(4000);
 		}

@@ -161,6 +161,7 @@
   <ItemGroup>
     <ClInclude Include="game_astar.hpp" />
     <ClInclude Include="game_calls.hpp" />
+    <ClInclude Include="game_knapsac.hpp" />
     <ClInclude Include="game_role.hpp" />
     <ClInclude Include="game_send_packet.hpp" />
     <ClInclude Include="game_status_0.h" />

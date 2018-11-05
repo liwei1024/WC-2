@@ -10,7 +10,10 @@ game_status_0::game_status_0()
 game_status_0::~game_status_0()
 {
 }
-
+/*
+1.判断角色是否刷完
+2.选择角色
+*/
 void game_status_0::manage()
 {
 	if (g_role_index == get_role_count()) {

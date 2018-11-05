@@ -128,6 +128,7 @@ static inline void Call_区域Call(DWORD_PTR parameter)
 {
 	int 区域指针 = read<int>(__区域参数);
 	int Copy_ID = read<int>(parameter);
+	int goods_id = read<int>(parameter + 4);
 	int 区域call = __区域CALL;
 	__asm {
 		mov edx, Copy_ID
@@ -142,28 +143,34 @@ static inline void Call_区域Call(DWORD_PTR parameter)
 	区域信息[1] = read<int>(区域指针 + __区域偏移 + 4);
 	区域信息[2] = read<int>(区域指针 + __区域偏移 + 8) + createRandom(-2, 2);
 	区域信息[3] = read<int>(区域指针 + __区域偏移 + 12) + createRandom(-2, 2);
+	区域信息[4] = goods_id;
 	Send_城镇瞬移((DWORD)&区域信息);
 	
 }
 
 static inline void Call_坐标Call(DWORD_PTR parameter)
 {
-	DWORD object_pointer = read<int>(parameter);
-	DWORD x = read<int>(parameter + 4);
-	DWORD y = read<int>(parameter + 8);
-	DWORD z = read<int>(parameter + 12);
-	__asm
-	{
-		mov esi, object_pointer
-		mov edi, [esi]
-		push z
-		push y
-		push x
-		mov eax, [edi + 0xb4]
-		mov ecx, esi
-		call eax
+	__try {
+		DWORD object_pointer = read<int>(parameter);
+		DWORD x = read<int>(parameter + 4);
+		DWORD y = read<int>(parameter + 8);
+		DWORD z = read<int>(parameter + 12);
+		__asm
+		{
+			mov esi, object_pointer
+			mov edi, [esi]
+			push z
+			push y
+			push x
+			mov eax, [edi + 0xb4]
+			mov ecx, esi
+			call eax
+		}
 	}
-	
+	__except (1) {
+		LPCWSTR buffer = L"Call_坐标Call 异常";
+		Call_公告Call((DWORD_PTR)&buffer);
+	}
 }
 
 static inline void Call_过图Call(DWORD_PTR parameter)
@@ -214,6 +221,16 @@ static inline void Call_变身Call(DWORD_PTR parameter)
 	}
 	__except (1) {
 		//output_bebug_wstring(L"Call_变身Call 异常 参数地址 %x", parameter);
+	}
+}
+
+static inline void Call_城镇移动(DWORD_PTR parameter)
+{
+	__try {
+
+	}
+	__except (1) {
+		output_bebug_wstring(L"Call_城镇移动 异常");
 	}
 }
 

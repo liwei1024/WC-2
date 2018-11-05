@@ -45,14 +45,23 @@ struct TASK_STRUCT
 	int 完成次数 = 0;
 };
 
-struct RolePos
+//struct RolePos
+//{
+//	int max_city_id = 38;
+//	int min_city_id = 2;
+//	int x = 0;
+//	int y = 0;
+//	int z = 0;
+//};
+
+typedef struct _CITY_INFO
 {
 	int max_city_id = 38;
 	int min_city_id = 2;
 	int x = 0;
 	int y = 0;
 	int z = 0;
-};
+} CITY_INFO, RolePos;
 
 typedef struct _WINDOW_INFO
 {

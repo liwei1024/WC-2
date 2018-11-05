@@ -45,6 +45,8 @@
 #define __任务完成ECX 0x0
 #define __分解CALL 0x0
 #define __鼠标状态 0x057D0B30
+#define __副本ID 0
+#define __副本难度 0
 
 //#define  __攻击阵营  55938496
 //#define  __技能坐标  40079936
