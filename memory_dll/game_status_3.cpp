@@ -256,15 +256,9 @@ void game_status_3::attack_monster()
 			{
 				if (object.health_point > 0 || object.code == 8104 || object.code == 817)
 				{
-					////bulletin(L"Call_技能Call x%,%y,%z", object.x, object.y , object.z);
-					////bulletin(L"Call_技能Call");109005914 140158
+					
 					this->follow();
-					main_thread_exec_call(Call_技能Call, { read<int>(__人物基址),109005914,113, object.x + createRandom(-10, 10), object.y + createRandom(-10, 10), object.z });
-					Sleep(100);
-					main_thread_exec_call(Call_技能Call, { read<int>(__人物基址),140158,113, object.x + createRandom(-10, 10), object.y + createRandom(-10, 10), object.z });
-					Sleep(100);
-					main_thread_exec_call(Call_技能Call, { read<int>(__人物基址),70023,113, object.x + createRandom(-10, 10), object.y + createRandom(-10, 10), object.z });
-					////main_thread_exec_call(Call_技能Call, { 0,109005914,113, object.x + createRandom(-10, 10), object.y + createRandom(-10, 10), object.z });
+					main_thread_exec_call(Call_技能Call, { read<int>(__人物基址),g_技能列表[createRandom(0,(g_技能列表.size()-1))],createRandom(100000,10000000), object.x + createRandom(-10, 10), object.y + createRandom(-10, 10), object.z });
 					Sleep(100);
 					break;
 				}

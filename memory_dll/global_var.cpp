@@ -25,3 +25,4 @@ int g_城镇瞬移方式 = 0; //0-组包 1-call
 bool g_翻牌模式 = 1;//0组包 1按键
 WINDOW_INFO game_window_info;
 bool g_返回角色方式 = 1;//0组包 1按键
+std::vector<int> g_技能列表 = { 70023,140177,109005914,140158 };

@@ -23,5 +23,6 @@ extern int g_城镇瞬移方式;
 extern bool g_翻牌模式;
 extern WINDOW_INFO game_window_info;
 extern bool g_返回角色方式;
+extern std::vector<int> g_技能列表;
 
 
