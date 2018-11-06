@@ -181,7 +181,13 @@ MAP_OBJECT_STRUCT get_object_info(DWORD object_pointer)
 	object.camp = read<DWORD>(object_pointer + __阵营偏移);
 	object.health_point = read<DWORD>(object_pointer + __血量偏移);
 	object.code = read<DWORD>(object_pointer + __代码偏移);
-	object.name = read_wstring(read<DWORD>(object_pointer + __名称偏移), 100);
+	if (object.type == 289 && object.camp == 200)
+	{
+		object.name = read_wstring(read<DWORD>(read<DWORD>(object_pointer + __地面物品名称偏移) + 0x24) + 0, 100);
+	}
+	else {
+		object.name = read_wstring(read<DWORD>(object_pointer + __名称偏移), 100);
+	}
 	if (object.type == 273)
 	{
 		pos_pointer = read<int>(object_pointer + __人物坐标偏移);
@@ -391,7 +397,10 @@ bool game_status_3::按键捡物()
 				main_thread_exec_call(Call_坐标Call, { read<int>(__人物基址),object.x + createRandom(-10,10),object.y + createRandom(-3,3),0 });
 				Sleep(200);
 			}
-			doKeyPress(VK_X);
+			if (wcscmp(object.name.c_str(), L"金币") != 0)
+			{
+				doKeyPress(VK_X);
+			}
 			return true;
 		}
 	}
@@ -578,7 +587,103 @@ void game_status_3::按键_帕拉丁()
 	}
 }
 
-void game_status_3::再次挑战()
-{
+//void game_status_3::再次挑战()
+//{
+//
+//}
 
+void game_status_3::按键_狂战士()
+{
+	Pos current_room = get_current_room_pos();
+	DWORD figure_pointer = read<DWORD>(__人物基址);
+	if (g_dungeon_id == 格蓝迪)
+	{
+		if (current_room.x == 0 && current_room.y == 0)
+		{
+			Sleep(1000);
+			doKeyPress(VK_F);
+			Sleep(300);
+			doKeyPress(VK_E);
+			Sleep(300);
+			doKeyPress(VK_Q,500);
+			Sleep(800);
+			doKeyPress(VK_D);
+		}
+		else if (current_room.x == 1 && current_room.y == 0) {
+			移动到角色指定位置(345, 216);
+			Sleep(300);
+			doKeyPress(VK_W);
+			Sleep(1000);
+		}
+		else if (current_room.x == 2 && current_room.y == 0) {
+			移动到角色指定位置(582, 241);
+			Sleep(300);
+			doKeyPress(VK_R);
+			Sleep(1000);
+		}
+		else if (current_room.x == 2 && current_room.y == 1) {
+			
+		}
+		else if (current_room.x == 2 && current_room.y == 2) {
+			
+		}
+		else if (current_room.x == 3 && current_room.y == 2) {
+			
+		}
+		else if (current_room.x == 3 && current_room.y == 1) {
+			doKeyPress(VK_NUMPAD3);
+			Sleep(300);
+			doKeyPress(VK_W);
+			Sleep(4000);
+		}
+		if (is_open_door() == true)
+		{
+			return;
+		}
+		this->follow();
+		doKeyPress(VK_S);
+		Sleep(1500);
+		if (is_open_door() == true)
+		{
+			return;
+		}
+		this->follow();
+		doKeyPress(VK_E);
+		Sleep(500);
+		if (is_open_door() == true)
+		{
+			return;
+		}
+		this->follow();
+		doKeyPress(VK_G);
+		Sleep(1500);
+		if (is_open_door() == true)
+		{
+			return;
+		}
+		this->follow();
+		doKeyPress(VK_H);
+		Sleep(1500);
+		if (is_open_door() == true)
+		{
+			return;
+		}
+		this->follow();
+		doKeyPress(VK_S);
+		Sleep(1500);
+		if (is_open_door() == true)
+		{
+			return;
+		}
+		while (is_open_door() == false)
+		{
+			if (read<int>(__对话基址) == 1)
+			{
+				doKeyPress(VK_RETURN);
+				continue;
+			}
+			this->follow();
+			doKeyPress(VK_X, 1500);
+		}
+	}
 }

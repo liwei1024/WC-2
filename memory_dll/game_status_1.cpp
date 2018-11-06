@@ -19,7 +19,7 @@ void game_status_1::manage()
 		return_role(g_返回角色方式);
 		Sleep(2000);
 	}
-	else if (get_role_level() < 85) {
+	else if (get_role_level() < 84) {
 		return_role(g_返回角色方式);
 		Sleep(2000);
 	}

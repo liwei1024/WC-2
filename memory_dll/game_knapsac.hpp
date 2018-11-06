@@ -31,7 +31,9 @@ static int GetGoodsIndexByGoodsName(std::wstring GoodsName)
 		if (GoodsAddress == 0 || GoodsAddress == NULL)continue;
 		_GoodsInfo = GetGoodsInfo(GoodsAddress);
 		_GoodsInfo.index = i + 9;
-		if (_GoodsInfo.name == GoodsName)
+		//output_bebug_wstring(L"%ws --- %ws", _GoodsInfo.name.c_str(), GoodsName.c_str());
+		//if (_GoodsInfo.name.c_str() == GoodsName.c_str())equals
+		if (wcscmp(_GoodsInfo.name.c_str(), GoodsName.c_str()) == 0)
 		{
 			return _GoodsInfo.index;
 		}
@@ -78,10 +80,17 @@ static void OutputGoodsInfo()
 	for (size_t i = 0; i < 279; i++)
 	{
 		GoodsAddress = read<int>(StartAddress + i * 4);
+		if (!GoodsAddress)
+		{
+			continue;
+		}
+		_GoodsInfo = GetGoodsInfo(GoodsAddress);
+		_GoodsInfo.index = i + 9;
 		output_bebug_wstring(_T("====================================="));
 		output_bebug_wstring(_T("地址 0x%x"), _GoodsInfo.address);
 		output_bebug_wstring(_T("等级 %d"), _GoodsInfo.level);
-		output_bebug_wstring(_T("名称 %d"), _GoodsInfo.name);
+		output_bebug_wstring(_T("名称 %s"), _GoodsInfo.name.c_str());
+		output_bebug_wstring(_T("下标 %d"), _GoodsInfo.index);
 	}
 }
 
@@ -195,6 +204,7 @@ static void 按键卖物()
 					Sleep(500);
 					setMouseCoord(game_window_info.left + 630, game_window_info.top + 278);
 					mouseClick();
+					Sleep(500);
 				}
 				goods_pos = get_goods_pos_by_index(_GoodsInfo.index);
 				setMouseCoord(goods_pos.x, goods_pos.y);

@@ -89,7 +89,7 @@ static VOID keyDown(INT keyCode)
 	//	
 	//}
 	KeybdEvent(keyCode, 0, 0, 0);
-	Sleep(100);
+	Sleep(50);
 }
 
 static VOID keyUp(INT keyCode)
@@ -99,7 +99,7 @@ static VOID keyUp(INT keyCode)
 	//	Sleep(100);
 	//}
 	KeybdEvent(keyCode, 0, KEYEVENTF_KEYUP, 0);
-	Sleep(100);
+	Sleep(50);
 }
 
 static VOID doKeyPress(INT keyCode, INT s = 0)

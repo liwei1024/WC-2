@@ -24,6 +24,6 @@ private:
 	bool 是否有怪物();
 	void 移动到角色指定位置(int x, int y,int z = 0);
 	void 按键_帕拉丁();
-	void 再次挑战();
+	void 按键_狂战士();
 };
 

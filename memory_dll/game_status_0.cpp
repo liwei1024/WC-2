@@ -16,7 +16,7 @@ game_status_0::~game_status_0()
 */
 void game_status_0::manage()
 {
-	if (g_截止角色 == get_role_count()) {
+	if (g_截止角色 == get_role_index()) {
 		bulletin(L"所有角色刷图完毕，自动关闭");
 		g_auto_switch = false;
 	}

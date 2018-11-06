@@ -97,6 +97,7 @@
 #define __最大角色数量 0xa78
 #define __坐标结构偏移1 0x8c
 #define __坐标结构偏移2 0x1744
+#define __地面物品名称偏移 0x16c4
 
 
 
