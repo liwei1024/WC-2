@@ -61,7 +61,7 @@ static void auto_master_task()
 		if (
 			task.copy_id > 0 &&
 			task.完成次数 > 0 &&
-			task.condition_type != L"'[quest clear]'"
+			task.condition_type != L"[quest clear]"
 			)
 		{
 

@@ -312,11 +312,11 @@ void game_status_3::follow()
 					{
 						if (role_pos.x > object.x)
 						{
-							移动到角色指定位置(object.x + createRandom(-10, 10) + 150, object.y + createRandom(-10, 10));
+							移动到角色指定位置(object.x + createRandom(-10, 10) + 200, object.y + createRandom(-10, 10));
 							doKeyPress(VK_NUMPAD1);
 						}
 						else {
-							移动到角色指定位置(object.x + createRandom(-10, 10) - 150, object.y + createRandom(-10, 10));
+							移动到角色指定位置(object.x + createRandom(-10, 10) - 200, object.y + createRandom(-10, 10));
 							doKeyPress(VK_NUMPAD3);
 						}
 						Sleep(200);

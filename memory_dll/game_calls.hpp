@@ -53,8 +53,8 @@ static inline void Call_公告Call(DWORD_PTR parameter)
 			__asm
 			{
 				mov ecx, __商店基址
-				mov ecx, [ecx]
-				mov ecx, [ecx + 0x50]
+				mov ecx, dword ptr[ecx]
+				mov ecx, dword ptr[ecx + 0x50]
 				push 0
 				push 0
 				push 0
@@ -170,11 +170,11 @@ static inline void Call_坐标Call(DWORD_PTR parameter)
 		__asm
 		{
 			mov esi, object_pointer
-			mov edi, [esi]
+			mov edi, dword ptr[esi]
 			push z
 			push y
 			push x
-			mov eax, [edi + 0xb4]
+			mov eax, dword ptr[edi + 0xb4]
 			mov ecx, esi
 			call eax
 		}
@@ -192,10 +192,10 @@ static inline void Call_过图Call(DWORD_PTR parameter)
 		__asm {
 			pushad
 			mov eax, __房间编号
-			mov ecx, [eax - 0x8]//
+			mov ecx, dword ptr[eax - 0x8]//
 			mov eax, __时间基址
-			mov ecx, [ecx + eax]//
-			mov ecx, [ecx + 0x8c]
+			mov ecx, dword ptr[ecx + eax]//
+			mov ecx, dword ptr[ecx + 0x8c]
 			push - 1
 			push - 1
 			push 0
