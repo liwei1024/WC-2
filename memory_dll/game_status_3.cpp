@@ -39,12 +39,7 @@ void game_status_3::manage()
 						Sleep(1000);
 						break;
 					}
-					if(get_current_role_fatigue_value() <= 0){
-						doKeyPress(VK_F12);
-					}
-					else {
-						doKeyPress(VK_F10);
-					}
+					doKeyPress(VK_F10);
 					Sleep(1000);
 				}
 				break;
@@ -392,11 +387,11 @@ bool game_status_3::按键捡物()
 			continue;
 		if (object.type == 289 && object.camp == 200)
 		{
-			if (abs(role_pos.x- object.x) > 10 || abs(role_pos.y - object.y) > 3)
+			if (abs(role_pos.x- object.x) > 2 || abs(role_pos.y - object.y) > 2)
 			{
-				main_thread_exec_call(Call_坐标Call, { read<int>(__人物基址),object.x + createRandom(-10,10),object.y + createRandom(-3,3),0 });
-				Sleep(200);
+				main_thread_exec_call(Call_坐标Call, { read<int>(__人物基址),object.x + createRandom(-2,2),object.y + createRandom(-2,2),0 });
 			}
+			Sleep(200);
 			if (wcscmp(object.name.c_str(), L"金币") != 0)
 			{
 				doKeyPress(VK_X);

@@ -45,11 +45,11 @@ static BOOL setMouseCoord(INT x, INT y)
 
 static VOID mouseClick(INT s = 100)
 {
-	//mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
-	MouseEvent(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+	mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+	//MouseEvent(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 	Sleep(s + createRandom(0, 10));
-	//mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-	MouseEvent(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+	mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+	//MouseEvent(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 	Sleep(50 + createRandom(0, 10));
 }
 
@@ -84,22 +84,22 @@ static INT getSCan(INT keyCode)
 
 static VOID keyDown(INT keyCode)
 {
-	//if (getKeyStatus(keyCode) == FALSE) {
-	//	////keybd_event(keyCode, getSCan(keyCode), 0, 0);
-	//	
-	//}
-	KeybdEvent(keyCode, 0, 0, 0);
-	Sleep(50);
+	if (getKeyStatus(keyCode) == FALSE) {
+		keybd_event(keyCode, getSCan(keyCode), 0, 0);
+		Sleep(100);
+	}
+	/*KeybdEvent(keyCode, 0, 0, 0);
+	Sleep(100);*/
 }
 
 static VOID keyUp(INT keyCode)
 {
-	//if (getKeyStatus(keyCode) == TRUE) {
-	//	////keybd_event(keyCode, getSCan(keyCode), KEYEVENTF_KEYUP, 0);
-	//	Sleep(100);
-	//}
-	KeybdEvent(keyCode, 0, KEYEVENTF_KEYUP, 0);
-	Sleep(50);
+	if (getKeyStatus(keyCode) == TRUE) {
+		keybd_event(keyCode, getSCan(keyCode), KEYEVENTF_KEYUP, 0);
+		Sleep(100);
+	}
+	/*KeybdEvent(keyCode, 0, KEYEVENTF_KEYUP, 0);
+	Sleep(100);*/
 }
 
 static VOID doKeyPress(INT keyCode, INT s = 0)

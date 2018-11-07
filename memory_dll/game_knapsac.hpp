@@ -184,7 +184,6 @@ static void 按键卖物()
 		GoodsAddress = read<int>(StartAddress + i * 4);
 		if (GoodsAddress == 0 || GoodsAddress == NULL)continue;
 		_GoodsInfo = GetGoodsInfo(GoodsAddress);
-		_GoodsInfo.index = i;
 		if (
 			(_GoodsInfo.name.find(L"传承", 0) == -1) &&
 			(_GoodsInfo.name.find(L"周年", 0) == -1) &&
@@ -206,7 +205,7 @@ static void 按键卖物()
 					mouseClick();
 					Sleep(500);
 				}
-				goods_pos = get_goods_pos_by_index(_GoodsInfo.index);
+				goods_pos = get_goods_pos_by_index(i);
 				setMouseCoord(goods_pos.x, goods_pos.y);
 				Sleep(100);
 				mouseDoubleClick(200);
