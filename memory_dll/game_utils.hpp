@@ -139,6 +139,8 @@ static bool is_open_door()
 	}
 }
 
+
+
 //static ULONG 取技能Atk目录(ULONG Obj路径文本)
 //{
 //	ULONG  副本信息基址 = __副本信息;

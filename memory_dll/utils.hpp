@@ -1,6 +1,29 @@
 #pragma once
 
 
+static void output_bebug_wstring(const wchar_t *lpcszFormat, ...)
+{
+	va_list argList;
+	wchar_t buffer[0x1024];
+	wchar_t temp_buffer[0x1024];
+	va_start(argList, lpcszFormat);
+	vswprintf_s(buffer, lpcszFormat, argList);
+	swprintf_s(temp_buffer, L"WC %s", buffer);
+	OutputDebugStringW(temp_buffer);
+	va_end(argList);
+}
+
+static void output_bebug_string(const char *lpcszFormat, ...)
+{
+	va_list argList;
+	char buffer[0x1024];
+	char temp_buffer[0x1024];
+	va_start(argList, lpcszFormat);
+	vsprintf_s(buffer, lpcszFormat, argList);
+	sprintf_s(temp_buffer, "WC %s", buffer);
+	OutputDebugStringA(temp_buffer);
+	va_end(argList);
+}
 
 static int createRandom(int min, int max)
 {
@@ -35,21 +58,45 @@ static POINT getMouseCoord()
 
 static BOOL setMouseCoord(INT x, INT y)
 {
-	BOOL result;
-	result = SetCursorPos(x, y);
-	if (result == FALSE) {
-		//printf("setMouseCoord Erro!\n");
+	BOOL result = BOOL();
+
+	//系统api设置
+	//result = SetCursorPos(x, y);
+	//if (result == FALSE) {
+	//	//printf("setMouseCoord Erro!\n");
+	//}
+
+	// 按键盒子设置
+	POINT Coord = getMouseCoord();
+	
+	/*Sleep(200);*/
+	int i = 0;
+	while (abs(Coord.x - x) > 5 || abs(Coord.y - y) > 5)
+	{
+		MouseMoveTo(0, x, y);
+		Sleep(150);
+		Coord = getMouseCoord();
+		output_bebug_wstring(L"x %d,y %d Coord.x %d,Coord.y %d", x,y,Coord.x, Coord.y);
+		if (i > 3) {
+			output_bebug_wstring(L"移动鼠标失败");
+			break;
+		}
+		i++;
 	}
 	return result;
 }
 
 static VOID mouseClick(INT s = 100)
 {
-	mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
-	//MouseEvent(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+	//系统api设置
+	/*mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 	Sleep(s + createRandom(0, 10));
 	mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-	//MouseEvent(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+	Sleep(50 + createRandom(0, 10));*/
+	//硬件按键设置
+	MouseEvent(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+	Sleep(s + createRandom(0, 10));
+	MouseEvent(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 	Sleep(50 + createRandom(0, 10));
 }
 
@@ -84,22 +131,22 @@ static INT getSCan(INT keyCode)
 
 static VOID keyDown(INT keyCode)
 {
-	if (getKeyStatus(keyCode) == FALSE) {
+	/*if (getKeyStatus(keyCode) == FALSE) {
 		keybd_event(keyCode, getSCan(keyCode), 0, 0);
 		Sleep(100);
-	}
-	/*KeybdEvent(keyCode, 0, 0, 0);
-	Sleep(100);*/
+	}*/
+	KeybdEvent(keyCode, 0, 0, 0);
+	Sleep(100);
 }
 
 static VOID keyUp(INT keyCode)
 {
-	if (getKeyStatus(keyCode) == TRUE) {
+	/*if (getKeyStatus(keyCode) == TRUE) {
 		keybd_event(keyCode, getSCan(keyCode), KEYEVENTF_KEYUP, 0);
 		Sleep(100);
-	}
-	/*KeybdEvent(keyCode, 0, KEYEVENTF_KEYUP, 0);
-	Sleep(100);*/
+	}*/
+	KeybdEvent(keyCode, 0, KEYEVENTF_KEYUP, 0);
+	Sleep(100);
 }
 
 static VOID doKeyPress(INT keyCode, INT s = 0)
