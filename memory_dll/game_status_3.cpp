@@ -94,7 +94,24 @@ void game_status_3::manage()
 			g_首图标记 = false;
 		}
 		//attack_monster();
-		按键_帕拉丁();
+		std::wstring role_job_name = get_role_job_name();
+		if (wcscmp(role_job_name.c_str(),L"破晓女神") == 0)
+		{
+			按键_破晓女神();
+		}
+		else if (wcscmp(role_job_name.c_str(), L"帝血弑天") == 0) {
+			按键_帝血弑天();
+		}
+		else if (wcscmp(role_job_name.c_str(), L"天帝") == 0) {
+			按键_天帝();
+		}
+		else if (wcscmp(role_job_name.c_str(), L"剑神") == 0) {
+			按键_剑神(); 
+		}
+		else if (wcscmp(role_job_name.c_str(), L"风神") == 0) {
+			按键_风神(); 
+		}
+		
 	}
 }
 
@@ -372,22 +389,38 @@ void game_status_3::组包拾取()
 
 bool game_status_3::按键捡物()
 {
-
+	Pos current_room = get_current_room_pos();
+	if (current_room.x == 2 && current_room.x == 2 && g_dungeon_id == 104)
+	{
+		doKeyPress(VK_V);
+		Sleep(200);
+		doKeyPress(VK_X, 1000);
+	}
 	DWORD map_start_address = get_map_start_address();
 	DWORD map_object_count = get_map_object_count(map_start_address);
 	std::vector<MAP_OBJECT_STRUCT> Objects;
 	MAP_OBJECT_STRUCT object;
 	DWORD object_address;
 	RolePos role_pos = get_role_pos();
+	
 	for (size_t i = 0; i < map_object_count; i++) {
 		object_address = read<int>(map_start_address + i * 4);
 		if (object_address <= 0)continue;
 		object = get_object_info(object_address);
+
 		if (object.code == Code_鸡腿 || object.code == Code_肉块 || object.code == Code_成长之泉水)
 			continue;
+		if (
+			wcscmp(object.name.c_str(), L"碎布片") == 0 ||
+			wcscmp(object.name.c_str(), L"最下级硬化剂") == 0 ||
+			wcscmp(object.name.c_str(), L"钢铁片") == 0 
+			)
+			continue;
+
 		if (object.type == 289 && object.camp == 200)
 		{
-			if (abs(role_pos.x- object.x) > 2 || abs(role_pos.y - object.y) > 2)
+			role_pos = get_role_pos();
+			if (abs(role_pos.x - object.x) > 2 || abs(role_pos.y - object.y) > 2)
 			{
 				main_thread_exec_call(Call_坐标Call, { read<int>(__人物基址),object.x + createRandom(-2,2),object.y + createRandom(-2,2),0 });
 			}
@@ -471,7 +504,8 @@ void game_status_3::移动到角色指定位置(int x,int y,int z)
 	//Sleep(200);
 }
 
-void game_status_3::按键_帕拉丁()
+
+void game_status_3::按键_破晓女神()
 {
 	Pos current_room = get_current_room_pos();
 	DWORD figure_pointer = read<DWORD>(__人物基址);
@@ -481,12 +515,10 @@ void game_status_3::按键_帕拉丁()
 		if (current_room.x == 0 && current_room.y == 0)
 		{
 			Sleep(1000);
-			doKeyPress(VK_F);
-			技能释放延时();
+			按键释放技能(VK_F);
 			移动到角色指定位置(468, 239);
 			Sleep(300);
-			doKeyPress(VK_G);
-			技能释放延时();
+			按键释放技能(VK_G);
 		}
 		else if (current_room.x == 1 && current_room.y == 0) {
 			Sleep(500);
@@ -496,42 +528,35 @@ void game_status_3::按键_帕拉丁()
 		else if (current_room.x == 2 && current_room.y == 0) {
 			移动到角色指定位置(582, 241);
 			Sleep(300);
-			doKeyPress(VK_A);
-			技能释放延时();
+			按键释放技能(VK_A);
 		}
 		else if (current_room.x == 2 && current_room.y == 1) {
 			移动到角色指定位置(521, 200);
 			Sleep(300);
 			doKeyPress(VK_NUMPAD1);
 			Sleep(100);
-			doKeyPress(VK_R);
-			技能释放延时();
+			按键释放技能(VK_R);
 		}
 		else if (current_room.x == 2 && current_room.y == 2) {
 			移动到角色指定位置(611, 201);
 			Sleep(300);
-			doKeyPress(VK_T);
-			技能释放延时();
+			按键释放技能(VK_T);
 			移动到角色指定位置(550, 335);
 			Sleep(300);
-			doKeyPress(VK_A);
-			技能释放延时();
+			按键释放技能(VK_A);
 			this->follow();
-			doKeyPress(VK_Q);
-			技能释放延时();
+			按键释放技能(VK_Q);
 			Sleep(1000);
 		}
 		else if (current_room.x == 3 && current_room.y == 2) {
 			移动到角色指定位置(343, 273);
 			Sleep(300);
-			doKeyPress(VK_A);
-			技能释放延时();
+			按键释放技能(VK_A);
 		}
 		else if (current_room.x == 3 && current_room.y == 1) {
 			doKeyPress(VK_NUMPAD3);
 			移动到角色指定位置(333, 216);
-			doKeyPress(VK_H);
-			技能释放延时();
+			按键释放技能(VK_H);
 			if (is_open_door() == true)
 			{
 				return;
@@ -544,43 +569,37 @@ void game_status_3::按键_帕拉丁()
 			return;
 		}
 		this->follow();
-		doKeyPress(VK_S);
-		技能释放延时();
+		按键释放技能(VK_S);
 		if (is_open_door() == true)
 		{
 			return;
 		}
 		this->follow();
-		doKeyPress(VK_D);
-		技能释放延时();
+		按键释放技能(VK_E);
 		if (is_open_door() == true)
 		{
 			return;
 		}
 		this->follow();
-		doKeyPress(VK_E);
-		技能释放延时();
+		按键释放技能(VK_G);
 		if (is_open_door() == true)
 		{
 			return;
 		}
 		this->follow();
-		doKeyPress(VK_G);
-		技能释放延时();
+		按键释放技能(VK_H);
 		if (is_open_door() == true)
 		{
 			return;
 		}
 		this->follow();
-		doKeyPress(VK_H);
-		技能释放延时();
+		按键释放技能(VK_D);
 		if (is_open_door() == true)
 		{
 			return;
 		}
 		this->follow();
-		doKeyPress(VK_S);
-		技能释放延时();
+		按键释放技能(VK_S);
 		if (is_open_door() == true)
 		{
 			return;
@@ -603,7 +622,7 @@ void game_status_3::按键_帕拉丁()
 //
 //}
 
-void game_status_3::按键_狂战士()
+void game_status_3::按键_帝血弑天()
 {
 	Pos current_room = get_current_room_pos();
 	DWORD figure_pointer = read<DWORD>(__人物基址);
@@ -697,4 +716,21 @@ void game_status_3::按键_狂战士()
 			doKeyPress(VK_X, 1500);
 		}
 	}
+}
+
+void game_status_3::按键_天帝()
+{
+
+}
+
+
+
+void game_status_3::按键_剑神()
+{
+
+}
+
+void game_status_3::按键_风神()
+{
+
 }

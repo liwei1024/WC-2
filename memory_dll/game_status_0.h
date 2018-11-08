@@ -5,9 +5,6 @@ public:
 	game_status_0();
 	~game_status_0();
 	void manage();
-
-	
-
 private:
 	int g_role_index = 0;
 	int g_role_count = 0;

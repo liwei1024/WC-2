@@ -20,6 +20,10 @@ static int get_role_level() {
 	return read<int>(__角色等级);
 }
 
+static std::wstring get_role_job_name()
+{
+	return read_wstring(read<DWORD>(__职业名称),100);
+}
 
 static void 按键移动角色(RolePos end_role_pos)
 {
@@ -150,8 +154,21 @@ static int get_role_status()
 
 static void 技能释放延时()
 {
-	while (get_role_status() != 0)
+	while (true)
 	{
+		if (get_role_status() == 0)
+		{
+			break;
+		}
 		Sleep(300);
+	}
+}
+
+static void 按键释放技能(int KeyCode)
+{
+	if (is_open_door() == false)
+	{
+		doKeyPress(KeyCode);
+		技能释放延时();
 	}
 }

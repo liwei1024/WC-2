@@ -171,14 +171,14 @@ static int get_goods_count()
 
 static void °´¼üÂôÎï()
 {
-	if (get_goods_count() < 10) {
+	if (get_goods_count() < 13) {
 		return;
 	}
 	DWORD StartAddress = GetKnapsacStartAddress();
 	GOODS_INFO _GoodsInfo;
 	DWORD GoodsAddress;
 	Pos goods_pos;
-	game_window_info = get_window_info(g_hWnd);
+	/*game_window_info = get_window_info(g_hWnd);*/
 	for (size_t i = 0; i < 55; i++)
 	{
 		GoodsAddress = read<int>(StartAddress + i * 4);
