@@ -142,3 +142,16 @@ static void 按键移动角色(RolePos end_role_pos)
 		}
 	}
 }
+
+static int get_role_status()
+{
+	return read<int>(read<int>(__角色状态) + __角色状态偏移);
+}
+
+static void 技能释放延时()
+{
+	while (get_role_status() != 0)
+	{
+		Sleep(300);
+	}
+}

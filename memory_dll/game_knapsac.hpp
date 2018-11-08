@@ -171,14 +171,14 @@ static int get_goods_count()
 
 static void 按键卖物()
 {
-	if (get_goods_count() < 15) {
+	if (get_goods_count() < 10) {
 		return;
 	}
 	DWORD StartAddress = GetKnapsacStartAddress();
 	GOODS_INFO _GoodsInfo;
 	DWORD GoodsAddress;
 	Pos goods_pos;
-
+	game_window_info = get_window_info(g_hWnd);
 	for (size_t i = 0; i < 55; i++)
 	{
 		GoodsAddress = read<int>(StartAddress + i * 4);
@@ -199,16 +199,18 @@ static void 按键卖物()
 				if (read<int>(__鼠标状态) != 5)
 				{
 					setMouseCoord(game_window_info.left + 192, game_window_info.top + 518);
+					Sleep(100);
 					mouseClick();
-					Sleep(500);
+					Sleep(100);
 					setMouseCoord(game_window_info.left + 630, game_window_info.top + 278);
+					Sleep(100);
 					mouseClick();
-					Sleep(500);
+					Sleep(100);
 				}
 				goods_pos = get_goods_pos_by_index(i);
 				setMouseCoord(goods_pos.x, goods_pos.y);
 				Sleep(100);
-				mouseDoubleClick(200);
+				mouseDoubleClick(100);
 			}
 		}
 	}

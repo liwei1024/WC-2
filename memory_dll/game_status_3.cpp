@@ -475,27 +475,29 @@ void game_status_3::按键_帕拉丁()
 {
 	Pos current_room = get_current_room_pos();
 	DWORD figure_pointer = read<DWORD>(__人物基址);
+	RolePos role_pos;
 	if (g_dungeon_id == 格蓝迪)
 	{
 		if (current_room.x == 0 && current_room.y == 0)
 		{
 			Sleep(1000);
 			doKeyPress(VK_F);
-			Sleep(800);
-			doKeyPress(VK_Y);
-			Sleep(3000);
+			技能释放延时();
+			移动到角色指定位置(468, 239);
+			Sleep(300);
+			doKeyPress(VK_G);
+			技能释放延时();
 		}
 		else if (current_room.x == 1 && current_room.y == 0) {
-			移动到角色指定位置(345, 216);
-			Sleep(300);
-			doKeyPress(VK_A);
-			Sleep(2000);
+			Sleep(500);
+			doKeyPress(VK_Y);
+			Sleep(3000);
 		}
 		else if (current_room.x == 2 && current_room.y == 0) {
 			移动到角色指定位置(582, 241);
 			Sleep(300);
 			doKeyPress(VK_A);
-			Sleep(1000);
+			技能释放延时();
 		}
 		else if (current_room.x == 2 && current_room.y == 1) {
 			移动到角色指定位置(521, 200);
@@ -503,30 +505,37 @@ void game_status_3::按键_帕拉丁()
 			doKeyPress(VK_NUMPAD1);
 			Sleep(100);
 			doKeyPress(VK_R);
-			Sleep(1500);
+			技能释放延时();
 		}
 		else if (current_room.x == 2 && current_room.y == 2) {
 			移动到角色指定位置(611, 201);
 			Sleep(300);
 			doKeyPress(VK_T);
-			Sleep(1000);
+			技能释放延时();
 			移动到角色指定位置(550, 335);
 			Sleep(300);
 			doKeyPress(VK_A);
-			Sleep(500);
+			技能释放延时();
 			this->follow();
 			doKeyPress(VK_Q);
-			Sleep(2500);
+			技能释放延时();
+			Sleep(1000);
 		}
 		else if (current_room.x == 3 && current_room.y == 2) {
 			移动到角色指定位置(343, 273);
 			Sleep(300);
 			doKeyPress(VK_A);
-			Sleep(1500);
+			技能释放延时();
 		}
 		else if (current_room.x == 3 && current_room.y == 1) {
 			doKeyPress(VK_NUMPAD3);
-			Sleep(300);
+			移动到角色指定位置(333, 216);
+			doKeyPress(VK_H);
+			技能释放延时();
+			if (is_open_door() == true)
+			{
+				return;
+			}
 			doKeyPress(VK_W);
 			Sleep(4000);
 		}
@@ -536,35 +545,42 @@ void game_status_3::按键_帕拉丁()
 		}
 		this->follow();
 		doKeyPress(VK_S);
-		Sleep(1500);
+		技能释放延时();
+		if (is_open_door() == true)
+		{
+			return;
+		}
+		this->follow();
+		doKeyPress(VK_D);
+		技能释放延时();
 		if (is_open_door() == true)
 		{
 			return;
 		}
 		this->follow();
 		doKeyPress(VK_E);
-		Sleep(500);
+		技能释放延时();
 		if (is_open_door() == true)
 		{
 			return;
 		}
 		this->follow();
 		doKeyPress(VK_G);
-		Sleep(1500);
+		技能释放延时();
 		if (is_open_door() == true)
 		{
 			return;
 		}
 		this->follow();
 		doKeyPress(VK_H);
-		Sleep(1500);
+		技能释放延时();
 		if (is_open_door() == true)
 		{
 			return;
 		}
 		this->follow();
 		doKeyPress(VK_S);
-		Sleep(1500);
+		技能释放延时();
 		if (is_open_door() == true)
 		{
 			return;

@@ -36,6 +36,7 @@
 //#define __城镇移动CALL 0x23DE600
 #define __时间基址 0x20A028 
 #define __技能CALL 0x24DAE30
+#define __角色状态 0x05741540 //0不动 1 动 2放技能中
 
 //#define __地图名称 0x0564D370
 #define __怪物CALL 0x25A0460
@@ -61,6 +62,7 @@
 #define __喇叭公告 0x29C5C20
 
 #define __副本难度偏移 0x20c
+#define __角色状态偏移 0x3378
 #define __地图偏移 0xC8
 #define __首地址 0xC0
 #define __尾地址 0xC4
