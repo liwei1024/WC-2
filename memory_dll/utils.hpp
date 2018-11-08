@@ -131,7 +131,7 @@ static INT getSCan(INT keyCode)
 
 static VOID keyDown(INT keyCode)
 {
-	/*if (getKeyStatus(keyCode) == FALSE) {
+	if (getKeyStatus(keyCode) == FALSE) {
 		keybd_event(keyCode, getSCan(keyCode), 0, 0);
 		Sleep(100);
 	}*/
@@ -167,40 +167,6 @@ static void main_thread_exec_call(LPVOID pfun, std::vector<int> params = { 0 })
 	delete[]call_params;
 }
 
-static void main_thread_exec_call_ex(LPVOID pfun, std::vector<int> params = { 0 })
-{
-	DWORD_PTR *call_params = new DWORD_PTR[params.size()];
-	for (size_t i = 0; i < params.size(); i++)
-	{
-		call_params[i] = params[i];
-	}
-	SendMessage(g_hWnd, MY_MESSAGE_ID, (WPARAM)pfun, (LPARAM)call_params);
-	delete[]call_params;
-}
-
-static void output_bebug_wstring(const wchar_t *lpcszFormat, ...)
-{
-	va_list argList;
-	wchar_t buffer[0x1024];
-	wchar_t temp_buffer[0x1024];
-	va_start(argList, lpcszFormat);
-	vswprintf_s(buffer, lpcszFormat, argList);
-	swprintf_s(temp_buffer, L"WC %s", buffer);
-	OutputDebugStringW(temp_buffer);
-	va_end(argList);
-}
-
-static void output_bebug_string(const char *lpcszFormat, ...)
-{
-	va_list argList;
-	char buffer[0x1024];
-	char temp_buffer[0x1024];
-	va_start(argList, lpcszFormat);
-	vsprintf_s(buffer, lpcszFormat, argList);
-	sprintf_s(temp_buffer, "WC %s", buffer);
-	OutputDebugStringA(temp_buffer);
-	va_end(argList);
-}
 
 static HWND get_game_hwnd()
 {
