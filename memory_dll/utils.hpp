@@ -120,6 +120,17 @@ static void main_thread_exec_call(LPVOID pfun, std::vector<int> params = { 0 })
 	delete[]call_params;
 }
 
+static void main_thread_exec_call_ex(LPVOID pfun, std::vector<int> params = { 0 })
+{
+	DWORD_PTR *call_params = new DWORD_PTR[params.size()];
+	for (size_t i = 0; i < params.size(); i++)
+	{
+		call_params[i] = params[i];
+	}
+	SendMessage(g_hWnd, MY_MESSAGE_ID, (WPARAM)pfun, (LPARAM)call_params);
+	delete[]call_params;
+}
+
 static void output_bebug_wstring(const wchar_t *lpcszFormat, ...)
 {
 	va_list argList;
