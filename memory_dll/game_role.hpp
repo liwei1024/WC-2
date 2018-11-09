@@ -160,8 +160,9 @@ static void 技能释放延时()
 		{
 			break;
 		}
-		Sleep(300);
+		Sleep(100);
 	}
+	Sleep(100);
 }
 
 static void 按键释放技能(int KeyCode,int s = 0)
