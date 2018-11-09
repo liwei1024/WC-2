@@ -22,7 +22,7 @@ static int get_role_level() {
 
 static std::wstring get_role_job_name()
 {
-	return read_wstring(read<DWORD>(__职业名称),100);
+	return read_wstring(read<DWORD>(__职业名称) + 0x0, 100);
 }
 
 static void 按键移动角色(RolePos end_role_pos)
@@ -164,11 +164,11 @@ static void 技能释放延时()
 	}
 }
 
-static void 按键释放技能(int KeyCode)
+static void 按键释放技能(int KeyCode,int s = 0)
 {
 	if (is_open_door() == false)
 	{
-		doKeyPress(KeyCode);
+		doKeyPress(KeyCode,s);
 		技能释放延时();
 	}
 }

@@ -61,28 +61,25 @@ static BOOL setMouseCoord(INT x, INT y)
 	BOOL result = BOOL();
 
 	//系统api设置
-	//result = SetCursorPos(x, y);
-	//if (result == FALSE) {
-	//	//printf("setMouseCoord Erro!\n");
-	//}
+	result = SetCursorPos(x, y);
+	if (result == FALSE) {
+		//printf("setMouseCoord Erro!\n");
+	}
 
 	// 按键盒子设置
-	POINT Coord = getMouseCoord();
-	
-	/*Sleep(200);*/
+	/*POINT Coord = getMouseCoord();
 	int i = 0;
 	while (abs(Coord.x - x) > 5 || abs(Coord.y - y) > 5)
 	{
 		MouseMoveTo(0, x, y);
 		Sleep(150);
 		Coord = getMouseCoord();
-		output_bebug_wstring(L"x %d,y %d Coord.x %d,Coord.y %d", x,y,Coord.x, Coord.y);
 		if (i > 3) {
 			output_bebug_wstring(L"移动鼠标失败");
 			break;
 		}
 		i++;
-	}
+	}*/
 	return result;
 }
 
@@ -131,7 +128,7 @@ static INT getSCan(INT keyCode)
 
 static VOID keyDown(INT keyCode)
 {
-	if (getKeyStatus(keyCode) == FALSE) {
+	/*if (getKeyStatus(keyCode) == FALSE) {
 		keybd_event(keyCode, getSCan(keyCode), 0, 0);
 		Sleep(100);
 	}*/
