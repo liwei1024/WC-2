@@ -409,12 +409,12 @@ std::vector<MAP_OBJECT_STRUCT> game_status_3::获取物品信息()
 		object = get_object_info(object_address);
 		if (object.code == Code_鸡腿 || object.code == Code_肉块 || object.code == Code_成长之泉水)
 			continue;
-		if (
+		/*if (
 			wcscmp(object.name.c_str(), L"碎布片") == 0 ||
 			wcscmp(object.name.c_str(), L"最下级硬化剂") == 0 ||
 			wcscmp(object.name.c_str(), L"钢铁片") == 0
 			)
-			continue;
+			continue;*/
 
 		if (object.type == 289 && object.camp == 200)
 		{
