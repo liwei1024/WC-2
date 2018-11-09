@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "game_status_3.h"
 #include "game_astar.hpp"
-#include "Knapsac.h"
 
 
 game_status_3::game_status_3()

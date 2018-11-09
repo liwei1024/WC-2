@@ -155,12 +155,16 @@ static VOID doKeyPress(INT keyCode, INT s = 0)
 
 static void main_thread_exec_call(LPVOID pfun, std::vector<int> params = { 0 })
 {
+	HANDLE hThread;
 	DWORD_PTR *call_params = new DWORD_PTR[params.size()];
 	for (size_t i = 0; i < params.size(); i++)
 	{
 		call_params[i] = params[i];
 	}
-	SendMessage(g_hWnd, MY_MESSAGE_ID,(WPARAM)pfun,(LPARAM)call_params);
+	//SendMessage(g_hWnd, MY_MESSAGE_ID,(WPARAM)pfun,(LPARAM)call_params);
+	hThread = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)pfun, call_params, 0, 0);
+	WaitForSingleObject(hThread, INFINITE);
+	CloseHandle(hThread);
 	delete[]call_params;
 }
 

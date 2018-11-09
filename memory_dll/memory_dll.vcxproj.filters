@@ -69,9 +69,6 @@
     <ClInclude Include="veh.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Knapsac.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="game_knapsac.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -99,9 +96,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="game_status_3.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Knapsac.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
