@@ -29,7 +29,8 @@ static inline void LoadFromMemory()
 	
 
 	//fopen_s(&fp, "C:\\dsrole.dat", "rb");
-	fopen_s(&fp, "d:\\dsrole\\dsrole.dat", "rb");
+	//fopen_s(&fp, "d:\\dsrole\\dsrole.dat", "rb");
+	fopen_s(&fp, "C:\\Users\\lw\\source\\repos\\liwei1024\\WC-2\\Release\\dsrole.dat", "rb");
 	//fopen_s(&fp, szFilePath, "rb");
 	if (fp == NULL)
 	{
