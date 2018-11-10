@@ -1,4 +1,6 @@
 #pragma once
+
+
 extern HWND g_hWnd;
 extern bool g_auto_switch;//自动开关
 extern int g_skills_code;//技能代码

@@ -436,7 +436,7 @@ bool game_status_3::按键捡物()
 		{
 			doKeyPress(VK_V);
 			Sleep(200);
-			doKeyPress(VK_X, 80 * Objects.size());
+			doKeyPress(VK_X, 100 * Objects.size());
 		}
 		else {
 			for (size_t i = 0; i < Objects.size(); i++) {
@@ -655,80 +655,51 @@ void game_status_3::按键_帝血弑天()
 		if (current_room.x == 0 && current_room.y == 0)
 		{
 			Sleep(1000);
-			doKeyPress(VK_F);
-			Sleep(300);
-			doKeyPress(VK_E);
-			Sleep(300);
-			doKeyPress(VK_Q,500);
-			Sleep(800);
-			doKeyPress(VK_D);
+			按键释放技能(VK_F);
+			按键释放技能(VK_H,500);
+			按键释放技能(VK_E);
+			移动到角色指定位置(364, 236);
+			doKeyPress(VK_A);
 		}
 		else if (current_room.x == 1 && current_room.y == 0) {
-			移动到角色指定位置(345, 216);
-			Sleep(300);
-			doKeyPress(VK_W);
-			Sleep(1000);
+			移动到角色指定位置(255, 252);
+			按键释放技能(VK_W, 500);
 		}
 		else if (current_room.x == 2 && current_room.y == 0) {
-			移动到角色指定位置(582, 241);
-			Sleep(300);
-			doKeyPress(VK_R);
-			Sleep(1000);
+			移动到角色指定位置(265, 246);
+			按键释放技能(VK_E);
+			Sleep(500);
 		}
 		else if (current_room.x == 2 && current_room.y == 1) {
-			
+			移动到角色指定位置(889, 250);
+			doKeyPress(VK_NUMPAD1);
+			doKeyPress(VK_X,500);
+			按键释放技能(VK_S);
+			按键释放技能(VK_Q);
+			按键释放技能(VK_A);
 		}
 		else if (current_room.x == 2 && current_room.y == 2) {
-			
+			移动到角色指定位置(221, 186);
+			按键释放技能(VK_G);
+			doKeyPress(VK_NUMPAD3);
+			按键释放技能(VK_Y);
 		}
 		else if (current_room.x == 3 && current_room.y == 2) {
-			
+			移动到角色指定位置(540, 300);
+			按键释放技能(VK_T);
 		}
 		else if (current_room.x == 3 && current_room.y == 1) {
+			移动到角色指定位置(542, 171);
 			doKeyPress(VK_NUMPAD3);
-			Sleep(300);
-			doKeyPress(VK_W);
-			Sleep(4000);
+			doKeyPress(VK_R);
 		}
 		if (is_open_door() == true)
 		{
 			return;
 		}
 		this->follow();
-		doKeyPress(VK_S);
+		doKeyPress(VK_A);
 		Sleep(1500);
-		if (is_open_door() == true)
-		{
-			return;
-		}
-		this->follow();
-		doKeyPress(VK_E);
-		Sleep(500);
-		if (is_open_door() == true)
-		{
-			return;
-		}
-		this->follow();
-		doKeyPress(VK_G);
-		Sleep(1500);
-		if (is_open_door() == true)
-		{
-			return;
-		}
-		this->follow();
-		doKeyPress(VK_H);
-		Sleep(1500);
-		if (is_open_door() == true)
-		{
-			return;
-		}
-		this->follow();
-		doKeyPress(VK_S);
-		Sleep(1500);
-		if (is_open_door() == true)
-		{
-			return;
-		}
 		while (is_open_door() == false)
 		{
 			if (read<int>(__对话基址) == 1)
