@@ -213,7 +213,6 @@ static inline void Call_过图Call(DWORD_PTR parameter)
 		/*LPCWSTR buffer = L"Call_召唤Call 异常";
 		Call_公告Call((DWORD_PTR)&buffer);*/
 	}
-	
 }
 
 static inline void Call_召唤Call(DWORD_PTR parameter)

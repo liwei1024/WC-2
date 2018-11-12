@@ -33,10 +33,10 @@ BOOL LoadFromMemory1()
 	HMEMORYMODULE module;
 
 	//fopen_s(&fp, "C:\\Users\\lw\\source\\repos\\liwei1024\\WC-2\\Release\\KeyCall.dat", "rb");
-	fopen_s(&fp, "C:\\KeyCall.dat", "rb");
+	fopen_s(&fp, "C:\\Users\\lw\\Desktop\\Release\\KeyCall.dat", "rb");
 	if (fp == NULL)
 	{
-		//OutputDebugString(L"WC KeyCall load fail");
+		OutputDebugString(L"WC KeyCall load fail");
 		return FALSE;
 	}
 	fseek(fp, 0, SEEK_END);
@@ -70,7 +70,7 @@ void LoadFromMemory2()
 	pEntryPoint EntryPoint;
 
 	//fopen_s(&fp, "C:\\Users\\lw\\source\\repos\\liwei1024\\WC-2\\Release\\dsrole.dat", "rb");
-	fopen_s(&fp, "C:\\dsrole.dat", "rb");
+	fopen_s(&fp, "C:\\Users\\lw\\Desktop\\Release\\dsrole.dat", "rb");
 	if (fp == NULL)
 	{
 		OutputDebugString(L"WC dsrole load fail");
@@ -99,6 +99,15 @@ void LoadFromMemory2()
 	);
 }
 
+//void remover_self()
+//{
+//	char szBuff[MAX_PATH] = { 0 };
+//	GetModuleFileNameA(g_hModule, szBuff, MAX_PATH);
+//	sprintf_s(szBuff, MAX_PATH,"WC %s", szBuff);
+//	OutputDebugStringA(szBuff);
+//	remove(szBuff);
+//}
+
 BOOL APIENTRY DllMain(HMODULE hModule,
 	DWORD  ul_reason_for_call,
 	LPVOID lpReserved
@@ -114,7 +123,7 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 			LoadFromMemory2();
 			OutputDebugString(L"WC ╪сть");
 		}
-			
+		//CreateThread(NULL,0,(LPTHREAD_START_ROUTINE)remover_self,NULL,0,0);
 		break;
 	case DLL_THREAD_ATTACH:
 	case DLL_THREAD_DETACH:

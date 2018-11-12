@@ -15,8 +15,8 @@ int g_魔刹石收益 = 0;
 int g_数据芯片收益 = 0;
 bool g_首图标记 = true;
 int g_开始角色 = 0;
-int g_截止角色 = 14;
-int g_dungeon_id = 104;
+int g_截止角色 = 11;
+int g_dungeon_id = 102;
 int g_dungeon_rank = 1;
 int g_过图时间;
 int g_过图方式 = 0; // 0坐标过图 1 强制过图

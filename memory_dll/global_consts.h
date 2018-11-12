@@ -49,6 +49,7 @@
 #define __鼠标状态 0x057D0B30
 #define __副本ID 0x05506770
 #define __副本难度 0x0562D638
+#define __图内副本ID 0x055FA310
 
 //#define  __攻击阵营  55938496
 //#define  __技能坐标  40079936

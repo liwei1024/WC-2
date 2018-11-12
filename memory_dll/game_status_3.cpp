@@ -415,7 +415,10 @@ std::vector<MAP_OBJECT_STRUCT> game_status_3::获取物品信息()
 			wcscmp(object.name.c_str(), L"钢铁片") == 0
 			)
 			continue;*/
-
+		if (object.z == 0)
+		{
+			Sleep(500);
+		}
 		if (object.type == 289 && object.camp == 200)
 		{
 			Objects.insert(Objects.begin(), object);
@@ -450,6 +453,7 @@ bool game_status_3::按键捡物()
 				if (wcscmp(object.name.c_str(), L"金币") != 0)
 				{
 					doKeyPress(VK_X);
+					Sleep(100);
 				}
 				return true;
 			}
@@ -524,16 +528,16 @@ void game_status_3::移动到角色指定位置(int x,int y,int z)
 	else if (g_移动方式 == 1) { //脚本移动
 
 	}
-	//Sleep(200);
+	Sleep(100);
 }
 
 
 void game_status_3::按键_破晓女神()
 {
 	Pos current_room = get_current_room_pos();
-	DWORD figure_pointer = read<DWORD>(__人物基址);
 	RolePos role_pos;
-	if (g_dungeon_id == 格蓝迪)
+	DWORD 副本ID = read<int>(__图内副本ID);
+	if (副本ID == 格蓝迪)
 	{
 		if (current_room.x == 0 && current_room.y == 0)
 		{
@@ -639,6 +643,96 @@ void game_status_3::按键_破晓女神()
 			doKeyPress(VK_X, 1500);
 		}
 	}
+	else if (g_dungeon_id == 102){
+		if (current_room.x == 0 && current_room.y == 0)
+		{
+			按键释放技能(VK_F);
+			移动到角色指定位置(574,272);
+			按键释放技能(VK_G);
+		}
+		else if (current_room.x == 1 && current_room.y == 0)
+		{
+			移动到角色指定位置(610, 276);
+			按键释放技能(VK_R);
+		}
+		else if (current_room.x == 2 && current_room.y == 0)
+		{
+			移动到角色指定位置(298, 289);
+			按键释放技能(VK_H);
+		}
+		else if (current_room.x == 2 && current_room.y == 1)
+		{
+			移动到角色指定位置(489, 346);
+			doKeyPress(VK_NUMPAD3);
+			doKeyPress(VK_Y);
+			Sleep(3000);
+		}
+		else if (current_room.x == 2 && current_room.y == 2)
+		{
+			移动到角色指定位置(645, 256);
+			按键释放技能(VK_T);
+		}
+		else if (current_room.x == 3 && current_room.y == 2)
+		{
+			移动到角色指定位置(476, 275);
+			按键释放技能(VK_A);
+		}
+		else if (current_room.x == 4 && current_room.y == 2)
+		{
+			doKeyPress(VK_W);
+			Sleep(4000);
+		}
+		if (is_open_door() == true)
+		{
+			return;
+		}
+		this->follow();
+		按键释放技能(VK_S);
+		if (is_open_door() == true)
+		{
+			return;
+		}
+		this->follow();
+		按键释放技能(VK_E);
+		if (is_open_door() == true)
+		{
+			return;
+		}
+		this->follow();
+		按键释放技能(VK_G);
+		if (is_open_door() == true)
+		{
+			return;
+		}
+		this->follow();
+		按键释放技能(VK_Q);
+		if (is_open_door() == true)
+		{
+			return;
+		}
+		this->follow();
+		按键释放技能(VK_D);
+		if (is_open_door() == true)
+		{
+			return;
+		}
+		this->follow();
+		按键释放技能(VK_S);
+		if (is_open_door() == true)
+		{
+			return;
+		}
+		while (is_open_door() == false)
+		{
+			if (read<int>(__对话基址) == 1)
+			{
+				doKeyPress(VK_RETURN);
+				continue;
+			}
+			this->follow();
+			doKeyPress(VK_X, 1500);
+		}
+	}
 }
 
 //void game_status_3::再次挑战()
@@ -650,7 +744,8 @@ void game_status_3::按键_帝血弑天()
 {
 	Pos current_room = get_current_room_pos();
 	DWORD figure_pointer = read<DWORD>(__人物基址);
-	if (g_dungeon_id == 格蓝迪)
+	DWORD 副本ID = read<int>(__图内副本ID);
+	if (副本ID == 格蓝迪)
 	{
 		if (current_room.x == 0 && current_room.y == 0)
 		{
