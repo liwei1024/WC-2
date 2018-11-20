@@ -415,11 +415,7 @@ std::vector<MAP_OBJECT_STRUCT> game_status_3::获取物品信息()
 			wcscmp(object.name.c_str(), L"钢铁片") == 0
 			)
 			continue;*/
-		if (object.z == 0)
-		{
-			Sleep(500);
-		}
-		if (object.type == 289 && object.camp == 200)
+		if (object.type == 289 && object.camp == 200 && object.z == 0)
 		{
 			Objects.insert(Objects.begin(), object);
 		}
@@ -646,9 +642,9 @@ void game_status_3::按键_破晓女神()
 	else if (g_dungeon_id == 102){
 		if (current_room.x == 0 && current_room.y == 0)
 		{
-			按键释放技能(VK_F);
-			移动到角色指定位置(574,272);
+			移动到角色指定位置(574, 272);
 			按键释放技能(VK_G);
+			按键释放技能(VK_F);
 		}
 		else if (current_room.x == 1 && current_room.y == 0)
 		{
@@ -686,6 +682,7 @@ void game_status_3::按键_破晓女神()
 		{
 			return;
 		}
+		Sleep(200);
 		this->follow();
 		按键释放技能(VK_S);
 		if (is_open_door() == true)
@@ -711,12 +708,6 @@ void game_status_3::按键_破晓女神()
 			return;
 		}
 		this->follow();
-		按键释放技能(VK_D);
-		if (is_open_door() == true)
-		{
-			return;
-		}
-		this->follow();
 		按键释放技能(VK_S);
 		if (is_open_door() == true)
 		{
@@ -734,11 +725,6 @@ void game_status_3::按键_破晓女神()
 		}
 	}
 }
-
-//void game_status_3::再次挑战()
-//{
-//
-//}
 
 void game_status_3::按键_帝血弑天()
 {
