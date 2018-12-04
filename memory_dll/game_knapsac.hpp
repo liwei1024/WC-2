@@ -201,7 +201,7 @@ static void °´¼üÂôÎï()
 					setMouseCoord(game_window_info.left + 192, game_window_info.top + 518);
 					Sleep(100);
 					mouseClick();
-					Sleep(100);
+					Sleep(1000);
 					setMouseCoord(game_window_info.left + 630, game_window_info.top + 278);
 					Sleep(100);
 					mouseClick();

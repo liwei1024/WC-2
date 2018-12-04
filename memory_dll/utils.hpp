@@ -1,6 +1,7 @@
 #pragma once
 
 
+
 static void output_bebug_wstring(const wchar_t *lpcszFormat, ...)
 {
 	va_list argList;
@@ -160,8 +161,10 @@ static void main_thread_exec_call(LPVOID pfun, std::vector<int> params = { 0 })
 	{
 		call_params[i] = params[i];
 	}
-	//SendMessage(g_hWnd, MY_MESSAGE_ID,(WPARAM)pfun,(LPARAM)call_params);
-	std::thread(pfun, call_params).join();//创建 线程并等待执行完毕
+	SendMessage(g_hWnd, MY_MESSAGE_ID,(WPARAM)pfun,(LPARAM)call_params);
+	/*HANDLE hThread = ::CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)pfun, call_params, 0, NULL);
+	::WaitForSingleObject(hThread, INFINITE); 
+	::CloseHandle(hThread);*/
 	delete[]call_params;
 }
 

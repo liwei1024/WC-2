@@ -44,7 +44,7 @@ void game_status_1::enter_the_dungeon(int 副本ID,int 副本难度,int 副本类型)
 	move_to_copy_door(副本ID, 副本类型);
 	Sleep(500);
 	//main_thread_exec_call(Send_进入选图);
-	按键进入选图(104);
+	按键进入选图(g_dungeon_id);
 	//Sleep(500);
 	main_thread_exec_call(Send_选择副本, { 副本ID, 副本难度, 副本类型 });
 
@@ -146,7 +146,7 @@ void game_status_1::组包到副本门口(int copy_id)
 
 void game_status_1::按键进入选图(int copy_id)
 {
-	if (copy_id == 104)
+	if (copy_id == 104 || copy_id == 102 || copy_id == 103)
 	{
 		keyDown(VK_NUMPAD3);
 		while (true) 

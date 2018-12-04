@@ -3,11 +3,11 @@
 #define TIMER_MIN 100
 #define MY_MESSAGE_ID 10024 //自定义消息ID
 
-#define __人物基址 0x5741540
-#define __当前疲劳 0x57417E0
-#define __最大疲劳 0x57417E8
-#define __商店基址 0x562DD48
-#define __对话基址 0x5770594
+#define __人物基址 0x05768830
+#define __当前疲劳 0x05768AD0
+#define __最大疲劳 0x05768AD0
+#define __商店基址 0x05655038
+#define __对话基址 0x057978B4
 #define __释放CALL 0x237B720
 
 #define __发包基址 0x5777C8C
@@ -49,6 +49,7 @@
 #define __鼠标状态 0x057D0B30
 #define __副本ID 0x05506770
 #define __副本难度 0x0562D638
+#define __图内副本ID 0x055FA310
 
 //#define  __攻击阵营  55938496
 //#define  __技能坐标  40079936
