@@ -527,7 +527,6 @@ void game_status_3::移动到角色指定位置(int x,int y,int z)
 	//Sleep(200);
 }
 
-
 void game_status_3::按键_破晓女神()
 {
 	Pos current_room = get_current_room_pos();
@@ -641,11 +640,6 @@ void game_status_3::按键_破晓女神()
 	}
 }
 
-//void game_status_3::再次挑战()
-//{
-//
-//}
-
 void game_status_3::按键_帝血弑天()
 {
 	Pos current_room = get_current_room_pos();
@@ -746,8 +740,6 @@ void game_status_3::按键_天帝()
 {
 
 }
-
-
 
 void game_status_3::按键_剑神()
 {

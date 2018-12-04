@@ -40,7 +40,6 @@ static unsigned char orientation_vector[16][4] = {
 	{ 1, 0, 1, 1 },//14	左	上	下
 	{ 1, 1, 1, 1 } //15	左	右	上	下
 };
-
 static BOOL has_list(std::vector<AStarRoomInfo> list, AStarRoomInfo to_search_room)
 {
 	for (unsigned i = 0; i < list.size(); i++)
