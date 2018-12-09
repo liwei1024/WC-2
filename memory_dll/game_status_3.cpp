@@ -527,7 +527,6 @@ void game_status_3::移动到角色指定位置(int x,int y,int z)
 	Sleep(100);
 }
 
-
 void game_status_3::按键_破晓女神()
 {
 	Pos current_room = get_current_room_pos();
@@ -644,91 +643,6 @@ void game_status_3::按键_破晓女神()
 			doKeyPress(VK_X, 1500);
 		}
 	}
-	else if (g_dungeon_id == 102){
-		if (current_room.x == 0 && current_room.y == 0)
-		{
-			移动到角色指定位置(574, 272);
-			按键释放技能(VK_G);
-			按键释放技能(VK_F);
-		}
-		else if (current_room.x == 1 && current_room.y == 0)
-		{
-			移动到角色指定位置(610, 276);
-			按键释放技能(VK_R);
-		}
-		else if (current_room.x == 2 && current_room.y == 0)
-		{
-			移动到角色指定位置(298, 289);
-			按键释放技能(VK_H);
-		}
-		else if (current_room.x == 2 && current_room.y == 1)
-		{
-			移动到角色指定位置(489, 346);
-			doKeyPress(VK_NUMPAD3);
-			doKeyPress(VK_Y);
-			Sleep(3000);
-		}
-		else if (current_room.x == 2 && current_room.y == 2)
-		{
-			移动到角色指定位置(645, 256);
-			按键释放技能(VK_T);
-		}
-		else if (current_room.x == 3 && current_room.y == 2)
-		{
-			移动到角色指定位置(476, 275);
-			按键释放技能(VK_A);
-		}
-		else if (current_room.x == 4 && current_room.y == 2)
-		{
-			doKeyPress(VK_W);
-			Sleep(4000);
-		}
-		if (is_open_door() == true)
-		{
-			return;
-		}
-		Sleep(200);
-		this->follow();
-		按键释放技能(VK_S);
-		if (is_open_door() == true)
-		{
-			return;
-		}
-		this->follow();
-		按键释放技能(VK_E);
-		if (is_open_door() == true)
-		{
-			return;
-		}
-		this->follow();
-		按键释放技能(VK_G);
-		if (is_open_door() == true)
-		{
-			return;
-		}
-		this->follow();
-		按键释放技能(VK_Q);
-		if (is_open_door() == true)
-		{
-			return;
-		}
-		this->follow();
-		按键释放技能(VK_S);
-		if (is_open_door() == true)
-		{
-			return;
-		}
-		while (is_open_door() == false)
-		{
-			if (read<int>(__对话基址) == 1)
-			{
-				doKeyPress(VK_RETURN);
-				continue;
-			}
-			this->follow();
-			doKeyPress(VK_X, 1500);
-		}
-	}
 }
 
 void game_status_3::按键_帝血弑天()
@@ -803,8 +717,6 @@ void game_status_3::按键_天帝()
 {
 
 }
-
-
 
 void game_status_3::按键_剑神()
 {
