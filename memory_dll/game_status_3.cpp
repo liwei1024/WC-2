@@ -435,7 +435,7 @@ bool game_status_3::按键捡物()
 		{
 			doKeyPress(VK_V);
 			Sleep(200);
-			doKeyPress(VK_X, 100 * Objects.size());
+			doKeyPress(VK_X, 120 * Objects.size());
 		}
 		else {
 			for (size_t i = 0; i < Objects.size(); i++) {
@@ -532,8 +532,8 @@ void game_status_3::按键_破晓女神()
 {
 	Pos current_room = get_current_room_pos();
 	RolePos role_pos;
-	DWORD 副本ID = read<int>(__图内副本ID);
-	if (副本ID == 格蓝迪)
+	//DWORD 副本ID = read<int>(__图内副本ID);
+	if (g_dungeon_id == 格蓝迪)
 	{
 		if (current_room.x == 0 && current_room.y == 0)
 		{
@@ -542,6 +542,7 @@ void game_status_3::按键_破晓女神()
 			移动到角色指定位置(468, 239);
 			Sleep(300);
 			按键释放技能(VK_G);
+			Sleep(1500);
 		}
 		else if (current_room.x == 1 && current_room.y == 0) {
 			Sleep(500);
@@ -552,6 +553,7 @@ void game_status_3::按键_破晓女神()
 			移动到角色指定位置(582, 241);
 			Sleep(300);
 			按键释放技能(VK_A,300);
+			Sleep(800);
 		}
 		else if (current_room.x == 2 && current_room.y == 1) {
 			移动到角色指定位置(521, 200);
@@ -559,6 +561,7 @@ void game_status_3::按键_破晓女神()
 			doKeyPress(VK_NUMPAD1);
 			Sleep(100);
 			按键释放技能(VK_R);
+			Sleep(1500);
 		}
 		else if (current_room.x == 2 && current_room.y == 2) {
 			移动到角色指定位置(331, 329);
@@ -576,6 +579,7 @@ void game_status_3::按键_破晓女神()
 			移动到角色指定位置(343, 290);
 			Sleep(300);
 			按键释放技能(VK_A, 300);
+			Sleep(1000);
 		}
 		else if (current_room.x == 3 && current_room.y == 1) {
 			doKeyPress(VK_NUMPAD3);
@@ -590,6 +594,7 @@ void game_status_3::按键_破晓女神()
 		}
 		if (is_open_door() == true)
 		{
+			
 			return;
 		}
 		this->follow();
@@ -730,8 +735,8 @@ void game_status_3::按键_帝血弑天()
 {
 	Pos current_room = get_current_room_pos();
 	DWORD figure_pointer = read<DWORD>(__人物基址);
-	DWORD 副本ID = read<int>(__图内副本ID);
-	if (副本ID == 格蓝迪)
+	//DWORD 副本ID = read<int>(__图内副本ID);
+	if (g_dungeon_id == 格蓝迪)
 	{
 		if (current_room.x == 0 && current_room.y == 0)
 		{

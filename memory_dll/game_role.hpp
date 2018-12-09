@@ -158,8 +158,8 @@ static void 技能释放延时()
 	{
 		if (get_role_status() == 0)
 		{
-			break;
 			Sleep(100);
+			break;
 		}
 	}
 	Sleep(300);
@@ -170,6 +170,7 @@ static void 按键释放技能(int KeyCode,int s = 0)
 	if (is_open_door() == false)
 	{
 		doKeyPress(KeyCode,s);
+		Sleep(100);
 		技能释放延时();
 	}
 }
