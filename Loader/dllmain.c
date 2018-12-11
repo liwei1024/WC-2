@@ -36,7 +36,7 @@ BOOL LoadFromMemory1()
 	fopen_s(&fp, "C:\\Users\\lw\\Desktop\\Release\\KeyCall.dat", "rb");
 	if (fp == NULL)
 	{
-		OutputDebugString(L"WC KeyCall load fail");
+		//OutputDebugString(L"WC KeyCall load fail");
 		return FALSE;
 	}
 	fseek(fp, 0, SEEK_END);
@@ -121,7 +121,7 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 		g_hModule = hModule;
 		if (LoadFromMemory1() == TRUE) {
 			LoadFromMemory2();
-			OutputDebugString(L"WC ╪сть");
+			//OutputDebugString(L"WC ╪сть");
 		}
 		//CreateThread(NULL,0,(LPTHREAD_START_ROUTINE)remover_self,NULL,0,0);
 		break;

@@ -541,7 +541,7 @@ void game_status_3::按键_破晓女神()
 			移动到角色指定位置(468, 239);
 			Sleep(300);
 			按键释放技能(VK_G);
-			Sleep(1500);
+			Sleep(800);
 		}
 		else if (current_room.x == 1 && current_room.y == 0) {
 			Sleep(500);
@@ -560,7 +560,7 @@ void game_status_3::按键_破晓女神()
 			doKeyPress(VK_NUMPAD1);
 			Sleep(100);
 			按键释放技能(VK_R);
-			Sleep(1500);
+			Sleep(800);
 		}
 		else if (current_room.x == 2 && current_room.y == 2) {
 			移动到角色指定位置(331, 329);
@@ -578,7 +578,7 @@ void game_status_3::按键_破晓女神()
 			移动到角色指定位置(343, 290);
 			Sleep(300);
 			按键释放技能(VK_A, 300);
-			Sleep(1000);
+			Sleep(800);
 		}
 		else if (current_room.x == 3 && current_room.y == 1) {
 			doKeyPress(VK_NUMPAD3);
