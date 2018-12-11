@@ -354,6 +354,25 @@ void game_status_3::follow(std::wstring name)
 	}
 }
 
+
+MAP_OBJECT_STRUCT game_status_3::getObjectInfoByNmae(std::wstring name)
+{
+	DWORD map_start_address = get_map_start_address();
+	DWORD map_object_count = get_map_object_count(map_start_address);
+	MAP_OBJECT_STRUCT object;
+	RolePos role_pos = get_role_pos();
+	DWORD object_address;
+	for (size_t i = 0; i < map_object_count; i++) {
+		object_address = read<int>(map_start_address + i * 4);
+		if (object_address <= 0)continue;
+		object = get_object_info(object_address);
+		if (!name.empty() && wcscmp(object.name.c_str(), name.c_str()) == 0) {
+			break;
+		}
+	}
+	return object;
+}
+
 // 获取通关商店 营火
 bool game_status_3::get_the_custom_shop()
 {
@@ -522,7 +541,8 @@ void game_status_3::移动到角色指定位置(int x,int y,int z)
 		main_thread_exec_call(Call_坐标Call, { read<int>(__人物基址),x,y,z });
 	}
 	else if (g_移动方式 == 1) { //脚本移动
-
+		RolePos rolePos = get_role_pos();
+		main_thread_exec_call(Call_移动Call, { (abs(rolePos.x - x) + abs(rolePos.y - y)),x,y });
 	}
 	Sleep(100);
 }

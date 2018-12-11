@@ -20,6 +20,7 @@ private:
 	void sort_by_distance(std::vector<MAP_OBJECT_STRUCT>& Objects);
 	void attack_monster();
 	void follow(std::wstring name = L"");
+	MAP_OBJECT_STRUCT getObjectInfoByNmae(std::wstring name);
 	bool get_the_custom_shop();
 
 	

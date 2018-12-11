@@ -10,6 +10,11 @@
 #define __对话基址 0x057D4D44
 #define __释放CALL 0x023ABBD0
 
+#define __变量入栈CALL 0x08E7FC0
+#define __移动CALL 0x01E3C190
+#define __移动偏移_1 0x69C //7度_获取
+#define __移动偏移_2 0x6B0 //7度_获取
+
 #define __发包基址 0x057DC43C
 #define __缓冲CALL 0x03743FF0
 #define __密包CALL 0x03744100

@@ -245,6 +245,67 @@ static inline void Call_城镇移动(DWORD_PTR parameter)
 	}
 }
 
+static inline void Call_移动Call(int 移动速度, int 目标x, int 目标y)
+{
+	int 移动指针 = read<int>(__人物基址);
+	int 变量入栈CALL = __变量入栈CALL;
+	int 移动CALL = __移动CALL;
+	__asm
+	{
+		mov esi, 移动指针
+		mov eax, dword ptr ds : [esi]
+		mov edx, dword ptr ds : [eax + __移动偏移_1]
+		lea ecx, dword ptr ds : [0x400C00]
+		push ecx
+		mov ecx, esi
+		call edx //call eax	
+		push 目标y
+		push 目标x
+		push 移动速度
+		push 0x0
+		sub esp, 0x8
+		lea edx, dword ptr ds : [0x400C00]
+		mov ecx, esp
+		push edx
+		call 变量入栈CALL
+		mov esi, 移动指针
+		mov eax, dword ptr ds : [esi]
+		mov edx, dword ptr ds : [eax + __移动偏移_2]
+		lea ecx, dword ptr ds : [0x400C00]
+		push ecx
+		mov ecx, esi
+		call edx
+		sub esp, 0x8
+		lea eax, dword ptr ds : [0x400C00]
+		mov ecx, esp
+		push eax
+		call 变量入栈CALL
+		push 移动指针
+		mov ecx, 移动指针
+		call 移动CALL
+	}
+}
+
+//#define FlashFunc0x02413300//闪现CALL
+//VOID 男法瞬移(DWORD Point, DWORD Ex, DWORD Ey)
+//{
+//	DWORD Sx = ReadGrid(Point, 0);//当前 x坐标
+//	DWORD Sy = ReadGrid(Point, 1);//当前 y坐标
+//	DWORD FlashCall = FlashFunc;
+//	_asm
+//	{
+//		mov esi, Point
+//		push 0xA
+//		push Sy//当前y坐标
+//		push Sx//当前x坐标
+//		push Ey//目的y坐标
+//		push Ex//目的x坐标
+//		mov ecx, esi
+//		call FlashCall
+//	}
+//	return VOID();
+//}
+
 /*取对象坐标CALL   对象指针  xyz
 int Game_Take_Object_Coordinates(DWORD 对象, DWORD 轴)
 {

@@ -28,3 +28,5 @@ extern bool g_返回角色方式;
 extern std::vector<int> g_技能列表;
 
 
+extern HANDLE g_hProcess;
+extern HANDLE g_hThread;
