@@ -668,7 +668,16 @@ void game_status_3::按键_破晓女神()
 			if (i>3)
 			{
 				this->follow();
-				doKeyPress(VK_S, 1500);
+				按键释放技能(VK_S, 1500);
+			}
+			if (i > 20)
+			{
+				this->follow();
+				按键释放技能(VK_G);
+			}
+			if (i>50) {
+				g_auto_switch = false;
+				return;
 			}
 			i++;
 		}
