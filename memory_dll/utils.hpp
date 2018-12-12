@@ -163,14 +163,14 @@ static void main_thread_exec_call(LPVOID pfun, std::vector<int> params = { 0 })
 	{
 		call_params[i] = params[i];
 	}
-	RtlRemoteCall_ RtlRemoteCall = (RtlRemoteCall_)GetProcAddress(GetModuleHandle(_T("ntdll.dll")), "RtlRemoteCall");
+	//RtlRemoteCall_ RtlRemoteCall = (RtlRemoteCall_)GetProcAddress(GetModuleHandle(_T("ntdll.dll")), "RtlRemoteCall");
 	/*NtContinue_ NtContinue = (NtContinue_)GetProcAddress(GetModuleHandle(_T("ntdll.dll")), "NtContinue");*/
-	//SendMessage(g_hWnd, MY_MESSAGE_ID,(WPARAM)pfun,(LPARAM)call_params);
+	SendMessage(g_hWnd, MY_MESSAGE_ID,(WPARAM)pfun,(LPARAM)call_params);
 	/*HANDLE hThread = ::CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)pfun, call_params, 0, NULL);
 	::WaitForSingleObject(hThread, INFINITE); 
 	::CloseHandle(hThread);*/
-	RtlRemoteCall(g_hProcess,g_hThread, pfun, params.size(), call_params,FALSE, FALSE);
-	//delete[]call_params;
+	//RtlRemoteCall(g_hProcess,g_hThread, pfun, params.size(), call_params,FALSE, FALSE);
+	delete[]call_params;
 }
 
 

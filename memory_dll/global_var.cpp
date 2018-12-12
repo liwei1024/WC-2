@@ -20,7 +20,7 @@ int g_dungeon_id = 104;
 int g_dungeon_rank = 1;
 int g_过图时间;
 int g_过图方式 = 0; // 0坐标过图 1 强制过图
-int g_移动方式 = 0; // 0瞬移 1走路
+int g_移动方式 = 1; // 0瞬移 1走路
 //bool g_副本类型 = 0; //0普通 1深渊 2练习
 int g_选角方式 = 2;//0-组包 1-call 2-按键
 int g_城镇瞬移方式 = 0; //0-组包 1-call

@@ -31,10 +31,10 @@ void game_status_3::manage()
 				{
 					if (game_status != get_game_status() || is_boss_room() == false)
 					{
-						g_刷图次数++;
+						/*g_刷图次数++;
 						g_过图时间 = getTime() - g_过图时间;
 						g_首图标记 = true;
-						bulletin(_T("练习第 %d 次 耗时 %d s "), g_刷图次数, (int)(g_过图时间 / 1000));
+						bulletin(_T("练习第 %d 次 耗时 %d s "), g_刷图次数, (int)(g_过图时间 / 1000));*/
 						Sleep(1000);
 						break;
 					}
@@ -147,28 +147,29 @@ void game_status_3::move_to_next_room(int direction)
 	{
 		cx = x + xf + 20;
 		cy = y + yf / 2;
-		doKeyPress(VK_NUMPAD1);
+		//doKeyPress(VK_NUMPAD1);
 	}
 	else if (direction == 1) 
 	{
 		cx = x - 20;
 		cy = y + yf / 2;
-		doKeyPress(VK_NUMPAD3);
+		//doKeyPress(VK_NUMPAD3);
 	}
 	else if (direction == 2)
 	{
 		cx = x + xf / 2;
 		cy = y + yf + 20;
-		doKeyPress(VK_NUMPAD5);
+		//doKeyPress(VK_NUMPAD5);
 	}
 	else if (direction == 3)
 	{
 		cx = x + xf / 2;
 		cy = y - 20;
-		doKeyPress(VK_NUMPAD2);
+		//doKeyPress(VK_NUMPAD2);
 	}
 	Sleep(200);
-	main_thread_exec_call(Call_坐标Call, { read<int>(__人物基址),cx,cy,0 });
+	//main_thread_exec_call(Call_坐标Call, { read<int>(__人物基址),cx,cy,0 });
+	移动到角色指定位置(cx, cy);
 	Sleep(200);
 	/*main_thread_exec_call(Call_坐标Call, { read<int>(__人物基址),(x + xf / 2), y, 0 });
 	Sleep(1000);*/
@@ -348,7 +349,7 @@ void game_status_3::follow(std::wstring name)
 				移动到角色指定位置(object.x + createRandom(-10, 10) - 200, object.y + createRandom(-10, 10));
 				doKeyPress(VK_NUMPAD3);
 			}
-			Sleep(200);
+			//Sleep(200);
 			break;
 		}
 	}
@@ -434,8 +435,12 @@ std::vector<MAP_OBJECT_STRUCT> game_status_3::获取物品信息()
 			wcscmp(object.name.c_str(), L"钢铁片") == 0
 			)
 			continue;*/
-		if (object.type == 289 && object.camp == 200 && object.z == 0)
+		if (object.type == 289 && object.camp == 200)
 		{
+			if (object.z > 0)
+			{
+				Sleep(1000);
+			}
 			Objects.insert(Objects.begin(), object);
 		}
 	}
@@ -462,7 +467,8 @@ bool game_status_3::按键捡物()
 				role_pos = get_role_pos();
 				if (abs(role_pos.x - object.x) > 2 || abs(role_pos.y - object.y) > 2)
 				{
-					main_thread_exec_call(Call_坐标Call, { read<int>(__人物基址),object.x + createRandom(-2,2),object.y + createRandom(-2,2),0 });
+					//main_thread_exec_call(Call_坐标Call, { read<int>(__人物基址),object.x + createRandom(-2,2),object.y + createRandom(-2,2),0 });
+					移动到角色指定位置(object.x + createRandom(-2, 2), object.y + createRandom(-2, 2));
 				}
 				Sleep(200);
 				if (wcscmp(object.name.c_str(), L"金币") != 0)
@@ -543,6 +549,7 @@ void game_status_3::移动到角色指定位置(int x,int y,int z)
 	else if (g_移动方式 == 1) { //脚本移动
 		RolePos rolePos = get_role_pos();
 		main_thread_exec_call(Call_移动Call, { (abs(rolePos.x - x) + abs(rolePos.y - y)),x,y });
+		Sleep((abs(rolePos.x - x) + abs(rolePos.y - y)));
 	}
 	Sleep(100);
 }
@@ -561,7 +568,6 @@ void game_status_3::按键_破晓女神()
 			移动到角色指定位置(468, 239);
 			Sleep(300);
 			按键释放技能(VK_G);
-			Sleep(800);
 		}
 		else if (current_room.x == 1 && current_room.y == 0) {
 			Sleep(500);
@@ -572,7 +578,6 @@ void game_status_3::按键_破晓女神()
 			移动到角色指定位置(582, 241);
 			Sleep(300);
 			按键释放技能(VK_A,300);
-			Sleep(800);
 		}
 		else if (current_room.x == 2 && current_room.y == 1) {
 			移动到角色指定位置(521, 200);
@@ -580,7 +585,6 @@ void game_status_3::按键_破晓女神()
 			doKeyPress(VK_NUMPAD1);
 			Sleep(100);
 			按键释放技能(VK_R);
-			Sleep(800);
 		}
 		else if (current_room.x == 2 && current_room.y == 2) {
 			移动到角色指定位置(331, 329);
@@ -598,7 +602,6 @@ void game_status_3::按键_破晓女神()
 			移动到角色指定位置(343, 290);
 			Sleep(300);
 			按键释放技能(VK_A, 300);
-			Sleep(800);
 		}
 		else if (current_room.x == 3 && current_room.y == 1) {
 			doKeyPress(VK_NUMPAD3);
@@ -652,6 +655,7 @@ void game_status_3::按键_破晓女神()
 		{
 			return;
 		}
+		int i = 0;
 		while (is_open_door() == false)
 		{
 			if (read<int>(__对话基址) == 1)
@@ -661,6 +665,12 @@ void game_status_3::按键_破晓女神()
 			}
 			this->follow();
 			doKeyPress(VK_X, 1500);
+			if (i>3)
+			{
+				this->follow();
+				doKeyPress(VK_S, 1500);
+			}
+			i++;
 		}
 	}
 }

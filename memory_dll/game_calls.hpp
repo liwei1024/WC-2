@@ -245,44 +245,53 @@ static inline void Call_城镇移动(DWORD_PTR parameter)
 	}
 }
 
-static inline void Call_移动Call(int 移动速度, int 目标x, int 目标y)
+static inline void Call_移动Call(DWORD_PTR parameter)
 {
-	int 移动指针 = read<int>(__人物基址);
-	int 变量入栈CALL = __变量入栈CALL;
-	int 移动CALL = __移动CALL;
-	__asm
-	{
-		mov esi, 移动指针
-		mov eax, dword ptr ds : [esi]
-		mov edx, dword ptr ds : [eax + __移动偏移_1]
-		lea ecx, dword ptr ds : [0x400C00]
-		push ecx
-		mov ecx, esi
-		call edx //call eax	
-		push 目标y
-		push 目标x
-		push 移动速度
-		push 0x0
-		sub esp, 0x8
-		lea edx, dword ptr ds : [0x400C00]
-		mov ecx, esp
-		push edx
-		call 变量入栈CALL
-		mov esi, 移动指针
-		mov eax, dword ptr ds : [esi]
-		mov edx, dword ptr ds : [eax + __移动偏移_2]
-		lea ecx, dword ptr ds : [0x400C00]
-		push ecx
-		mov ecx, esi
-		call edx
-		sub esp, 0x8
-		lea eax, dword ptr ds : [0x400C00]
-		mov ecx, esp
-		push eax
-		call 变量入栈CALL
-		push 移动指针
-		mov ecx, 移动指针
-		call 移动CALL
+	__try {
+		int 移动指针 = read<int>(__人物基址);
+		int 变量入栈CALL = __变量入栈CALL;
+		int 移动CALL = __移动CALL;
+		int 移动速度 = read<int>(parameter + 0);
+		int 目标x = read<int>(parameter + 4);
+		int 目标y = read<int>(parameter + 8);
+		__asm
+		{
+			mov esi, 移动指针
+			mov eax, dword ptr ds : [esi]
+			mov edx, dword ptr ds : [eax + __移动偏移_1]
+			lea ecx, dword ptr ds : [0x400C00]
+			push ecx
+			mov ecx, esi
+			call edx //call eax	
+			push 目标y
+			push 目标x
+			push 移动速度
+			push 0x0
+			sub esp, 0x8
+			lea edx, dword ptr ds : [0x400C00]
+			mov ecx, esp
+			push edx
+			call 变量入栈CALL
+			mov esi, 移动指针
+			mov eax, dword ptr ds : [esi]
+			mov edx, dword ptr ds : [eax + __移动偏移_2]
+			lea ecx, dword ptr ds : [0x400C00]
+			push ecx
+			mov ecx, esi
+			call edx
+			sub esp, 0x8
+			lea eax, dword ptr ds : [0x400C00]
+			mov ecx, esp
+			push eax
+			call 变量入栈CALL
+			push 移动指针
+			mov ecx, 移动指针
+			call 移动CALL
+		}
+	}
+	__except (1) {
+		/*LPCWSTR buffer = L"Call_坐标Call 异常";
+		Call_公告Call((DWORD_PTR)&buffer);*/
 	}
 }
 
