@@ -25,9 +25,9 @@ void game_status_1::manage()
 	}
 	else {
 		// 1.到副本门口
-		组包到格蓝迪门口();
+		//组包到格蓝迪门口();
 		// 2.进入副本
-		按键进入选图(g_dungeon_id);
+		//按键进入选图(g_dungeon_id);
 		/*if (g_auto_mode == 搬砖 || g_auto_mode == 练习)
 		{
 			enter_the_dungeon(g_dungeon_id,g_dungeon_rank,g_auto_mode);

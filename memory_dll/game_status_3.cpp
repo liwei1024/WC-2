@@ -31,10 +31,10 @@ void game_status_3::manage()
 				{
 					if (game_status != get_game_status() || is_boss_room() == false)
 					{
-						/*g_刷图次数++;
+						g_刷图次数++;
 						g_过图时间 = getTime() - g_过图时间;
 						g_首图标记 = true;
-						bulletin(_T("练习第 %d 次 耗时 %d s "), g_刷图次数, (int)(g_过图时间 / 1000));*/
+						//bulletin(_T("练习第 %d 次 耗时 %d s "), g_刷图次数, (int)(g_过图时间 / 1000));
 						Sleep(1000);
 						break;
 					}
@@ -60,7 +60,7 @@ void game_status_3::manage()
 							g_刷图次数++;
 							g_过图时间 = getTime() - g_过图时间;
 							g_首图标记 = true;
-							bulletin(_T("搬砖第 %d 次 耗时 %d 秒 "), g_刷图次数, (int)(g_过图时间 / 1000));
+							//bulletin(_T("搬砖第 %d 次 耗时 %d 秒 "), g_刷图次数, (int)(g_过图时间 / 1000));
 							Sleep(1000);
 							break;
 						}
@@ -435,6 +435,9 @@ std::vector<MAP_OBJECT_STRUCT> game_status_3::获取物品信息()
 			wcscmp(object.name.c_str(), L"钢铁片") == 0
 			)
 			continue;*/
+		if (wcscmp(object.name.c_str(), L"Jolin应援棒") == 0) {
+			continue;
+		}
 		if (object.type == 289 && object.camp == 200)
 		{
 			if (object.z > 0)
