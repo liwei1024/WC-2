@@ -3,55 +3,55 @@
 #define TIMER_MIN 100
 #define MY_MESSAGE_ID 10024 //自定义消息ID
 
-#define __人物基址 0x057A5B88
-#define __当前疲劳 0x057A5E28
-#define __最大疲劳 0x057A5E30
-#define __商店基址 0x05692390
-#define __对话基址 0x057D4D44
-#define __释放CALL 0x023ABBD0
+#define __人物基址 0x057A7B88
+#define __当前疲劳 0x057A7E28
+#define __最大疲劳 0x057A7E30
+#define __商店基址 0x05694370
+#define __对话基址 0x057D6D44
+#define __释放CALL 0x023AC430
 
-#define __变量入栈CALL 0x08E7FC0
-#define __移动CALL 0x01E3C190
+#define __变量入栈CALL 0x08F1230
+#define __移动CALL 0x01E3EC80
 #define __移动偏移_1 0x69C //7度_获取
 #define __移动偏移_2 0x6B0 //7度_获取
 
-#define __发包基址 0x057DC43C
-#define __缓冲CALL 0x03743FF0
-#define __密包CALL 0x03744100
-#define __发包CALL 0x03745830
-#define __接受CALL 0x01EF6CA0
-#define __完成CALL 0x01EF6BA0
-#define __提交CALL 0x01EF6C20
-#define __任务基址 0x056923C8
-#define __房间编号 0x05692388
+#define __发包基址 0x057DE43C
+#define __缓冲CALL 0x03745C20
+#define __密包CALL 0x03745D30
+#define __发包CALL 0x03747460
+#define __接受CALL 0x01EF8B10
+#define __完成CALL 0x01EF8A10
+#define __提交CALL 0x01EF8A90
+#define __任务基址 0x056943A8
+#define __房间编号 0x05694368
 
-#define __过图CALL 0x01A62970
-#define __跳过CALL 0x01C8A1D0
-#define __游戏状态 0x05587464
-#define __角色等级 0x05674C54 
+#define __过图CALL 0x01A63C00
+#define __跳过CALL 0x01C8C4E0
+#define __游戏状态 0x05589464
+#define __角色等级 0x05676C34 
 
-#define __召唤参数 0x056B90B0
-#define __职业名称 0x05674C38
+#define __召唤参数 0x056BB0B0
+#define __职业名称 0x05676C18
 
 
 
-#define __解密基址 0x057E7580
-#define __背包基址 0x05692394
-#define __区域CALL 0x0369B600
-#define __区域参数 0x057DA6AC
+#define __解密基址 0x057E9580
+#define __背包基址 0x05694374
+#define __区域CALL 0x0369D5A0
+#define __区域参数 0x057DC6AC
 #define __时间基址 0x020A028 
-#define __技能CALL 0x0250A050
+#define __技能CALL 0x0250BBD0
 
-#define __怪物CALL 0x025CFDA0
+#define __怪物CALL 0x025D1D50
 
-#define __角色状态 0x057A5B88 //0不动 1 动 2放技能中
-#define __角色坐标 0x05692DCC//
-#define __遍历取值 0x05691C80//
+#define __角色状态 0x057A7B88 //0不动 1 动 2放技能中
+#define __角色坐标 0x05694DAC//
+#define __遍历取值 0x05693C60//
 #define __任务完成ECX 0x0
 #define __分解CALL 0x0
-#define __鼠标状态 0x05835318
-#define __副本ID 0x05569888
-#define __副本难度 0x05691C80
+#define __鼠标状态 0x05837318
+#define __副本ID 0x0556B888
+#define __副本难度 0x05693C60
 
 //#define  __攻击阵营  55938496
 //#define  __技能坐标  40079936
@@ -63,7 +63,7 @@
 //#define  __分割CALL  58318400
 
 
-#define __喇叭公告 0x029F8270
+#define __喇叭公告 0x029F9E70
 
 #define __副本难度偏移 0x20c
 #define __角色状态偏移 0x338c
