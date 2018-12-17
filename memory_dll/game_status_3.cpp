@@ -429,15 +429,18 @@ std::vector<MAP_OBJECT_STRUCT> game_status_3::获取物品信息()
 		object = get_object_info(object_address);
 		if (object.code == Code_鸡腿 || object.code == Code_肉块 || object.code == Code_成长之泉水)
 			continue;
-		/*if (
+		if (
 			wcscmp(object.name.c_str(), L"碎布片") == 0 ||
 			wcscmp(object.name.c_str(), L"最下级硬化剂") == 0 ||
-			wcscmp(object.name.c_str(), L"钢铁片") == 0
+			wcscmp(object.name.c_str(), L"最下级砥石") == 0 ||
+			wcscmp(object.name.c_str(), L"风化的碎骨") == 0 ||
+			wcscmp(object.name.c_str(), L"钢铁片") == 0 ||
+			wcscmp(object.name.c_str(), L"生锈的铁片") == 0 ||
+			wcscmp(object.name.c_str(), L"破旧的皮革") == 0 ||
+			wcscmp(object.name.c_str(), L"丢失的圣诞袜") == 0 
 			)
-			continue;*/
-		if (wcscmp(object.name.c_str(), L"Jolin应援棒") == 0) {
 			continue;
-		}
+		
 		if (object.type == 289 && object.camp == 200)
 		{
 			if (object.z > 0)
@@ -545,14 +548,17 @@ bool game_status_3::是否有怪物()
 
 void game_status_3::移动到角色指定位置(int x,int y,int z)
 {
-	if (g_移动方式 == 0) //坐标call
+	if (get_game_status() == 3)
 	{
-		main_thread_exec_call(Call_坐标Call, { read<int>(__人物基址),x,y,z });
-	}
-	else if (g_移动方式 == 1) { //脚本移动
-		RolePos rolePos = get_role_pos();
-		main_thread_exec_call(Call_移动Call, { (abs(rolePos.x - x) + abs(rolePos.y - y)),x,y });
-		Sleep((abs(rolePos.x - x) + abs(rolePos.y - y)));
+		if (g_移动方式 == 0) //坐标call
+		{
+			main_thread_exec_call(Call_坐标Call, { read<int>(__人物基址),x,y,z });
+		}
+		else if (g_移动方式 == 1) { //脚本移动
+			RolePos rolePos = get_role_pos();
+			main_thread_exec_call(Call_移动Call, { (abs(rolePos.x - x) + abs(rolePos.y - y)),x,y });
+			Sleep((abs(rolePos.x - x) + abs(rolePos.y - y))+100);
+		}
 	}
 	Sleep(100);
 }

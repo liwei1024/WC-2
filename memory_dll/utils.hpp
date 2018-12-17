@@ -87,15 +87,15 @@ static BOOL setMouseCoord(INT x, INT y)
 static VOID mouseClick(INT s = 100)
 {
 	//系统api设置
-	/*mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+	mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 	Sleep(s + createRandom(0, 10));
 	mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-	Sleep(50 + createRandom(0, 10));*/
+	Sleep(50 + createRandom(0, 10));
 	//硬件按键设置
-	MouseEvent(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+	/*MouseEvent(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 	Sleep(s + createRandom(0, 10));
 	MouseEvent(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-	Sleep(50 + createRandom(0, 10));
+	Sleep(50 + createRandom(0, 10));*/
 }
 
 static VOID mouseDoubleClick(INT s = 100)
@@ -129,22 +129,22 @@ static INT getSCan(INT keyCode)
 
 static VOID keyDown(INT keyCode)
 {
-	/*if (getKeyStatus(keyCode) == FALSE) {
+	if (getKeyStatus(keyCode) == FALSE) {
 		keybd_event(keyCode, getSCan(keyCode), 0, 0);
 		Sleep(100);
-	}*/
-	KeybdEvent(keyCode, 0, 0, 0);
-	Sleep(100);
+	}
+	/*KeybdEvent(keyCode, 0, 0, 0);
+	Sleep(100);*/
 }
 
 static VOID keyUp(INT keyCode)
 {
-	/*if (getKeyStatus(keyCode) == TRUE) {
+	if (getKeyStatus(keyCode) == TRUE) {
 		keybd_event(keyCode, getSCan(keyCode), KEYEVENTF_KEYUP, 0);
 		Sleep(100);
-	}*/
-	KeybdEvent(keyCode, 0, KEYEVENTF_KEYUP, 0);
-	Sleep(100);
+	}
+	/*KeybdEvent(keyCode, 0, KEYEVENTF_KEYUP, 0);
+	Sleep(100);*/
 }
 
 static VOID doKeyPress(INT keyCode, INT s = 0)

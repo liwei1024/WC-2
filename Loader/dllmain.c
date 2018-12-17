@@ -33,7 +33,7 @@ BOOL LoadFromMemory1()
 	HMEMORYMODULE module;
 
 	//fopen_s(&fp, "C:\\Users\\lw\\source\\repos\\liwei1024\\WC-2\\Release\\KeyCall.dat", "rb");
-	fopen_s(&fp, "C:\\Users\\lw\\Desktop\\Release\\KeyCall.dat", "rb");
+	fopen_s(&fp, "C:\\Users\\Administrator\\Desktop\\Release\\KeyCall.dat", "rb");
 	if (fp == NULL)
 	{
 		//OutputDebugString(L"WC KeyCall load fail");
@@ -70,7 +70,7 @@ void LoadFromMemory2()
 	pEntryPoint EntryPoint;
 
 	//fopen_s(&fp, "C:\\Users\\lw\\source\\repos\\liwei1024\\WC-2\\Release\\dsrole.dat", "rb");
-	fopen_s(&fp, "C:\\Users\\lw\\Desktop\\Release\\dsrole.dat", "rb");
+	fopen_s(&fp, "C:\\Users\\Administrator\\Desktop\\Release\\dsrole.dat", "rb");
 	if (fp == NULL)
 	{
 		OutputDebugString(L"WC dsrole load fail");

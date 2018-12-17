@@ -28,14 +28,14 @@ void game_status_1::manage()
 		//组包到格蓝迪门口();
 		// 2.进入副本
 		//按键进入选图(g_dungeon_id);
-		/*if (g_auto_mode == 搬砖 || g_auto_mode == 练习)
+		if (g_auto_mode == 搬砖 || g_auto_mode == 练习)
 		{
 			enter_the_dungeon(g_dungeon_id,g_dungeon_rank,g_auto_mode);
 		}
 		else if (g_auto_mode == 剧情) {
 			auto_master_task();
-		}*/
-		//按键进格蓝迪();
+		}
+		按键进格蓝迪();
 	}
 }
 

@@ -66,6 +66,8 @@ static inline void Send_城镇瞬移(DWORD_PTR parameter)
 		Send_密包CALL(x, 2);
 		Send_密包CALL(y, 2);
 		Send_发包CALL();
+		Send_缓冲CALL(949);
+		Send_发包CALL();
 	}
 	else {
 		Send_缓冲CALL(36);
